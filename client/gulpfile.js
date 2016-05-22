@@ -28,6 +28,7 @@ gulp.task('serve', function() {
     }
   });
   gulp.watch(['*.html'], reload);
+  gulp.watch(['lib/semantic/dist/*.css', 'lib/semantic/dist/*.js'],['semantic-ui']);
   gulp.watch('scss/**/*.scss',['sass']);
   gulp.watch('app/**/*.ts', ['compile-ts']);
 });
@@ -37,10 +38,11 @@ gulp.task('serve', function() {
 
 //Scss to css
 gulp.task('sass', function() {
-  gulp.src('./scss/**/*.scss', {cwd: workDir})
+  gulp.src('./scss/**/*.scss')
     .pipe(sass.sync({outputStyle: 'compressed'}).on('error', sass.logError))
     .pipe(autoprefixer('last 2 version'))
     .pipe(gulp.dest('css', {cwd: workDir}))
+    .pipe(cache('sass'))
     .pipe(browserSync.stream());
 });
 
@@ -53,6 +55,13 @@ gulp.task('compile-ts', function() {
 
   return tsResult.js
     .pipe(gulp.dest('js'))
+    .pipe(browserSync.stream());
+});
+
+// semantic ui
+gulp.task('semantic-ui', function() {
+  return gulp.src(['lib/semantic/dist/*.css', 'lib/semantic/dist/*.js'])
+    .pipe(cache('semanticui'))
     .pipe(browserSync.stream());
 });
 

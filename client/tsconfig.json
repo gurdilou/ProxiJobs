@@ -9,10 +9,5 @@
     "removeComments": false,
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true
-  },
-  "filesGlob": [
-        "app/**/*.ts",
-        "app/**/*.tsx",
-        "!node_modules/"
-    ],
+  }
 }
