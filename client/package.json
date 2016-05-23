@@ -35,7 +35,9 @@
     "rxjs": "5.0.0-beta.6",
     "zone.js": "^0.6.12",
     "angular2-in-memory-web-api": "0.0.10",
-    "bootstrap": "^3.3.6"
+    "bootstrap": "^3.3.6",
+    "jquery": "^2.2.4",
+    "semantic-ui": "^2.1.8"
   },
   "devDependencies": {
     "canonical-path": "0.0.2",
