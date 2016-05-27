@@ -21,7 +21,7 @@ var tsProject = ts.createProject({
 gulp.task('default', ['serve']);
 
 // II - Local html server during desktop developement
-gulp.task('serve', function() {
+gulp.task('serve', ['build'], function() {
   browserSync({
     server: {
       baseDir: '.'
@@ -29,7 +29,7 @@ gulp.task('serve', function() {
   });
   gulp.watch(['*.html'], reload);
   gulp.watch(['lib/semantic/dist/*.css', 'lib/semantic/dist/*.js'],['semantic-ui']);
-  gulp.watch('scss/**/*.scss',['sass']);
+  gulp.watch('styles/**/*.scss',['sass']);
   gulp.watch('app/**/*.ts', ['compile-ts']);
 });
 
@@ -38,17 +38,17 @@ gulp.task('serve', function() {
 
 //Scss to css
 gulp.task('sass', function() {
-  gulp.src('./scss/**/*.scss')
+  gulp.src('./styles/**/*.scss')
     .pipe(sass.sync({outputStyle: 'compressed'}).on('error', sass.logError))
     .pipe(autoprefixer('last 2 version'))
-    .pipe(gulp.dest('css', {cwd: workDir}))
+    .pipe(gulp.dest('css'))
     .pipe(cache('sass'))
     .pipe(browserSync.stream());
 });
 
 // Transpile typescript to javascript
 gulp.task('compile-ts', function() {
-  
+
   var tsResult = gulp.src('app/**/*.ts')
     .pipe(cache('tscompile'))
     .pipe(ts(tsProject));
@@ -65,6 +65,12 @@ gulp.task('semantic-ui', function() {
     .pipe(browserSync.stream());
 });
 
+// Compile les sources
+gulp.task('build', ['sass', 'compile-ts', 'semantic-ui'], function() {
+  return;
+});
+
+
 //pour créer la prod TODO
 //~ gulp.task('build-js', function () {
    //~ return gulp.src(['js/**/*.js', '!js/index.js', '!js/templates.js', '!js/lib/*'], {cwd: workDir})
@@ -74,4 +80,3 @@ gulp.task('semantic-ui', function() {
       //~ .pipe(uglify())
       //~ .pipe(gulp.dest(prodDir+'/js/'));
 //~ });
-

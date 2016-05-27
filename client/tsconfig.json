@@ -9,5 +9,10 @@
     "removeComments": false,
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true
-  }
+  },
+  "compileOnSave": false,
+  "filesGlob": [
+        "app/**/*.ts",
+        "typings/**/*.d.ts"
+    ],
 }
