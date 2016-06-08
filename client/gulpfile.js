@@ -9,12 +9,7 @@ var ts = require('gulp-typescript');
 var cache = require('gulp-cached');
 
 
-var tsProject = ts.createProject({
-  "target": "es6",
-  "module": "commonjs",
-  "allowJs" : true,
-  "experimentalDecorators": true,
-});
+
 
 //*** MAIN TASKS
 // I - Default task
@@ -24,13 +19,20 @@ gulp.task('default', ['serve']);
 gulp.task('serve', ['build'], function() {
   browserSync({
     server: {
-      baseDir: '.'
+      baseDir: '.',
+      online: false,
+      index: "index.html",
+      routes: {
+        "/map": ".",
+        "/search": ".",
+        "/offers": ".",
+      }
     }
   });
-  gulp.watch(['*.html'], reload);
+  gulp.watch(['*.html', 'app/**/*.component.html', 'js/**/*.js'], reload);
   gulp.watch(['lib/semantic/dist/*.css', 'lib/semantic/dist/*.js'],['semantic-ui']);
   gulp.watch('styles/**/*.scss',['sass']);
-  gulp.watch('app/**/*.ts', ['compile-ts']);
+  gulp.watch(['app/**/*.ts'], ['compile-ts']);
 });
 
 
@@ -46,16 +48,17 @@ gulp.task('sass', function() {
     .pipe(browserSync.stream());
 });
 
+
 // Transpile typescript to javascript
+var tsProject = ts.createProject('tsconfig.json');
 gulp.task('compile-ts', function() {
 
-  var tsResult = gulp.src('app/**/*.ts')
+  var tsResult = gulp.src( ['app/**/*.ts', 'typings/modules/**/*.d.ts'])
     .pipe(cache('tscompile'))
     .pipe(ts(tsProject));
 
-  return tsResult.js
-    .pipe(gulp.dest('js'))
-    .pipe(browserSync.stream());
+    return tsResult.js
+      .pipe(gulp.dest('js'));
 });
 
 // semantic ui

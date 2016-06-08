@@ -1,0 +1,29 @@
+
+.ui.vertical.menu {
+  width: 250px;
+
+
+  .item.pj-header {
+    display: flex;
+    flex-direction: row;
+
+    .logo {
+      width: 80px;
+      height: 49px;
+      align-self: center;
+    }
+    h2 {
+      align-self: center;
+      margin-top: 9px;
+    }
+  }
+}
+
+
+.content-app {
+  height: 100%;
+  width: 100%;
+  padding: $clear-padding;
+  margin: $clear-margin;
+  padding-left: 254px;
+}

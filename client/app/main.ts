@@ -1,14 +1,9 @@
-import {bootstrap}    from '@angular/platform-browser-dynamic';
-import {AppComponent} from './app.component';
+// The usual bootstrapping imports
+import { bootstrap }      from '@angular/platform-browser-dynamic';
+import { HTTP_PROVIDERS } from '@angular/http';
 
+import { MainRouter }   from './main-router.component';
 
-var map = new google.maps.Map(document.getElementById('map'), {
-  center: { lat: -34.397, lng: 150.644 },
-  zoom: 8 
-});
-$("#proxijobs-loader").remove();
+$('#proxijobs-loader').remove();
 
-// bootstrap(AppComponent);       
-
-
-
+bootstrap(MainRouter, [ HTTP_PROVIDERS ]);

@@ -1,6 +1,7 @@
 <html>
 
 <head>
+  <base href="/">
   <title>ProxiJobs</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,51 +27,24 @@
 </head>
 
 <body>
-  <div class="proxijobs">
 
-    <!-- Image de chargement -->
-    <div id="proxijobs-loader" class="ui demo page dimmer blurring transition visible active">
-      <div class="content">
-        <div class="center">
-          <h2 class="ui inverted icon header">
-              <div class="ui active inline loader"></div>
-              Chargement...
-            </h2>
-        </div>
+  <!-- Image de chargement -->
+  <div id="proxijobs-loader" class="ui demo page dimmer blurring transition visible active">
+    <div class="content">
+      <div class="center">
+        <h2 class="ui inverted icon header">
+            <div class="ui active inline loader"></div>
+            Chargement...
+          </h2>
       </div>
     </div>
-
-    <!-- menu -->
-    <div class="ui left fixed vertical menu">
-      <div class="item">
-        <img class="ui mini image" src="/images/logo.png" /> ProxiJobs
-      </div>
-      <a class="active item">
-        <i class="map icon"></i> Ma carte
-      </a>
-      <a class="item">
-        <i class="search icon"></i> Mes recherches
-      </a>
-      <a class="item">
-        <i class="ticket icon"></i> Mes offres
-      </a>
-    </div>
-
-
-    <!-- La carte -->
-    <div id="p_map" class="page-map ui grid">
-      <div id="map" class="map twelve wide stretched column">
-        Loading...
-      </div>
-      <div class="four wide stretched column">
-        <div class="ui segment">
-          This is an stretched grid column. This segment will always match the tab height
-        </div>
-      </div>
-    </div>
-
-
   </div>
+
+
+  <proxi-jobs>
+
+
+  </proxi-jobs>
 
 
 

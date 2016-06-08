@@ -1,0 +1,19 @@
+<!-- menu -->
+<div class="ui left fixed vertical menu">
+  <div class="pj-header item">
+    <img class="logo" src="/images/logo.png" />
+    <h2>ProxiJobs</h2>
+  </div>
+  <a class="item"  [routerLink]="['MapPage']" [class.active]="router.isRouteActive(router.generate(['/MapPage']))">
+    <i class="map icon"></i> Ma carte
+  </a>
+  <a class="item" [routerLink]="['SearchPage']" [class.active]="router.isRouteActive(router.generate(['/SearchPage']))">
+    <i class="search icon"></i> Mes recherches
+  </a>
+  <a class="item" [routerLink]="['OffersPage']" [class.active]="router.isRouteActive(router.generate(['/OffersPage']))">
+    <i class="ticket icon"></i> Mes offres
+  </a>
+</div>
+<div class="content-app">
+  <router-outlet></router-outlet>
+</div>

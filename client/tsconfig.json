@@ -1,18 +1,41 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "removeComments": false,
-    "noImplicitAny": true,
-    "suppressImplicitAnyIndexErrors": true
+    "removeComments": true,
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "outDir": "js"
   },
   "compileOnSave": false,
   "filesGlob": [
-        "app/**/*.ts",
-        "typings/**/*.d.ts"
-    ],
+    "app/**/*.ts",
+    "typings/**/*.d.ts"
+  ],
+  "files": [
+    "app/main-router.component.spec.ts",
+    "app/main-router.component.ts",
+    "app/main.ts",
+    "app/model/jobs/job-offer.ts",
+    "app/views/map/map-detail.component.ts",
+    "app/views/map/map-job-detail.component.ts",
+    "app/views/map/map-page.component.ts",
+    "app/views/map/map-quick-search.component.ts",
+    "app/views/map/map.component.ts",
+    "app/views/offers/offers-page.component.ts",
+    "app/views/search/search-page.component.ts",
+    "typings/globals/core-js/index.d.ts",
+    "typings/globals/jasmine/index.d.ts",
+    "typings/globals/node/index.d.ts",
+    "typings/index.d.ts",
+    "typings/modules/google-maps/index.d.ts",
+    "typings/modules/jquery/index.d.ts"
+  ],
+  "atom": {
+    "rewriteTsconfig": true
+  }
 }
