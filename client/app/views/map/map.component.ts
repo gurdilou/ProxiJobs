@@ -24,8 +24,8 @@ export class MapComponent implements OnInit, AfterContentInit {
     let mapCtn = document.getElementById('map');
 
     let map = new google.maps.Map( mapCtn, {
-      center: { lat: -34.397, lng: 150.644 },
-      zoom: 8
+      center: { lat: 49.4431, lng: 1.0993 },
+      zoom: 12
     });
   }
 

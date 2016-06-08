@@ -8,7 +8,6 @@ import { RouteParams } from '@angular/router-deprecated';
   templateUrl : 'app/views/map/map-quick-search.component.html'
 })
 export class MapQuickSearchComponent  implements OnInit {
-
   constructor(
     private routeParams: RouteParams) {
   }
@@ -17,4 +16,24 @@ export class MapQuickSearchComponent  implements OnInit {
     // TODO extract filtre
   }
 
+  loadJobs() {
+    if(this.inputsValid()){
+
+    }
+  }
+
+  public inputsValid(): boolean {
+    return $('.pj-quick-search-form').form({
+        fields: {
+            kind: {
+                identifier: 'kind',
+                rules: [{ type: 'empty', prompt: 'Veuillez renseigner un emploi'  }]
+            },
+            city: {
+              identifier: 'city',
+              rules: [{ type: 'empty', prompt: 'Veuillez renseigner un lieu'  }]
+            }
+        }
+    });
+  }
 }

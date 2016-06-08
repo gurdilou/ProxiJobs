@@ -25512,7 +25512,7 @@ a.ui.card:hover,
 
 .ui.toggle.checkbox input:checked ~ .box:before,
 .ui.toggle.checkbox input:checked ~ label:before {
-  background-color: #2196F3 !important;
+  background-color: #303F9F !important;
 }
 
 .ui.toggle.checkbox input:checked ~ .box:after,
@@ -25529,7 +25529,7 @@ a.ui.card:hover,
 
 .ui.toggle.checkbox input:focus:checked ~ .box:before,
 .ui.toggle.checkbox input:focus:checked ~ label:before {
-  background-color: #0083eb !important;
+  background-color: #1e2c89 !important;
 }
 
 /*******************************

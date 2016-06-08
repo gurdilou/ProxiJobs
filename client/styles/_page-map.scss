@@ -1,17 +1,6 @@
-.ui.fixed.menu{
-
-  &+.page-map.ui.grid {
-    height: 100%;
-    width: 100%;
-    padding: $clear-padding;
-    margin: $clear-margin;
-
-    &>.pj-map-ctn.column:not(.row) {
-      height: 100%;
-      width: 100%;
-      background-color: $pageBackground;
-      margin: $clear-margin;
-      padding: $clear-padding;
-    }
-  }
+.ui.grid>.page-map.ui.grid {
+  height: 100%;
+  width: 100%;
+  padding: $clear-padding;
+  margin: $clear-margin;
 }
