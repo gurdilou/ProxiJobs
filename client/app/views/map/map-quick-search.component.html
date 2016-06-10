@@ -1,37 +1,45 @@
-<div class="content">
-  <div class="ui top attached label"><i class="search icon"></i> Recherche rapide </div>
-
-
+<div class="pj-map-detail quicksearch ui teal card transition">
   <div class="content">
+    <div class="ui top big attached label">
+      <i class="search icon"></i>
+      Recherche rapide
+      <button class="circular ui icon button exit" (click)="onReduce()">
+        <i class="icon expand"></i>
+      </button>
+    </div>
 
-    <form class="ui form pj-quick-search-form">
-      <div class="field">
-        <label>Emploi</label>
-        <input type="text" name="kind" placeholder="métier, mots-clés ou entreprise">
-      </div>
 
-      <div class="field">
-        <label>Ville</label>
+    <div class="content">
 
-        <div class="action ui input">
-          <input type="text" name="city" placeholder="ville, département, code postal">
-          <button class="ui icon button" title="Ma position actuelle">
-            <i class="marker icon"></i>
-          </button>
+      <form class="ui form pj-quick-search-form" (submit)="onLoadJobs()">
+        <div class="field">
+          <label>Emploi</label>
+          <input [(ngModel)]="search.job"  type="text" name="kind" placeholder="métier, mots-clés ou entreprise">
         </div>
-      </div>
 
-      <div class="field">
-        <label>Rayon</label>
-        <input type="text" name="distance" placeholder="temps de trajet, ou kilomètres">
-      </div>
+        <div class="field">
+          <label>Ville</label>
 
-      <div class="extra content">
-          <div class="ui error message"></div>
-        <div class="ui divider"></div>
-        <button class="ui button" type="submit" (click)="loadJobs()">Rechercher</button>
-      </div>
-    </form>
+          <div class="action ui input">
+            <input [(ngModel)]="search.city"  type="text" name="city" placeholder="ville, département ou code postal">
+            <button class="ui icon button" title="Ma position actuelle" (click)="getCurrentLocation($event)">
+              <i class="marker icon"></i>
+            </button>
+          </div>
+        </div>
 
+        <div class="field">
+          <label>Rayon</label>
+          <input [(ngModel)]="search.perimeter"  type="text" name="distance" placeholder="temps de trajet, ou kilomètres">
+        </div>
+
+        <div class="extra content">
+            <div class="ui error message"></div>
+          <div class="ui divider"></div>
+          <button type="submit" class="ui button">Rechercher</button>
+        </div>
+      </form>
+
+    </div>
   </div>
 </div>

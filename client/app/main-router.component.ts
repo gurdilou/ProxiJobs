@@ -19,9 +19,9 @@ import { OffersPageComponent } from './views/offers/offers-page.component';
   ]
 })
 @RouteConfig([
-  { path: 'map', name: 'MapPage', component: MapPageComponent, useAsDefault : true},
-  { path: 'search', name: 'SearchPage', component: SearchPageComponent },
-  { path: 'offers', name: 'OffersPage', component: OffersPageComponent }
+  { path: '/map/', name: 'MapPage', component: MapPageComponent, useAsDefault : true},
+  { path: '/search', name: 'SearchPage', component: SearchPageComponent },
+  { path: '/offers', name: 'OffersPage', component: OffersPageComponent }
 ])
 export class MainRouter {
   constructor(

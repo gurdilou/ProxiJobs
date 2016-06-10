@@ -1,39 +1,76 @@
-import {Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { RouteParams } from '@angular/router-deprecated';
 
-
+import {QuickSearch} from '../../model/search/quick-search';
+import {LocationResolverService} from '../../services/location-resolver.service';
 
 @Component({
   selector: 'pj-map-quick-search',
-  templateUrl : 'app/views/map/map-quick-search.component.html'
+  templateUrl: 'app/views/map/map-quick-search.component.html',
+  providers: [LocationResolverService]
 })
-export class MapQuickSearchComponent  implements OnInit {
+export class MapQuickSearchComponent implements OnInit {
+  @Input() search: QuickSearch;
+  @Output() onQuickSearchClose = new EventEmitter();
+  @Output() onQuickSearch = new EventEmitter();
+
   constructor(
-    private routeParams: RouteParams) {
+    private routeParams: RouteParams,
+    private locationService: LocationResolverService) {
   }
 
   ngOnInit() {
-    // TODO extract filtre
+    let widgetForm = $('.pj-quick-search-form');
+    widgetForm.form({
+      keyboardShortcuts: false,
+      fields: {
+        kind: {
+          identifier: 'kind',
+          rules: [{ type: 'empty', prompt: 'Veuillez renseigner un emploi' }]
+        },
+        city: {
+          identifier: 'city',
+          rules: [{ type: 'empty', prompt: 'Veuillez renseigner un lieu' }]
+        }
+      }
+    });
   }
 
-  loadJobs() {
-    if(this.inputsValid()){
+  /**
+   * Affecte la ville à la plus proche au champ ville
+   */
+  getCurrentLocation(event: any) {
+    event.preventDefault();
+    event.stopPropagation();
 
+    locationService.getCurrentPosition().then(heroes => this.heroes = heroes);
+  }
+
+  /**
+   * Lorsque l'on veut chercher des offres
+   */
+  onLoadJobs() {
+    if (this.inputsValid()) {
+      this.onQuickSearch.emit(undefined);
     }
   }
 
-  public inputsValid(): boolean {
-    return $('.pj-quick-search-form').form({
-        fields: {
-            kind: {
-                identifier: 'kind',
-                rules: [{ type: 'empty', prompt: 'Veuillez renseigner un emploi'  }]
-            },
-            city: {
-              identifier: 'city',
-              rules: [{ type: 'empty', prompt: 'Veuillez renseigner un lieu'  }]
-            }
-        }
-    });
+  /**
+   * Lorsque l'on réduit la fenêtre de recherche
+   */
+  onReduce() {
+    this.onQuickSearchClose.emit(undefined);
+  }
+
+
+  /**
+   * Vérifie que les champs du formulaires sont correctement remplis
+   * @return {boolean} [description]
+   */
+  inputsValid(): boolean {
+    let widgetForm = $('.pj-quick-search-form');
+
+
+    return widgetForm.form('is valid');
   }
 }

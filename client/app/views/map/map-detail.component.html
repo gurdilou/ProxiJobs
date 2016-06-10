@@ -1,18 +1,11 @@
 
+<button class="pj-detail-button job circular ui icon button" (click)="onShowSelectedJob()">
+  <i class="material-icons">work</i>
+</button>
 
-<div class="pj-map-detail ui teal card">
+<button class="pj-detail-button search circular ui icon button" (click)="onShowQuickSearch()">
+  <i class="material-icons">search</i>
+</button>
 
-  <div *ngIf="hero">
-
-    <pj-map-job-selected>Offre sélectionnée</pj-map-job-selected>
-
-  </div>
-
-
-  <div *ngIf="!hero">
-
-    <pj-map-quick-search>Recherche rapide</pj-map-quick-search>
-
-  </div>
-
-</div>
+<pj-map-job-selected></pj-map-job-selected>
+<pj-map-quick-search [search]="search" (onQuickSearchClose)="onQuickSearchClose()" (onQuickSearch)="onQuickSearch()"></pj-map-quick-search>

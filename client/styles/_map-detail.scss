@@ -1,16 +1,61 @@
+.pj-detail-button.ui.button {
+  @include emphasize-shadow();
+  color: $primaryColor;
+  position: absolute;
+  top: 12px;
+  font-weight: bold;
+
+  &.loading {
+    position: absolute;
+    top: 12px;
+  }
+  // bouton afficher l'offre
+  &.job {
+    right: 70px;
+    transition: right ease-out 350ms;
+
+    &.search-opened {
+      right: 400px;
+    }
+  }
+  // bouton afficher la recherche rapide
+  &.search {
+    right: 12px;
+    opacity: 1;
+    transition: opacity linear 500ms;
+
+    &.search-opened {
+      opacity: 0;
+    }
+  }
+}
+
 .pj-map-detail.ui.card {
-  position : absolute;
+  @include emphasize-shadow();
+  position: absolute;
   right: 12px;
   top: 12px;
   padding: 12px;
   min-height: 200px;
   margin-bottom: 200px;
-  width: 320px;
-
+  width: 372px;
+  display: none;
   border-width: 2px;
-  box-shadow: 0 0 0 1px $secondaryColor  ,2px 3px 0px 0px $lightPrimaryColor,3px 3px 3px 0 $secondaryColor;
+
+  &.visible {
+    display: inherit;
+  }
 
   &:hover {
-    box-shadow: 0 0 0 1px $secondaryColor  ,2px 3px 0px 0px $lightPrimaryColor,3px 1px 3px 0 $secondaryColor;
+    @include emphasize-shadow();
+  }
+
+  .ui.icon.button.exit {
+    position: absolute;
+    right: 0px;
+    top: 6px;
+    border: none;
+    background: none;
+    box-shadow: none;
   }
 }
