@@ -8,4 +8,8 @@
 </button>
 
 <pj-map-job-selected></pj-map-job-selected>
-<pj-map-quick-search [search]="search" (onQuickSearchClose)="onQuickSearchClose()" (onQuickSearch)="onQuickSearch()"></pj-map-quick-search>
+<pj-map-quick-search [search]="search"
+      (onQuickSearchClose)="onQuickSearchClose()"
+      (onQuickSearch)="onQuickSearch()"
+      (onCenterMap)="centerMap($event)">
+</pj-map-quick-search>

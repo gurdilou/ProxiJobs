@@ -1,0 +1,13 @@
+<div class="content">
+  <div *ngIf="deletable">
+    <button class="delete circular ui icon button right floated hidden">
+      <i class="icon trash outline"></i>
+    </button>
+  </div>
+
+  <div class="header">{{search.job}}</div>
+  <div class="meta">{{search.getLocation()}}</div>
+  <div class="description">{{search.getExpected()}}</div>
+
+
+</div>

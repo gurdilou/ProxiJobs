@@ -89,7 +89,8 @@ $white            : #FFFFFF;
 
 
 $indigo           : #4eb6cd;
-$lightBlueMat     : #84def2;
+$lightBlueMat     : rgba(157, 228, 244, 0.4);
+$acidOrange       : #f09a29;
 
 /*-------------------
     Brand Colors
@@ -98,8 +99,10 @@ $lightBlueMat     : #84def2;
 $primaryColor        : $indigo;
 $secondaryColor      : $grey;
 
-$lightPrimaryColor   : $indigo;
+$lightPrimaryColor   : $lightBlueMat;
 $lightSecondaryColor : $lightGrey;
+
+$accentColor          : $acidOrange;
 
 /*-------------------
       Paragraph

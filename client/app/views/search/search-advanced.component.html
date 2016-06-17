@@ -1,0 +1,62 @@
+<h2 ><i class="small search icon"></i>Recherche avancée</h2>
+
+<form class="ui form pj-adv-search-form" (submit)="onLoadJobs()">
+  <div class="field">
+    <label>Emploi</label>
+    <input [(ngModel)]="advSearch.job"  type="text" name="kind" placeholder="métier, mots-clés ou entreprise">
+  </div>
+
+  <div class="field">
+    <label>Ville</label>
+
+    <div class="action ui input">
+      <input [(ngModel)]="advSearch.city"  type="text" name="city" placeholder="ville, département ou code postal">
+      <button class="ui icon button" title="Ma position actuelle" (click)="getCurrentLocation($event)">
+        <i class="marker icon"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Entreprise</label>
+    <input [(ngModel)]="advSearch.company"  type="text" name="city" placeholder="groupe, société">
+  </div>
+
+  <div class="field">
+    <label>Type de contrat</label>
+    <select (change)="setContractKind" class="ui fluid dropdown">
+      <option value="CDI">Tous</option>
+      <option value="CDI">CDI</option>
+      <option value="CDD">CDD</option>
+      <option value="Interim">Interim</option>
+      <option value="Stage">Stage</option>
+      <option value="Temps partiel">Temps partiel</option>
+      <option value="Alternance">Alternance</option>
+      <option value="Freelance">Freelance</option>
+      <option value="Temps complet">Temps complet</option>
+    </select>
+  </div>
+
+
+  <div class="field">
+    <label>Rayon</label>
+    <input [(ngModel)]="advSearch.perimeter"  type="text" name="distance" placeholder="temps de trajet, ou kilomètres">
+  </div>
+
+  <!-- Footer -->
+  <div class="extra content">
+    <div class="ui error message"></div>
+
+    <!-- Bouton envoyer -->
+    <button type="submit" class="ui button">Rechercher</button>
+
+    <!-- Bouton ajouter aux favoris -->
+    <div class="starred ui animated button right floated" tabindex="0" (click)="addToFavorites()">
+      <i class="visible content starred-button empty star icon"></i>
+      <div class="hidden content">
+        <div class="starred-label">Ajouter aux favoris</div>
+      </div>
+    </div>
+
+  </div>
+</form>

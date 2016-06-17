@@ -1,6 +1,6 @@
 <div class="page-map ui grid">
 
-  <pj-map>Loading...</pj-map>
+  <pj-map [centerMap]="centerMap">Loading...</pj-map>
 
-  <pj-map-detail></pj-map-detail>
+  <pj-map-detail (onCenterMap)="centerMap($event)"></pj-map-detail>
 </div>

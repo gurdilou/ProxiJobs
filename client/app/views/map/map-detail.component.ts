@@ -1,4 +1,4 @@
-import {Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {Location} from '@angular/common';
 import { Router, RouteParams } from '@angular/router-deprecated';
 
@@ -19,6 +19,8 @@ import {MapJobDetailComponent} from './map-job-detail.component';
  * Classe gérant le détail d'une carte
  */
 export class MapDetailComponent implements OnInit {
+  @Output() onCenterMap = new EventEmitter();
+
 
   search: QuickSearch;
   offer: JobOffer;
@@ -76,6 +78,13 @@ export class MapDetailComponent implements OnInit {
   onShowQuickSearch() {
     this.refreshQuickSearchUrl();
     this.showQuickSearch();
+  }
+
+  /**
+   * Lorsque l'utilisateur centre un point sur la carte
+   */
+  centerMap(center : google.maps.LatLng) {
+    this.onCenterMap.emit(center);
   }
 
   /**

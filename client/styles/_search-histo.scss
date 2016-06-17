@@ -1,0 +1,51 @@
+.pj-search-hist-ctn{
+  height : 100%;
+  position: relative;
+
+  .pj-search-favorites {
+    height: 50%;
+    position: relative;
+  }
+  .pj-search-recents {
+    height: 50%;
+    position: relative;
+    margin-top: 12px;
+  }
+
+  .pj-search-list-ctn{
+    position : absolute;
+    top: 60px;
+    left: 0px;
+    right: 6px;
+    bottom: 22px;
+    width: 100%;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    .pj-search-list{
+      & .item {
+        padding-left: 18px;
+        padding-right: 18px;
+        margin-right: 3px;
+
+        & .delete{
+          display: none;
+          visibility: hidden;
+          margin: auto;
+        }
+
+        &:hover {
+          background: $lightPrimaryColor;
+          cursor: pointer;
+
+          & .delete{
+            display: inherit;
+            visibility: inherit;
+          }
+        }
+      }
+    }
+  }
+
+}

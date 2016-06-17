@@ -13,6 +13,7 @@ export class MapQuickSearchComponent implements OnInit {
   @Input() search: QuickSearch;
   @Output() onQuickSearchClose = new EventEmitter();
   @Output() onQuickSearch = new EventEmitter();
+  @Output() onCenterMap = new EventEmitter();
 
   constructor(
     private routeParams: RouteParams,
@@ -43,7 +44,12 @@ export class MapQuickSearchComponent implements OnInit {
     event.preventDefault();
     event.stopPropagation();
 
-    locationService.getCurrentPosition().then(heroes => this.heroes = heroes);
+    this.locationService.getCurrentPosition().then(position => {
+      this.search.city = position.address;
+
+      var center = new google.maps.LatLng(position.latitude, position.longitude);
+      this.onCenterMap.emit(center);
+    });
   }
 
   /**
@@ -69,7 +75,6 @@ export class MapQuickSearchComponent implements OnInit {
    */
   inputsValid(): boolean {
     let widgetForm = $('.pj-quick-search-form');
-
 
     return widgetForm.form('is valid');
   }

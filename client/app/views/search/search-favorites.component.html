@@ -1,0 +1,16 @@
+<div class="pj-search-favorites">
+  <h2>Favories <i class="small star icon"></i></h2>
+
+  <div class="ui divider"></div>
+
+  <div class="pj-search-list-ctn">
+
+    <div class="pj-search-list ui relaxed divided list">
+      <!-- Une recherche -->
+      <div class="item" *ngFor="let search of favorites" (click)="onSelect(search)" [class.selected]="search === selectedSearch">
+        <pj-search-adv-widget [search]=search [deletable]=true></pj-search-adv-widget>
+      </div>
+
+    </div>
+  </div>
+</div>

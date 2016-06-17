@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router-deprecated';
 
 import {MapComponent} from './map.component';
@@ -11,6 +11,8 @@ import {MapDetailComponent} from './map-detail.component';
 })
 
 export class MapPageComponent implements OnInit {
+  @ViewChild(MapComponent) map:MapComponent;
+
 
   constructor(private router: Router) {
   }
@@ -18,5 +20,10 @@ export class MapPageComponent implements OnInit {
   ngOnInit() {
 
   }
-
+  /**
+   * Lorsque l'utilisateur veut centrer la map
+   */
+  centerMap(center : google.maps.LatLng) {
+    this.map.setHomeOn(center);
+  }
 }
