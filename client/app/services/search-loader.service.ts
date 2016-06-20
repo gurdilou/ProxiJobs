@@ -10,6 +10,8 @@ import {ErrorManagerService} from './error-manager.service';
 @Injectable()
 export class SearchLoaderService {
 
+
+
   constructor(
     private http: Http,
     private errorHandler : ErrorManagerService) {
@@ -62,6 +64,32 @@ export class SearchLoaderService {
   }
 
   /**
+   * Sauvegarde une nouvelle recherche favorie
+   * @param  {AdvancedSearch}          newFavorite la nouvelle recherche favorie
+   * @return {Promise<boolean>}
+   */
+  addFavorite(newFavorite : AdvancedSearch) : Promise<AdvancedSearch> {
+    return new Promise<AdvancedSearch>( (resolve, reject) => {
+      newFavorite.starred = true;
+      resolve(newFavorite);
+      // reject(Error("Failed to find position"));
+    });
+  }
+
+  /**
+   * Supprime une recherche favorie
+   * @param  {AdvancedSearch}          oldFavorite l'ancienne recherche favorie
+   * @return {Promise<AdvancedSearch>}
+   */
+  removeFavorite(oldFavorite : AdvancedSearch) : Promise<AdvancedSearch> {
+    return new Promise<AdvancedSearch>( (resolve, reject) => {
+      oldFavorite.starred = false;
+      resolve(oldFavorite);
+      // reject(Error("Failed to find position"));
+    });
+  }
+
+  /**
    * Charge la liste des recherches récentes
    * @return {Promise<AdvancedSearch[]>}  la liste des recherches récentes
    */
@@ -71,24 +99,18 @@ export class SearchLoaderService {
   }
 
   /**
-   * Sauvegarde une nouvelle recherche favorie
-   * @return {Promise<boolean>} [description]
+   * Ajoute une recherche aux récentes
+   * @param  {AdvancedSearch} recentSearch la recherche récente
+   * @return {Promise<AdvancedSearch>}
    */
-  addFavorite(newFavorite) : Promise<AdvancedSearch> {
+  public addRecent(recentSearch: AdvancedSearch): Promise<AdvancedSearch> {
     return new Promise<AdvancedSearch>( (resolve, reject) => {
-      newFavorite.starred = true;
-      resolve(newFavorite);
+
+      resolve(recentSearch);
       // reject(Error("Failed to find position"));
     });
   }
 
-  removeFavorite(oldFavorite) : Promise<AdvancedSearch> {
-    return new Promise<AdvancedSearch>( (resolve, reject) => {
-      oldFavorite.starred = false;
-      resolve(oldFavorite);
-      // reject(Error("Failed to find position"));
-    });
-  }
 
   /**
    * Gestion des erreurs

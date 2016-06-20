@@ -20,7 +20,9 @@ export class SearchAdvancedWidget {
   /**
    * Lorsque l'utilisateur clique sur le bouton supprimer
    */
-  protected onButtDeleteClick() {
+  protected onButtDeleteClick(event : any) {
     this.onDeleteClick.emit(this.search);
+    event.preventDefault();
+    event.stopPropagation();
   }
 }

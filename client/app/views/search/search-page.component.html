@@ -11,7 +11,7 @@
     <div class="pj-search-hist-ctn six wide column">
       <div class="pj-search-hist-ctn">
 
-        <pj-search-favorites (onSelect)="onSelectFavoriteSearch($event)"></pj-search-favorites>
+        <pj-search-favorites (onSelect)="onSelectFavoriteSearch($event)" (onDelete)="onDeleteFavoriteSearch($event)"></pj-search-favorites>
 
         <pj-search-recents (onSelect)="onSelectRecentSearch($event)"></pj-search-recents>
       </div>

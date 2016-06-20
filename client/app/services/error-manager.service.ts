@@ -1,4 +1,4 @@
-import { Injectable, Inject }    from '@angular/core';
+import { Injectable }    from '@angular/core';
 
 import {ToasterService, Toast} from 'angular2-toaster/angular2-toaster';
 
@@ -8,9 +8,8 @@ export class ErrorManagerService {
   constructor(private toastr : ToasterService) {
   }
   /**
-   * [handle description]
-   * @param  {any}    error [description]
-   * @return {[type]}       [description]
+   * Gère une erreur
+   * @param  {any}    error l'erreur
    */
   handle(error : any) {
     // console.error("ErrorManagerService : ", error);

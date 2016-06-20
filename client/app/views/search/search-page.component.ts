@@ -26,14 +26,14 @@ export class SearchPageComponent {
    * Evenement levé lors de l'ajout d'un favoris depuis la recherche avancée
    * @param  {AdvancedSearch} newFavorite la nouvelle favorite
    */
-  onAddingToFavorites(search : AdvancedSearch) {
+  protected onAddingToFavorites(search : AdvancedSearch) {
     this.favoritesPanel.addFavorite(search);
   }
   /**
    * Evenement levé lors de l'annulation d'un favoris depuis la recherche avancée
    * @param  {AdvancedSearch} oldFavorite l'ex favorite
    */
-  onRemoveFromFavorites(oldFavorite : AdvancedSearch) {
+  protected onRemoveFromFavorites(oldFavorite : AdvancedSearch) {
     this.favoritesPanel.removeFromFavorites(oldFavorite);
   }
 
@@ -41,15 +41,25 @@ export class SearchPageComponent {
    * Evenement levé lors de la sélection d'une recherche depuis les favoris
    * @param  {AdvancedSearch} search la recherche favorite sélectionnée
    */
-  onSelectFavoriteSearch(search : AdvancedSearch) {
+  protected onSelectFavoriteSearch(search : AdvancedSearch) {
     this.advancedPanel.applySearch(search);
   }
+  /**
+   * Evènement levé lors de la suppression d'un favoris depuis le panneau des favoris
+   * @param  {AdvancedSearch} oldFavorite la recherche supprimée
+   */
+  protected onDeleteFavoriteSearch(oldFavorite : AdvancedSearch) {
+    this.advancedPanel.refreshSearchStarred(oldFavorite);
+  }
+
   /**
    * Evenement levé lors de la sélection d'une recherche depuis les favoris
    * @param  {AdvancedSearch} search la recherche favorite sélectionnée
    */
-  onSelectRecentSearch(search : AdvancedSearch) {
+  protected onSelectRecentSearch(search : AdvancedSearch) {
     this.advancedPanel.applySearch(search);
   }
+
+
 
 }

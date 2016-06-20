@@ -16,6 +16,7 @@ import {ContractKind, ContractKindUtils} from '../../model/search/contract-kind'
 })
 
 export class SearchAdvancedComponent implements OnInit {
+
   private advSearch : AdvancedSearch;
   @Output() onAddingToFavorites = new EventEmitter();
   @Output() onRemoveFromFavorites = new EventEmitter();
@@ -61,20 +62,23 @@ export class SearchAdvancedComponent implements OnInit {
   /**
    * Lorsque l'on veut chercher des offres
    */
-  protected onLoadJobs() {
+  protected onLoadJobs(event : any) {
+    event.preventDefault();
+    event.stopPropagation();
+
     if (this.inputsValid()) {
-      let params = {
-        aJob: this.advSearch.job,
-        aCity: this.advSearch.city,
-        aCompany: this.advSearch.company,
-        aKind: ContractKindUtils.getContractKindStr(this.advSearch.kind),
-        aPerim: this.advSearch.perimeter,
-        aSalary: this.advSearch.salary
-      };
-      this.router.navigate(['MapPage', params]);
-    }else{
-      event.preventDefault();
-      event.stopPropagation();
+      this.searchService.addRecent(this.advSearch)
+        .then( search => {
+            let params = {
+              aJob: this.advSearch.job,
+              aCity: this.advSearch.city,
+              aCompany: this.advSearch.company,
+              aKind: ContractKindUtils.getContractKindStr(this.advSearch.kind),
+              aPerim: this.advSearch.perimeter,
+              aSalary: this.advSearch.salary
+            };
+            this.router.navigate(['MapPage', params]);
+        } );
     }
   }
 
@@ -150,6 +154,19 @@ export class SearchAdvancedComponent implements OnInit {
     }
   }
 
+  /**
+   * Rafraichit la valeur du bouton favori
+   * @param  {AdvancedSearch} search la recherche donée
+   * @return {[type]}                [description]
+   */
+  refreshSearchStarred(search: AdvancedSearch) {
+    if(search == this.advSearch){
+      this.hideSearchStarred();
+      if(search.starred){
+        this.displaySearchStarred();
+      }
+    }
+  }
 
 
 }

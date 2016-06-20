@@ -8,7 +8,7 @@
     <div class="pj-search-list ui relaxed divided list">
       <!-- Une recherche -->
       <div class="item" *ngFor="let search of favorites" (click)="onSelectWidget(search)" [class.selected]="search === selectedSearch">
-        <pj-search-adv-widget [search]=search [deletable]=true (onDeleteClick)="removeFromFavorites(search)"></pj-search-adv-widget>
+        <pj-search-adv-widget [search]=search [deletable]=true (onDeleteClick)="onDeleteFavorite(search)"></pj-search-adv-widget>
       </div>
 
     </div>

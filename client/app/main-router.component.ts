@@ -15,7 +15,7 @@ import {ErrorManagerService} from './services/error-manager.service';
   selector: 'proxi-jobs',
   templateUrl: 'app/main-router.component.html',
   directives: [ROUTER_DIRECTIVES, ToasterContainerComponent],
-  providers: [ROUTER_PROVIDERS, ErrorManagerService, ToasterService]
+  providers: [ROUTER_PROVIDERS, ToasterService, ErrorManagerService]
 })
 @RouteConfig([
   { path: '/map/', name: 'MapPage', component: MapPageComponent, useAsDefault: true },

@@ -35,6 +35,7 @@
     "app/views/map/map-page.component.ts",
     "app/views/map/map-quick-search.component.ts",
     "app/views/map/map.component.ts",
+    "app/views/messenger.component.ts",
     "app/views/offers/offers-page.component.ts",
     "app/views/search/search-adv-widget.component.ts",
     "app/views/search/search-advanced.component.ts",
