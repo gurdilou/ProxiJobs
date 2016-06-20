@@ -1,6 +1,6 @@
 <div class="content">
   <div *ngIf="deletable">
-    <button class="delete circular ui icon button right floated hidden">
+    <button class="delete circular ui icon button right floated hidden" (click)="onButtDeleteClick()">
       <i class="icon trash outline"></i>
     </button>
   </div>

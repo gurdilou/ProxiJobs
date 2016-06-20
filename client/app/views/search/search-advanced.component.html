@@ -1,9 +1,9 @@
 <h2 ><i class="small search icon"></i>Recherche avancée</h2>
 
-<form class="ui form pj-adv-search-form" (submit)="onLoadJobs()">
+<form class="ui form pj-adv-search-form" (submit)="onLoadJobs($event)">
   <div class="field">
     <label>Emploi</label>
-    <input [(ngModel)]="advSearch.job"  type="text" name="kind" placeholder="métier, mots-clés ou entreprise">
+    <input [(ngModel)]="advSearch.job"  type="text" name="job" placeholder="métier, mots-clés ou entreprise">
   </div>
 
   <div class="field">
@@ -19,21 +19,21 @@
 
   <div class="field">
     <label>Entreprise</label>
-    <input [(ngModel)]="advSearch.company"  type="text" name="city" placeholder="groupe, société">
+    <input [(ngModel)]="advSearch.company"  type="text" name="company" placeholder="groupe, société">
   </div>
 
   <div class="field">
     <label>Type de contrat</label>
-    <select (change)="setContractKind" class="ui fluid dropdown">
+    <select (change)="setContractKind" class="ui fluid dropdown" name="kind">
       <option value="CDI">Tous</option>
       <option value="CDI">CDI</option>
       <option value="CDD">CDD</option>
       <option value="Interim">Interim</option>
       <option value="Stage">Stage</option>
-      <option value="Temps partiel">Temps partiel</option>
+      <option value="TempsPartiel">Temps partiel</option>
       <option value="Alternance">Alternance</option>
       <option value="Freelance">Freelance</option>
-      <option value="Temps complet">Temps complet</option>
+      <option value="TempsComplet">Temps complet</option>
     </select>
   </div>
 
@@ -41,6 +41,11 @@
   <div class="field">
     <label>Rayon</label>
     <input [(ngModel)]="advSearch.perimeter"  type="text" name="distance" placeholder="temps de trajet, ou kilomètres">
+  </div>
+
+  <div class="field">
+    <label>Salaire</label>
+    <input [(ngModel)]="advSearch.salary"  type="number" name="salary" placeholder="salaire brut annuel">
   </div>
 
   <!-- Footer -->
@@ -51,8 +56,8 @@
     <button type="submit" class="ui button">Rechercher</button>
 
     <!-- Bouton ajouter aux favoris -->
-    <div class="starred ui animated button right floated" tabindex="0" (click)="addToFavorites()">
-      <i class="visible content starred-button empty star icon"></i>
+    <div class="star-search ui animated button right floated" tabindex="0" (click)="addToFavorites()">
+      <i class="visible content empty star icon"></i>
       <div class="hidden content">
         <div class="starred-label">Ajouter aux favoris</div>
       </div>

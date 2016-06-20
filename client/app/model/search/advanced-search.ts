@@ -5,6 +5,7 @@ export class AdvancedSearch extends QuickSearch{
   company: string;
   kind: ContractKind;
   salary: number;
+  starred: boolean;
 
   /**
    * @return {string}  Retourne la concaténation du lieu et du périmètre espéré

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { Router, RouteParams } from '@angular/router-deprecated';
 
 import {AdvancedSearch} from '../../model/search/advanced-search';
@@ -13,13 +13,14 @@ import {SearchAdvancedWidget} from './search-adv-widget.component';
 })
 
 export class SearchFavoritesComponent implements OnInit {
-  favorites : AdvancedSearch[];
+  private favorites : AdvancedSearch[];
+  @Output() onSelect = new EventEmitter();
 
   constructor(
     private searchService : SearchLoaderService) {
   }
 
-  getFavorites() {
+  private getFavorites() {
     this.searchService.getFavorites()
       .then(searches => {
         this.favorites = searches;
@@ -28,5 +29,35 @@ export class SearchFavoritesComponent implements OnInit {
 
   ngOnInit() {
     this.getFavorites();
+  }
+  /**
+   * Appelé lors de l'ajout d'un favoris depuis la recherche avancée
+   * @param  {AdvancedSearch} newFavorite la nouvelle favorite
+   */
+  addFavorite(newFavorite : AdvancedSearch) {
+    this.favorites.splice(0,0,newFavorite);
+  }
+  /**
+   * Appelé lors de l'annulation d'un favoris depuis la recherche avancée
+   * @param  {AdvancedSearch} oldFavorite l'ex favorite
+   */
+  removeFromFavorites(oldFavorite : AdvancedSearch) {
+    let found = false;
+    let i = 0;
+    while( (i < this.favorites.length) && !found ) {
+      if(this.favorites[i] == oldFavorite) {
+        this.favorites.splice(i, 1);
+        found = true;
+      }
+
+      i++;
+    }
+  }
+  /**
+   * Lors de la sélection d'une recherche locale
+   * @param  {AdvancedSearch} search la recherche sélectionnée
+   */
+  protected onSelectWidget(search : AdvancedSearch) {
+    this.onSelect.emit(search);
   }
 }

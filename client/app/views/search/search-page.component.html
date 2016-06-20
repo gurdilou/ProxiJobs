@@ -2,15 +2,18 @@
   <div class="row">
     <div class="pj-search-adv-ctn ten wide column">
 
-      <pj-search-advanced></pj-search-advanced>
+      <pj-search-advanced
+        (onAddingToFavorites)="onAddingToFavorites($event)"
+        (onRemoveFromFavorites)="onRemoveFromFavorites($event)"
+      ></pj-search-advanced>
 
     </div>
     <div class="pj-search-hist-ctn six wide column">
       <div class="pj-search-hist-ctn">
 
-        <pj-search-favorites></pj-search-favorites>
+        <pj-search-favorites (onSelect)="onSelectFavoriteSearch($event)"></pj-search-favorites>
 
-        <pj-search-recents></pj-search-recents>
+        <pj-search-recents (onSelect)="onSelectRecentSearch($event)"></pj-search-recents>
       </div>
     </div>
   </div>

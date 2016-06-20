@@ -7,6 +7,7 @@ var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var ts = require('gulp-typescript');
 var cache = require('gulp-cached');
+var typedoc = require("gulp-typedoc");
 
 
 
@@ -71,6 +72,25 @@ gulp.task('semantic-ui', function() {
 // Compile les sources
 gulp.task('build', ['sass', 'compile-ts', 'semantic-ui'], function() {
   return;
+});
+
+// Documentation
+gulp.task('doc', function() {
+
+  return gulp
+      .src(["app/**/*.ts", "typings/modules/**/*.ts"])
+      .pipe(typedoc({
+          module: "commonjs",
+          target: "es6",
+          moduleResolution: "node",
+          out: "docs/",
+          name: "ProxiJobs",
+          emitDecoratorMetadata: true,
+          experimentalDecorators: true,
+          includeDeclarations: true,
+          exclude: "node_modules/**/*.ts",
+          readme: "README.md"
+      }));
 });
 
 

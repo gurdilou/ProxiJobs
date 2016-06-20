@@ -10,16 +10,15 @@ import {ErrorManagerService} from './error-manager.service';
 @Injectable()
 export class SearchLoaderService {
 
-  // URL to web api
-  // key = AIzaSyC_u2NmSUvEwkfzMTWhqrAEqMwXC8rlPIA
-  private mapApi = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=';
-
   constructor(
     private http: Http,
     private errorHandler : ErrorManagerService) {
   }
 
-
+  /**
+   * Demande au serveur la liste des recherches favorites
+   * @return {Promise<AdvancedSearch[]>} La liste des recherches favories
+   */
   getFavorites() : Promise<AdvancedSearch[]>  {
     return new Promise<AdvancedSearch[]>( (resolve, reject) => {
       let result : AdvancedSearch[] =[];
@@ -30,6 +29,7 @@ export class SearchLoaderService {
       s1.perimeter = "25km";
       s1.company = "bnp";
       s1.salary = 44;
+      s1.starred = true;
       result.push(s1);
 
       let s2 = new AdvancedSearch();
@@ -38,6 +38,7 @@ export class SearchLoaderService {
       s2.perimeter = "";
       s2.company = "";
       s2.salary = 0;
+      s2.starred = true;
       result.push(s2);
 
 
@@ -49,6 +50,7 @@ export class SearchLoaderService {
         s3.perimeter = "2min";
         s3.company = "INVOKE";
         s3.salary = 30;
+        s3.starred = true;
         result.push(s3);
       }
 
@@ -59,10 +61,39 @@ export class SearchLoaderService {
     });
   }
 
-  private getRecents() {
+  /**
+   * Charge la liste des recherches récentes
+   * @return {Promise<AdvancedSearch[]>}  la liste des recherches récentes
+   */
+  getRecents() : Promise<AdvancedSearch[]> {
+    // TODO
     return this.getFavorites();
   }
 
+  /**
+   * Sauvegarde une nouvelle recherche favorie
+   * @return {Promise<boolean>} [description]
+   */
+  addFavorite(newFavorite) : Promise<AdvancedSearch> {
+    return new Promise<AdvancedSearch>( (resolve, reject) => {
+      newFavorite.starred = true;
+      resolve(newFavorite);
+      // reject(Error("Failed to find position"));
+    });
+  }
+
+  removeFavorite(oldFavorite) : Promise<AdvancedSearch> {
+    return new Promise<AdvancedSearch>( (resolve, reject) => {
+      oldFavorite.starred = false;
+      resolve(oldFavorite);
+      // reject(Error("Failed to find position"));
+    });
+  }
+
+  /**
+   * Gestion des erreurs
+   * @param  {any}    error une erreur émise
+   */
   private handleError(error: any) {
     this.errorHandler.handle(error);
     return Promise.reject(error.message || error);

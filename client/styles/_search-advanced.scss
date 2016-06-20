@@ -1,12 +1,14 @@
-.pj-adv-search-form{
+.pj-adv-search-form {
 
-  .starred {
+  .star-search {
     width: 120px;
-  }
-  &[role="aaa"] {
 
-  }
-  &[role="zzz"] {
-     
+    &.starred {
+      background: $lightPrimaryColor;
+
+      i.icon.content:before {
+        content: "\f005";
+      }
+    }
   }
 }

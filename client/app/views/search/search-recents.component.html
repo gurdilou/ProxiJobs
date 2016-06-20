@@ -7,7 +7,7 @@
 
     <div class="pj-search-list ui relaxed divided list">
       <!-- Une recherche -->
-      <div class="item" *ngFor="let search of recents" (click)="onSelect(search)" [class.selected]="search === selectedSearch">
+      <div class="item" *ngFor="let search of recents" (click)="onSelectWidget(search)" [class.selected]="search === selectedSearch">
         <pj-search-adv-widget [search]=search></pj-search-adv-widget>
       </div>
 
