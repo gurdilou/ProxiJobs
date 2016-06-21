@@ -4,20 +4,16 @@ import {ToasterContainerComponent, ToasterService, ToasterConfig} from 'angular2
 @Component({
   selector: 'pj-toaster',
   directives: [ToasterContainerComponent],
-  providers: [ToasterService],
-  templateUrl: 'app/views/toaster.component.html',
+  templateUrl: 'app/views/notification.component.html',
 })
 
-export class ToasterComponent {
+export class NotificationComponent {
   private toasterService: ToasterService;
 
   constructor(toasterService: ToasterService) {
     this.toasterService = toasterService;
   }
 
-  popToast() {
-    this.toasterService.pop('success', 'Args Title', 'Args Body');
-  }
 
   /**
    * [toasterconfig description]
@@ -25,11 +21,11 @@ export class ToasterComponent {
    */
   public toasterconfig: ToasterConfig =
   new ToasterConfig({
-    showCloseButton: true,
     newestOnTop: true,
     positionClass: "toast-bottom-right",
-    preventDuplicates: true,
-    timeout: 3000
+    preventDuplicates: false,
+    timeout: 3000,
+    limit: 6
   });
 
 }

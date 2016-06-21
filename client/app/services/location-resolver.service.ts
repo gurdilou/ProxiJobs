@@ -4,6 +4,8 @@ import 'rxjs/add/operator/toPromise';
 
 import {UserPosition} from '../model/search/user-position';
 
+import {NotificationService} from './notification.service';
+
 @Injectable()
 export class LocationResolverService {
 
@@ -12,10 +14,15 @@ export class LocationResolverService {
   private mapApi = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=';
 
   constructor(
-    private http: Http) {
+    private http: Http,
+    private notifier: NotificationService) {
 
-    }
+  }
 
+  /**
+   * Retourne la position actuelle
+   * @return {Promise<UserPosition>} la position actuelle
+   */
   getCurrentPosition(): Promise<UserPosition> {
     return new Promise<UserPosition>( (resolve, reject) => {
       //Position
@@ -25,13 +32,15 @@ export class LocationResolverService {
 
         // Addresse
         this.http.get(url).toPromise().then(response => {
-            let responseJSON = response.json();
-            position.address = responseJSON.results[0].formatted_address;
-            resolve(position);
-          }).catch(reject);
+          let responseJSON = response.json();
+          position.address = responseJSON.results[0].formatted_address;
+          resolve(position);
+        }).catch(err => {
+          this.notifier.errror(err);
+        });
 
       }).catch(err => {
-        reject(err);
+        this.notifier.errror(err);
       });
     });
   }

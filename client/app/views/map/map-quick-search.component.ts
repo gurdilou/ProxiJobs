@@ -3,22 +3,20 @@ import { RouteParams } from '@angular/router-deprecated';
 
 import {QuickSearch} from '../../model/search/quick-search';
 
-import {ToasterComponent} from '../toaster.component';
+import {NotificationService} from '../../services/notification.service';
 
 import {LocationResolverService} from '../../services/location-resolver.service';
 
 @Component({
   selector: 'pj-map-quick-search',
   templateUrl: 'app/views/map/map-quick-search.component.html',
-  directives: [ToasterComponent],
-  providers: [LocationResolverService]
+  providers: [NotificationService, LocationResolverService]
 })
 export class MapQuickSearchComponent implements OnInit {
   @Input() search: QuickSearch;
   @Output() onQuickSearchClose = new EventEmitter();
   @Output() onQuickSearch = new EventEmitter();
   @Output() onCenterMap = new EventEmitter();
-  @ViewChild(ToasterComponent) toastr:ToasterComponent;
 
   constructor(
     private routeParams: RouteParams,
@@ -54,9 +52,6 @@ export class MapQuickSearchComponent implements OnInit {
 
       var center = new google.maps.LatLng(position.latitude, position.longitude);
       this.onCenterMap.emit(center);
-    }).catch(err => {
-      console.log("aaaa");
-      this.toastr.popToast();
     });
   }
 

@@ -5,6 +5,7 @@ import {SearchAdvancedWidget} from './search-adv-widget.component';
 
 import {LocationResolverService} from '../../services/location-resolver.service';
 import {SearchLoaderService} from '../../services/search-loader.service';
+import {NotificationService} from '../../services/notification.service';
 
 import {AdvancedSearch} from '../../model/search/advanced-search';
 import {ContractKind, ContractKindUtils} from '../../model/search/contract-kind';
@@ -12,7 +13,7 @@ import {ContractKind, ContractKindUtils} from '../../model/search/contract-kind'
 @Component({
   selector: 'pj-search-advanced',
   templateUrl : 'app/views/search/search-advanced.component.html',
-  providers: [LocationResolverService, SearchLoaderService]
+  providers: [NotificationService,, LocationResolverService, SearchLoaderService]
 })
 
 export class SearchAdvancedComponent implements OnInit {
