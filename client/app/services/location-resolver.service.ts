@@ -3,7 +3,6 @@ import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import {UserPosition} from '../model/search/user-position';
-import {ErrorManagerService} from './error-manager.service';
 
 @Injectable()
 export class LocationResolverService {
@@ -13,8 +12,7 @@ export class LocationResolverService {
   private mapApi = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=';
 
   constructor(
-    private http: Http,
-    private errorHandler : ErrorManagerService ) {
+    private http: Http) {
 
     }
 
@@ -33,7 +31,7 @@ export class LocationResolverService {
           }).catch(reject);
 
       }).catch(err => {
-        this.handleError(err);
+        reject(err);
       });
     });
   }
@@ -62,10 +60,5 @@ export class LocationResolverService {
         reject(Error("Failed to find position"));
       }
     });
-  }
-
-  private handleError(error: any) {
-    this.errorHandler.handle(error);
-    return Promise.reject(error.message || error);
   }
 }

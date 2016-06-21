@@ -4,13 +4,12 @@ import { Router, RouteParams } from '@angular/router-deprecated';
 import {AdvancedSearch} from '../../model/search/advanced-search';
 import {SearchLoaderService} from '../../services/search-loader.service';
 import {SearchAdvancedWidget} from './search-adv-widget.component';
-import {ToasterService, Toast, ToasterContainerComponent} from 'angular2-toaster/angular2-toaster';
 
 @Component({
   selector: 'pj-search-favorites',
   templateUrl : 'app/views/search/search-favorites.component.html',
-  directives: [SearchAdvancedWidget, ToasterContainerComponent],
-  providers: [SearchLoaderService, ToasterService]
+  directives: [SearchAdvancedWidget],
+  providers: [SearchLoaderService]
 })
 
 export class SearchFavoritesComponent implements OnInit {
@@ -19,8 +18,7 @@ export class SearchFavoritesComponent implements OnInit {
   @Output() onDelete = new EventEmitter();
 
   constructor(
-    private searchService : SearchLoaderService,
-    private toastr : ToasterService) {
+    private searchService : SearchLoaderService) {
   }
 
   private getFavorites() {
@@ -85,16 +83,16 @@ export class SearchFavoritesComponent implements OnInit {
    * @return {[type]}
    */
   private informDeleteSucceed(searchDeleted : AdvancedSearch) {
-    let toast: Toast = {
-        type: 'info',
-        title: 'Favori supprimé',
-        body: 'Cliquez ici pour annuler la suppresion',
-        clickHandler: (toast , isCloseButton) => {
-          // this.toasterService.pop('success', 'invoked from ' + toast.title + ' onHide callback')
-
-          return true
-        }
-    };
-    this.toastr.pop(toast);
+    // let toast: Toast = {
+    //     type: 'info',
+    //     title: 'Favori supprimé',
+    //     body: 'Cliquez ici pour annuler la suppresion',
+    //     clickHandler: (toast , isCloseButton) => {
+    //       // this.toasterService.pop('success', 'invoked from ' + toast.title + ' onHide callback')
+    //
+    //       return true
+    //     }
+    // };
+    // this.toastr.pop(toast);
   }
 }

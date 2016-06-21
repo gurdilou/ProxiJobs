@@ -7,16 +7,13 @@ import {QuickSearch} from '../model/search/quick-search';
 import {ContractKind} from '../model/search/contract-kind';
 import {JobOffer} from '../model/jobs/job-offer';
 
-import {ErrorManagerService} from './error-manager.service';
-
 
 
 @Injectable()
 export class JobLoaderService {
 
   constructor(
-    private http: Http,
-    private errorHandler : ErrorManagerService) {
+    private http: Http) {
   }
 
 
@@ -34,7 +31,6 @@ export class JobLoaderService {
   }
 
   private handleError(error: any) {
-    this.errorHandler.handle(error);
     return Promise.reject(error.message || error);
   }
 }

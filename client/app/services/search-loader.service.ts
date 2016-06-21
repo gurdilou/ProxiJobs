@@ -4,7 +4,6 @@ import 'rxjs/add/operator/toPromise';
 
 import {AdvancedSearch} from '../model/search/advanced-search';
 import  {ContractKind} from '../model/search/contract-kind';
-import {ErrorManagerService} from './error-manager.service';
 
 
 @Injectable()
@@ -13,8 +12,7 @@ export class SearchLoaderService {
 
 
   constructor(
-    private http: Http,
-    private errorHandler : ErrorManagerService) {
+    private http: Http) {
   }
 
   /**
@@ -117,7 +115,6 @@ export class SearchLoaderService {
    * @param  {any}    error une erreur émise
    */
   private handleError(error: any) {
-    this.errorHandler.handle(error);
     return Promise.reject(error.message || error);
   }
 }
