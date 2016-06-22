@@ -1,5 +1,5 @@
 export class QuickSearch {
-  job: string;
-  city: string;
-  perimeter: string;
+  job: string = "";
+  city: string = "";
+  perimeter: string = "";
 }

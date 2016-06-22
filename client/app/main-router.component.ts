@@ -4,8 +4,6 @@ import { Router } from '@angular/router-deprecated';
 
 import {User} from './model/general/user';
 
-import {ToasterService} from 'angular2-toaster/angular2-toaster';
-
 import {NotificationComponent} from './views/notification.component';
 import { MapPageComponent } from './views/map/map-page.component';
 import { SearchPageComponent } from './views/search/search-page.component';

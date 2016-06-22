@@ -24,7 +24,7 @@ export class SearchLoaderService implements ISearchLoader{
       this.loaderRemote = new SearchLoaderRemote(http);
   }
 
-  getFavorites() : Promise<AdvancedSearch[]>  {
+  getFavorites() : Promise<AdvancedSearch[]>  { 
     if(this.app.userIsConnected()){
       return this.loaderRemote.getFavorites();
     }else{
