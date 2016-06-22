@@ -19,6 +19,8 @@ import {ContractKind, ContractKindUtils} from '../../model/search/contract-kind'
 export class SearchAdvancedComponent implements OnInit {
 
   private advSearch : AdvancedSearch;
+  private advSearchIndex : number = undefined;
+
   @Output() onAddingToFavorites = new EventEmitter();
   @Output() onRemoveFromFavorites = new EventEmitter();
 
@@ -70,17 +72,33 @@ export class SearchAdvancedComponent implements OnInit {
     if (this.inputsValid()) {
       this.searchService.addRecent(this.advSearch)
         .then( search => {
-            let params = {
-              aJob: this.advSearch.job,
-              aCity: this.advSearch.city,
-              aCompany: this.advSearch.company,
-              aKind: ContractKindUtils.getContractKindStr(this.advSearch.kind),
-              aPerim: this.advSearch.perimeter,
-              aSalary: this.advSearch.salary
-            };
-            this.router.navigate(['MapPage', params]);
+
+          if(search.starred){
+            this.searchService.refreshFavorite(this.advSearchIndex || 0, this.advSearch)
+              .then( search => {
+                this.loadSearchPage();
+              });
+
+          }else{
+            this.loadSearchPage();
+          }
         } );
     }
+  }
+
+  /**
+   * Change de page, ce qui lance la recherche
+   */
+  private loadSearchPage() {
+    let params = {
+      aJob: this.advSearch.job,
+      aCity: this.advSearch.city,
+      aCompany: this.advSearch.company,
+      aKind: ContractKindUtils.getContractKindStr(this.advSearch.kind),
+      aPerim: this.advSearch.perimeter,
+      aSalary: this.advSearch.salary
+    };
+    this.router.navigate(['MapPage', params]);
   }
 
   /**
@@ -134,7 +152,7 @@ export class SearchAdvancedComponent implements OnInit {
           } );
       }
     }else{
-      this.searchService.removeFavorite(this.advSearch)
+      this.searchService.removeFavorite(this.advSearchIndex || 0, this.advSearch)
         .then( search => {
           this.onRemoveFromFavorites.emit(search);
           this.hideSearchStarred();
@@ -146,10 +164,25 @@ export class SearchAdvancedComponent implements OnInit {
    * Modifie le formulaire pour y coller la recherche donnée
    * @param  {AdvancedSearch} search la recherche à afficher
    */
-  applySearch(search : AdvancedSearch) {
+  applySearch(search : AdvancedSearch, favoriteIndex : number) {
     this.hideSearchStarred();
 
     this.advSearch = search;
+    this.advSearchIndex = favoriteIndex;
+
+    let select = $('.select-kind');
+
+    switch(this.advSearch.kind) {
+      case ContractKind.Permanent : select.val("CDI"); break;
+      case ContractKind.FixedTerm : select.val("CDD"); break;
+      case ContractKind.Interim : select.val("Interim"); break;
+      case ContractKind.Internship : select.val("Stage"); break;
+      case ContractKind.PartTime : select.val("TempsPartiel"); break;
+      case ContractKind.Training : select.val("Alternance"); break;
+      case ContractKind.Freelance : select.val("Freelance"); break;
+      case ContractKind.FullTime : select.val("TempsComplet"); break;
+    }
+
     if(search.starred) {
       this.displaySearchStarred();
     }
@@ -168,6 +201,22 @@ export class SearchAdvancedComponent implements OnInit {
       }
     }
   }
-
+  /**
+   * lors du changement du type de contrat cherché
+   * @param  {string} value code du type
+   */
+  protected onKindChange(value : string) {
+    switch(value) {
+      case "All" : this.advSearch.kind = undefined; break;
+      case "CDI" : this.advSearch.kind = ContractKind.Permanent; break;
+      case "CDD" : this.advSearch.kind = ContractKind.FixedTerm; break;
+      case "Interim" : this.advSearch.kind = ContractKind.Interim; break;
+      case "Stage" : this.advSearch.kind = ContractKind.Internship; break;
+      case "TempsPartiel" : this.advSearch.kind = ContractKind.PartTime; break;
+      case "Alternance" : this.advSearch.kind = ContractKind.Training; break;
+      case "Freelance" : this.advSearch.kind = ContractKind.Freelance; break;
+      case "TempsComplet" : this.advSearch.kind = ContractKind.FullTime; break;
+    }
+  }
 
 }

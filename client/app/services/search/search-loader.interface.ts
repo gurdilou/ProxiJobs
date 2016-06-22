@@ -22,9 +22,10 @@ export interface ISearchLoader {
   /**
    * Supprime une recherche favorie
    * @param  {AdvancedSearch}          oldFavorite l'ancienne recherche favorie
+   * @param {number} index : l'index de la recherche
    * @return {Promise<AdvancedSearch>}
    */
-  removeFavorite(oldFavorite : AdvancedSearch) : Promise<AdvancedSearch>;
+  removeFavorite(index : number, oldFavorite : AdvancedSearch) : Promise<AdvancedSearch>;
 
   /**
    * Charge la liste des recherches récentes
@@ -39,4 +40,12 @@ export interface ISearchLoader {
    * @return {Promise<AdvancedSearch>}
    */
   addRecent(recentSearch: AdvancedSearch): Promise<AdvancedSearch>;
+
+  /**
+   * Mise à jour des champs de la recherche de favori
+   * @param  {number}         index l'index de la favoris
+   * @param  {AdvancedSearch} seach le favorie modifié
+   * @return {[type]}               [description]
+   */
+  refreshFavorite(index : number, search : AdvancedSearch): Promise<AdvancedSearch>;
 }

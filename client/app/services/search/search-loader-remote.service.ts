@@ -32,7 +32,7 @@ export class SearchLoaderRemote implements ISearchLoader{
     });
   }
 
-  removeFavorite(oldFavorite : AdvancedSearch) : Promise<AdvancedSearch> {
+  removeFavorite(index : number, oldFavorite : AdvancedSearch) : Promise<AdvancedSearch> {
     return new Promise<AdvancedSearch>( (resolve, reject) => {
       oldFavorite.starred = false;
       resolve(oldFavorite);
@@ -56,4 +56,12 @@ export class SearchLoaderRemote implements ISearchLoader{
       // reject(Error("Failed to find position"));
     });
   }
+
+  refreshFavorite(index : number, search : AdvancedSearch): Promise<AdvancedSearch> {
+    return new Promise<AdvancedSearch>( (resolve, reject) => {
+      resolve(search);
+      // reject(Error("Failed to find position"));
+    });
+  }
+
 }

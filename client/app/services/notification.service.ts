@@ -43,14 +43,14 @@ export class NotificationService {
         type: 'info',
         title: title,
         body: 'Cliquez ici pour annuler',
-        showCloseButton: true,
+        showCloseButton: false,
         timeout: 9000,
         clickHandler: (toast , isCloseButton) => {
-          console.log("isCloseButton : "+isCloseButton);
+          // console.log("isCloseButton : "+isCloseButton);
           if(isCloseButton === undefined){
             callBackOnCancel(true);
           }
-          return false;
+          return true;
         }
     };
     this.pop(toast);

@@ -17,6 +17,7 @@ import {SearchAdvancedWidget} from './search-adv-widget.component';
 })
 
 export class SearchFavoritesComponent implements OnInit {
+
   private favorites : AdvancedSearch[];
   @Output() onSelect = new EventEmitter();
   @Output() onDelete = new EventEmitter();
@@ -48,34 +49,46 @@ export class SearchFavoritesComponent implements OnInit {
    * @param  {AdvancedSearch} oldFavorite l'ex favorite
    */
   removeFromFavorites(oldFavorite : AdvancedSearch) {
-    let found = false;
+    let index = this.getSearchIndex(oldFavorite);
+
+    if(index !== -1){
+      this.favorites.splice(index, 1);
+      this.informDeleteSucceed(oldFavorite, index);
+    }
+  }
+
+  private getSearchIndex(search: AdvancedSearch): any {
     let i = 0;
+    let found = false;
     while( (i < this.favorites.length) && !found ) {
-      if(this.favorites[i] == oldFavorite) {
-        this.favorites.splice(i, 1);
+      if(this.favorites[i] == search) {
         found = true;
       }else{
         i++;
       }
     }
-
-    if(found){
-      this.informDeleteSucceed(oldFavorite, i);
+    if(found)  {
+      return i;
+    }else{
+      return -1;
     }
-  }
+   }
   /**
    * Lors de la sélection d'une recherche locale
    * @param  {AdvancedSearch} search la recherche sélectionnée
    */
   protected onSelectWidget(search : AdvancedSearch) {
-    this.onSelect.emit(search);
+    let index = this.getSearchIndex(search);
+    this.onSelect.emit( {search:search, index:index} );
   }
   /**
    * Lors de la suppression d'un favoris depuis un widget
    * @param  {AdvancedSearch} oldFavorite l'ancien favori
    */
   protected onDeleteFavorite(oldFavorite : AdvancedSearch) {
-    this.searchService.removeFavorite(oldFavorite)
+    let index = this.getSearchIndex(oldFavorite);
+
+    this.searchService.removeFavorite(index, oldFavorite)
       .then(search => {
         this.removeFromFavorites(oldFavorite);
         this.onDelete.emit(oldFavorite);
@@ -89,7 +102,7 @@ export class SearchFavoritesComponent implements OnInit {
    */
   private informDeleteSucceed(searchDeleted : AdvancedSearch, index: number = 0) {
     this.notifier.askConfirmDownload('Favorie supprimée "'+searchDeleted.job+'"', (isCanceled) => {
-      if(isCanceled){
+      if(isCanceled && !searchDeleted.starred){ //si elle n'a pas été remise en favories
         this.searchService.addFavorite(searchDeleted, index)
         .then(search => {
           this.addFavorite(searchDeleted, index);

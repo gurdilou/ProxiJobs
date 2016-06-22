@@ -24,7 +24,7 @@ export class SearchLoaderService implements ISearchLoader{
       this.loaderRemote = new SearchLoaderRemote(http);
   }
 
-  getFavorites() : Promise<AdvancedSearch[]>  { 
+  getFavorites() : Promise<AdvancedSearch[]>  {
     if(this.app.userIsConnected()){
       return this.loaderRemote.getFavorites();
     }else{
@@ -40,11 +40,11 @@ export class SearchLoaderService implements ISearchLoader{
     }
   }
 
-  removeFavorite(oldFavorite : AdvancedSearch) : Promise<AdvancedSearch> {
+  removeFavorite(index : number, oldFavorite : AdvancedSearch) : Promise<AdvancedSearch> {
     if(this.app.userIsConnected()){
-      return this.loaderRemote.removeFavorite(oldFavorite);
+      return this.loaderRemote.removeFavorite(index, oldFavorite);
     }else{
-      return this.loaderLocal.removeFavorite(oldFavorite);
+      return this.loaderLocal.removeFavorite(index, oldFavorite);
     }
   }
 
@@ -62,6 +62,14 @@ export class SearchLoaderService implements ISearchLoader{
       return this.loaderRemote.addRecent(recentSearch);
     }else{
       return this.loaderLocal.addRecent(recentSearch);
+    }
+  }
+
+  refreshFavorite(index : number, search : AdvancedSearch): Promise<AdvancedSearch> {
+    if(this.app.userIsConnected()){
+      return this.loaderRemote.refreshFavorite(index, search);
+    }else{
+      return this.loaderLocal.refreshFavorite(index, search);
     }
   }
 }

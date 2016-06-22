@@ -6,6 +6,7 @@ import {ISearchLoader} from './search-loader.interface';
 
 const KEY_FAVORITES  = 'search-favorites';
 const KEY_RECENTS  = 'search-recentes';
+const RECENTS_LENGTH  = 20;
 
 @Injectable()
 export class SearchLoaderLocal implements ISearchLoader{
@@ -52,12 +53,13 @@ export class SearchLoaderLocal implements ISearchLoader{
       //parsing des objets
       let resultObj : Object[] = JSON.parse(searchesStr);
       for(let i = 0; i < resultObj.length; i++) {
-        let newSearch = AdvancedSearch.parseJSON(resultObj);
+        let newSearch = AdvancedSearch.parseJSON(resultObj[i]);
         result.push(newSearch);
       }
+      // console.debug("count searchesStr["+key+"] : "+searchesStr);
     }
 
-    console.debug("searchesStr["+key+"] : "+searchesStr);
+
 
     return result;
   }
@@ -94,19 +96,56 @@ export class SearchLoaderLocal implements ISearchLoader{
     });
   }
 
-  removeFavorite(oldFavorite : AdvancedSearch) : Promise<AdvancedSearch> {
+  removeFavorite(index : number, oldFavorite : AdvancedSearch) : Promise<AdvancedSearch> {
     return new Promise<AdvancedSearch>( (resolve, reject) => {
-      oldFavorite.starred = false;
-      resolve(oldFavorite);
-      // reject(Error("Failed to find position"));
+      //Résolution
+      this.getFavorites()
+        .then(searches => {
+          searches.splice(index, 1);
+          oldFavorite.starred = false;
+
+          return this.saveSearches(KEY_FAVORITES, searches);
+        }).then( (success) => {
+          resolve(oldFavorite);
+        }).catch(err => {
+          reject(err);
+        });
     });
   }
 
 
   addRecent(recentSearch: AdvancedSearch): Promise<AdvancedSearch> {
     return new Promise<AdvancedSearch>( (resolve, reject) => {
-      resolve(recentSearch);
-      // reject(Error("Failed to find position"));
+      //Résolution
+      this.getRecents()
+        .then(searches => {
+          searches.splice(0, 0, recentSearch);
+
+          if(searches.length > RECENTS_LENGTH) {
+            searches.splice(RECENTS_LENGTH - 1, searches.length - RECENTS_LENGTH);
+          }
+
+          return this.saveSearches(KEY_RECENTS, searches);
+        }).then( (success) => {
+          resolve(recentSearch);
+        }).catch(err => {
+          reject(err);
+        });
+    });
+  }
+
+  refreshFavorite(index : number, search : AdvancedSearch): Promise<AdvancedSearch> {
+    return new Promise<AdvancedSearch>( (resolve, reject) => {
+      //Résolution
+      this.getFavorites()
+        .then(searches => {
+          searches[index] = search;
+          return this.saveSearches(KEY_FAVORITES, searches);
+        }).then( (success) => {
+          resolve(search);
+        }).catch(err => {
+          reject(err);
+        });
     });
   }
 }

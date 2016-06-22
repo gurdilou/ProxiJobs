@@ -41,8 +41,8 @@ export class SearchPageComponent {
    * Evenement levé lors de la sélection d'une recherche depuis les favoris
    * @param  {AdvancedSearch} search la recherche favorite sélectionnée
    */
-  protected onSelectFavoriteSearch(search : AdvancedSearch) {
-    this.advancedPanel.applySearch(search);
+  protected onSelectFavoriteSearch(ctn : Object) {
+    this.advancedPanel.applySearch(ctn["search"], ctn["index"]);
   }
   /**
    * Evènement levé lors de la suppression d'un favoris depuis le panneau des favoris
@@ -57,7 +57,7 @@ export class SearchPageComponent {
    * @param  {AdvancedSearch} search la recherche favorite sélectionnée
    */
   protected onSelectRecentSearch(search : AdvancedSearch) {
-    this.advancedPanel.applySearch(search);
+    this.advancedPanel.applySearch(search, -1);
   }
 
 

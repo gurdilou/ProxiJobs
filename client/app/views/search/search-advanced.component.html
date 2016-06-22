@@ -1,3 +1,4 @@
+
 <h2 ><i class="small search icon"></i>Recherche avancée</h2>
 
 <form class="ui form pj-adv-search-form" (submit)="onLoadJobs($event)">
@@ -24,8 +25,8 @@
 
   <div class="field">
     <label>Type de contrat</label>
-    <select (change)="setContractKind" class="ui fluid dropdown" name="kind">
-      <option value="CDI">Tous</option>
+    <select (change)="setContractKind" class="select-kind ui fluid dropdown" name="kind" (change)="onKindChange($event.target.value)">>
+      <option value="All">Tous</option>
       <option value="CDI">CDI</option>
       <option value="CDD">CDD</option>
       <option value="Interim">Interim</option>
