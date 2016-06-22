@@ -1,0 +1,32 @@
+$offer-log-margin : 32px;
+
+.pj-offers-logbook-ctn{
+  height : 100%;
+  position: relative;
+
+  .log-save-cv.item {
+    margin-left: $offer-log-margin;
+    .ui.card {
+      width: 150px;
+      color: $secondaryColor;
+      border-color: $secondaryColor;
+    }
+  }
+  .log-child.item {
+    margin-left: $offer-log-margin;
+  }
+
+  .log-backs-list.ui.relaxed.divided.list {
+    border: 1px solid $lightSecondaryColor;
+    width: 100%;
+    margin-right: 64px;
+    height: 200px;
+  }
+
+  .log-notes-list{
+    border: 1px solid $lightSecondaryColor;
+    width: 100%;
+    margin-right: 64px;
+    height: 200px;
+  }
+}

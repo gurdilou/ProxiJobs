@@ -1,0 +1,109 @@
+<h2><i class="small map icon"></i>Journal de bord</h2>
+
+<div class="ui items">
+  <!-- Postulation ? -->
+  <div class="log-postulation item">
+    <div class="ui input checkbox">
+      <input type="checkbox" id="offer-log-postulation" />
+      <label for="offer-log-postulation">Postulation</label>
+    </div>
+  </div>
+
+  <!-- CV et LM envoyés ?  -->
+  <div class="log-sent item">
+    <div class="ui input checkbox">
+      <input type="checkbox" id="offer-log-sent" />
+      <label for="offer-log-sent">Envoi du CV et de la lettre de motivation</label>
+    </div>
+  </div>
+
+  <!-- Sauvegarde du CV et la LM -->
+  <div class="log-save-cv log-child item">
+    <div class="ui link cards">
+      <!-- Sauvegarder le CV -->
+      <div class="ui card">
+        <div class="center aligned content">
+          <i class="huge plus square outline icon"></i>
+          <div class="meta">
+            Sauvegarder le CV
+          </div>
+        </div>
+      </div>
+
+      <!-- Sauvegarde la lettre -->
+      <div class="ui card">
+        <div class="center aligned content">
+          <i class="huge plus square outline icon"></i>
+          <div class="meta">
+            Sauvegarder la lettre
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Réponse -->
+  <div class="log-response item">
+    <div class="ui input checkbox">
+      <input type="checkbox" id="offer-log-response" />
+      <label for="offer-log-response">Réponse</label>
+    </div>
+  </div>
+
+  <!-- Le contenu de la réponse -->
+  <div class="log-response-state log-child item">
+    <div class="grouped fields">
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="example2" checked="checked">
+          <label>Attente</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="example2">
+          <label>Entretien</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="example2">
+          <label>Refus</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Relances -->
+  <div class="log-response-backs item">
+    <div class="ui input checkbox">
+      <input type="checkbox" id="offer-log-backs" />
+      <label for="offer-log-backs">Relances</label>
+    </div>
+  </div>
+
+  <!-- Liste des relances -->
+  <div class="log-response-backs-list log-child item">
+    <div class="log-backs-list ui relaxed divided list">
+      <!-- Une recherche -->
+      <div class="item" *ngFor="let back of log.backs">
+        <i class="small plus square calendar icon"></i> {{back.date}} - {{back.state}}
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Notes -->
+  <div class="log-response-backs item">
+    <div class="ui input checkbox">
+      <input type="checkbox" id="offer-log-notes" />
+      <label for="offer-log-notes">Notes</label>
+    </div>
+  </div>
+
+  <!-- List de notes -->
+  <div class="log-response-notes-list log-child item">
+    <textarea class="log-notes-list"></textarea>
+  </div>
+
+</div>

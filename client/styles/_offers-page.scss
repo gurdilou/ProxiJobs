@@ -1,0 +1,12 @@
+.page-offers.ui.grid {
+  height: 100%;
+  width: 100%;
+  padding: $clear-padding;
+  padding: 12px;
+
+  &>.row>.column.pj-offers-logbook-ctn {
+    padding-right: 0px;
+    position: relative;
+    border-left: 1px solid $lightGrey;
+  }
+}
