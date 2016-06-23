@@ -5,26 +5,25 @@ import {JobLoaderService} from '../../services/job-loader.service';
 import {NotificationService} from '../../services/notification.service';
 
 @Component({
-  selector: 'pj-offers-saved',
-  templateUrl : 'app/views/offers/offers-saved.component.html',
+  selector: 'pj-offer-saved',
+  templateUrl : 'app/views/offers/offer-saved-widget.component.html',
   providers: [NotificationService, JobLoaderService]
 })
 
 export class OffersSavedComponent implements OnInit {
-  private offers : SavedJobOffer[] = [];
+  private savedOffer : SavedJobOffer;
 
   constructor(private jobService : JobLoaderService) {
   }
 
-  private getSavedOffers() {
-    this.jobService.getSavedOffers()
-      .then(offers => {
-        this.offers = offers;
+  private getSavedOfferLogBook() {
+    this.jobService.getSavedOfferLogBook(savedOffer)
+      .then(savedOffer => {
       });
   }
 
   ngOnInit() {
-    this.getSavedOffers();
+    this.getSavedOfferLogBook();
   }
 
 }

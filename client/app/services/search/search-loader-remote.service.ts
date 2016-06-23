@@ -7,11 +7,14 @@ import {AdvancedSearch} from '../../model/search/advanced-search';
 import {ContractKind} from '../../model/search/contract-kind';
 import {ISearchLoader} from './search-loader.interface';
 
+import {NotificationService} from '../notification.service';
+
 
 @Injectable()
 export class SearchLoaderRemote implements ISearchLoader{
 
-  constructor(private http: Http) {
+  constructor(private http: Http,
+    private notifier: NotificationService) {
   }
 
   getFavorites() : Promise<AdvancedSearch[]>  {

@@ -4,6 +4,8 @@ import {AdvancedSearch} from '../../model/search/advanced-search';
 import {ContractKind} from '../../model/search/contract-kind';
 import {ISearchLoader} from './search-loader.interface';
 
+import {NotificationService} from '../notification.service';
+
 const KEY_FAVORITES  = 'search-favorites';
 const KEY_RECENTS  = 'search-recentes';
 const RECENTS_LENGTH  = 20;
@@ -12,7 +14,7 @@ const RECENTS_LENGTH  = 20;
 export class SearchLoaderLocal implements ISearchLoader{
 
 
-  constructor() {
+  constructor(private notifier: NotificationService) {
   }
 
   getFavorites() : Promise<AdvancedSearch[]>  {
@@ -23,7 +25,7 @@ export class SearchLoaderLocal implements ISearchLoader{
         resolve(result);
 
       }catch(err){
-        reject(err);
+        this.notifier.errror(err);
       }
     });
   }
@@ -36,7 +38,7 @@ export class SearchLoaderLocal implements ISearchLoader{
         resolve(result);
 
       }catch(err){
-        reject(err);
+        this.notifier.errror(err);
       }
     });
   }
@@ -75,7 +77,7 @@ export class SearchLoaderLocal implements ISearchLoader{
         }).then( (success) => {
           resolve(newFavorite);
         }).catch(err => {
-          reject(err);
+          this.notifier.errror(err);
         })
     });
   }
@@ -108,7 +110,7 @@ export class SearchLoaderLocal implements ISearchLoader{
         }).then( (success) => {
           resolve(oldFavorite);
         }).catch(err => {
-          reject(err);
+          this.notifier.errror(err);
         });
     });
   }
@@ -129,7 +131,7 @@ export class SearchLoaderLocal implements ISearchLoader{
         }).then( (success) => {
           resolve(recentSearch);
         }).catch(err => {
-          reject(err);
+          this.notifier.errror(err);
         });
     });
   }
@@ -144,7 +146,7 @@ export class SearchLoaderLocal implements ISearchLoader{
         }).then( (success) => {
           resolve(search);
         }).catch(err => {
-          reject(err);
+          this.notifier.errror(err);
         });
     });
   }

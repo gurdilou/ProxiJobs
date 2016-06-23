@@ -1,2 +1,25 @@
 
 <h2 ><i class="small ticket icon"></i>Offres sauvegardées</h2>
+
+<div *ngIf="offers.count > 0">
+  <div class="items">
+    <div class="item" *ngFor="let offer of offers">
+
+      <pj-offer-saved [savedOffer]="offer"></pj-offer-saved>
+
+    </div>
+  </div>
+</div>
+
+<!-- Si aucune offre => on invite l'utilisateur à en sauvegarder -->
+<div *ngIf="offers.length == 0">
+  <div class="pj-info-nothing item">
+    <h3 class="ui icon header center aligned">
+      <i class="help icon"></i>
+      <div class="content">
+        Aucune offre sauvegardée &#9785;
+        <div class="sub header">Sauvegardez une offre offres depuis la carte.</div>
+      </div>
+    </h3>
+  </div>
+</div>

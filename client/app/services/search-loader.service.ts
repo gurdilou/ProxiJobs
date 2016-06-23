@@ -1,14 +1,13 @@
 import { Injectable }    from '@angular/core';
-import { Headers, Http } from '@angular/http';
-import 'rxjs/add/operator/toPromise';
+import { Http } from '@angular/http';
 
 import {AdvancedSearch} from '../model/search/advanced-search';
-import {ContractKind} from '../model/search/contract-kind';
 import {AppProperties} from '../model/general/app-properties';
 import {ISearchLoader} from './search/search-loader.interface';
 
 import {SearchLoaderLocal} from './search/search-loader-local.service';
 import {SearchLoaderRemote} from './search/search-loader-remote.service';
+import {NotificationService} from './notification.service';
 
 
 @Injectable()
@@ -19,9 +18,10 @@ export class SearchLoaderService implements ISearchLoader{
 
   constructor(
     private http: Http,
-    private app: AppProperties) {
-      this.loaderLocal = new SearchLoaderLocal();
-      this.loaderRemote = new SearchLoaderRemote(http);
+    private app: AppProperties,
+    private notifier: NotificationService) {
+      this.loaderLocal = new SearchLoaderLocal(notifier);
+      this.loaderRemote = new SearchLoaderRemote(http, notifier);
   }
 
   getFavorites() : Promise<AdvancedSearch[]>  {

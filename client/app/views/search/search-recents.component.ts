@@ -4,13 +4,13 @@ import { Router, RouteParams } from '@angular/router-deprecated';
 import {AdvancedSearch} from '../../model/search/advanced-search';
 import {SearchLoaderService} from '../../services/search-loader.service';
 import {SearchAdvancedWidget} from './search-adv-widget.component';
-
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   selector: 'pj-search-recents',
   templateUrl : 'app/views/search/search-recents.component.html',
   directives: [SearchAdvancedWidget],
-  providers: [SearchLoaderService]
+  providers: [NotificationService, SearchLoaderService]
 })
 
 export class SearchRecentsComponent implements OnInit {
