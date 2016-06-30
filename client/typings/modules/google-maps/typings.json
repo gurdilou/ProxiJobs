@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/google-maps/google-maps.d.ts",
+    "raw": "registry:dt/google-maps#0.0.0+20160317120654",
+    "typings": "https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/google-maps/google-maps.d.ts"
+  }
+}

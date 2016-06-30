@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 
 import {SavedJobOffer} from '../../model/jobs/saved-job-offer';
 import {JobLoaderService} from '../../services/job-loader.service';
@@ -10,20 +10,44 @@ import {NotificationService} from '../../services/notification.service';
   providers: [NotificationService, JobLoaderService]
 })
 
-export class OffersSavedComponent implements OnInit {
-  private savedOffer : SavedJobOffer;
+export class OfferSavedWidgetComponent implements OnInit {
+  @Input() savedOffer : SavedJobOffer;
+  private id : number;
+  static global_counter : number = 0;
 
   constructor(private jobService : JobLoaderService) {
+    this.id = OfferSavedWidgetComponent.global_counter;
+    OfferSavedWidgetComponent.global_counter++;
   }
 
   private getSavedOfferLogBook() {
-    this.jobService.getSavedOfferLogBook(savedOffer)
+    this.jobService.getSavedOfferLogBook(this.savedOffer)
       .then(savedOffer => {
       });
   }
 
   ngOnInit() {
+  }
+  /**
+   * Lors de la sélection de l'offre
+   */
+  protected onSelect(){
     this.getSavedOfferLogBook();
   }
+
+  /**
+   * Lorsque l'utilisateur veut voir tout le descriptif d'une offre
+   */
+  protected onExpandDesc(event : any) {
+    event.preventDefault();
+    event.stopPropagation();
+    $('.ui.long.modal.'+this.id)
+      .modal({
+        blurring: true
+      })
+      .modal('setting', 'transition', 'vertical flip')
+      .modal('show');
+  }
+
 
 }

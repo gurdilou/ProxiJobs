@@ -1,1 +1,55 @@
-{{savedOffer.offer.job}}
+<div class="ui link card item">
+  <div class="content">
+    <h2 class="header">{{savedOffer.job.jobtitle}}</h2>
+    <div class="meta">
+      <span><i class="small user icon"></i> {{savedOffer.job.company}}</span>
+      <span><i class="small euro icon"></i> {{savedOffer.job.salary}}</span>
+      <span><i class="small university icon"></i> {{savedOffer.job.city}}</span>
+    </div>
+    <!-- TODO -->
+  </div>
+
+  <!-- Etate de la réponse -->
+  <div class="offer-status">
+    {{savedOffer.logbook.getStatus()}}
+  </div>
+
+  <!-- note sur l'offre -->
+  <div *ngIf="savedOffer.logbook.note !== ''">
+    <div class="offer-notes">
+      <i class="note-icon small quote left icon"></i>
+      <div class="note-content">
+        {{savedOffer.logbook.note}}
+      </div>
+    </div>
+  </div>
+
+  <!-- Description de l'offre -->
+  <div  class="offer-description item">
+    <button class="offer-desc-expand circular ui icon button" (click)="onExpandDesc($event)">
+      <i class="icon expand"></i>
+    </button>
+    <div [innerHtml]="savedOffer.job.getShortSnippet()" class="offer-desc-content"></div>
+  </div>
+
+</div>
+
+
+
+
+<div class="ui transition long modal {{id}}">
+  <i class="close icon"></i>
+  <div class="header">
+    {{savedOffer.job.jobtitle}}
+  </div>
+
+  <div class="content">
+    <div [innerHtml]="savedOffer.job.snippet" class="description">
+
+    </div>
+  </div>
+
+  <div class="actions">
+    <div class="ui right approve labeled button">OK</div>
+  </div>
+</div>

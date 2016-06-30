@@ -53,10 +53,12 @@ export class JobLoaderService implements IJobLoader{
   }
 
   getSavedOfferLogBook(offer : SavedJobOffer) : Promise<SavedJobOffer> {
-    if(this.app.userIsConnected()){
-      return this.loaderRemote.getSavedOfferLogBook(offer);
-    }else{
-      return this.loaderLocal.getSavedOfferLogBook(offer);
+    if(!offer.logbook.isLoaded){
+      if(this.app.userIsConnected()){
+        return this.loaderRemote.getSavedOfferLogBook(offer);
+      }else{
+        return this.loaderLocal.getSavedOfferLogBook(offer);
+      }
     }
   }
 }

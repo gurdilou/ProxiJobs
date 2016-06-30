@@ -1,0 +1,82 @@
+.pj-offers-saved {
+  position: absolute;
+  overflow-y: auto;
+  overflow-x: hidden;
+  top: 64px;
+  left: 14px;
+  right: 14px;
+  bottom: 0;
+  padding: 6px;
+
+  .item {
+    pj-offer-saved {
+      width: 100%;
+
+      .card {
+        width: 100%;
+        transition: max-height 0.25s;
+        max-height: 64px;
+        overflow: hidden;
+
+        .content {
+          padding-bottom: 0px;
+          margin-bottom: 0px;
+        }
+
+        // statut
+        .offer-status {
+          position: absolute;
+          top: 12px;
+          right: 6px;
+        }
+        //  note
+        .offer-notes {
+          position: absolute;
+          top: 32px;
+          right: 6px;
+          padding: 6px;
+
+          .note-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: $secondaryColor;
+          }
+
+          .note-content {
+            margin-top: 2px;
+            margin-left: 2px;
+          }
+        }
+        // Description
+        .offer-description {
+          color : lighten($black, 0.6);
+          margin: 6px;
+          margin-top: 12px;
+          padding: 3px;
+          border: 1px solid $secondaryColor;
+
+          .offer-desc-expand {
+            float: right;
+            border: none;
+            box-shadow: none;
+            background: none;
+            &:hover {
+              border: none;
+              background: none;              
+            }
+          }
+        }
+      }
+    }
+
+
+    &.selected {
+      .card{
+        max-height: 1000px;
+        transition: max-height 0.5s;
+        background-color: $lightPrimaryColor;
+      }
+    }
+  }
+}

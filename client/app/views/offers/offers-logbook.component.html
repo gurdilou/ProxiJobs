@@ -1,12 +1,12 @@
 <h2>Journal de bord <i class="small map icon"></i></h2>
 
 
-<div *ngIf="log">
+<div *ngIf="logbook">
   <div class="ui items">
     <!-- Postulation ? -->
     <div class="log-postulation item">
       <div class="ui input checkbox">
-        <input type="checkbox" id="offer-log-postulation" />
+        <input type="checkbox" id="offer-log-postulation" [(ngModel)]="logbook.postulated"  />
         <label for="offer-log-postulation">Postulation</label>
       </div>
     </div>
@@ -14,7 +14,7 @@
     <!-- CV et LM envoyés ?  -->
     <div class="log-sent item">
       <div class="ui input checkbox">
-        <input type="checkbox" id="offer-log-sent" />
+        <input type="checkbox" id="offer-log-sent" [(ngModel)]="logbook.documentsSent"  />
         <label for="offer-log-sent">Envoi du CV et de la lettre de motivation</label>
       </div>
     </div>
@@ -25,20 +25,39 @@
         <!-- Sauvegarder le CV -->
         <div class="ui card">
           <div class="center aligned content">
-            <i class="huge plus square outline icon"></i>
-            <div class="meta">
-              Sauvegarder le CV
+
+            <div *ngIf="logbook.resumeUrl !== ''">
+              <i class="huge download outline icon"></i>
+              <div class="meta">
+                Télécharger le CV
+              </div>
             </div>
+            <div *ngIf="logbook.resumeUrl === ''">
+              <i class="huge plus square outline icon"></i>
+              <div class="meta">
+                Sauvegarder le CV
+              </div>
+            </div>
+
           </div>
         </div>
 
         <!-- Sauvegarde la lettre -->
         <div class="ui card">
           <div class="center aligned content">
-            <i class="huge plus square outline icon"></i>
-            <div class="meta">
-              Sauvegarder la lettre
+            <div *ngIf="logbook.coverLetterUrl !== ''">
+              <i class="huge download outline icon"></i>
+              <div class="meta">
+                Sauvegarder la lettre
+              </div>
             </div>
+            <div *ngIf="logbook.coverLetterUrl === ''">
+              <i class="huge plus square outline icon"></i>
+              <div class="meta">
+                Sauvegarder la lettre
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -47,7 +66,7 @@
     <!-- Réponse -->
     <div class="log-response item">
       <div class="ui input checkbox">
-        <input type="checkbox" id="offer-log-response" />
+        <input type="checkbox" id="offer-log-response"  [(ngModel)]="logbook.gotAResponse" />
         <label for="offer-log-response">Réponse</label>
       </div>
     </div>
@@ -57,19 +76,19 @@
       <div class="grouped fields">
         <div class="field">
           <div class="ui radio checkbox">
-            <input type="radio" name="example2" checked="checked">
+            <input type="radio" name="resp-state" checked="checked">
             <label>Attente</label>
           </div>
         </div>
         <div class="field">
           <div class="ui radio checkbox">
-            <input type="radio" name="example2">
+            <input type="radio" name="resp-state">
             <label>Entretien</label>
           </div>
         </div>
         <div class="field">
           <div class="ui radio checkbox">
-            <input type="radio" name="example2">
+            <input type="radio" name="resp-state">
             <label>Refus</label>
           </div>
         </div>
@@ -79,7 +98,7 @@
     <!-- Relances -->
     <div class="log-response-backs item">
       <div class="ui input checkbox">
-        <input type="checkbox" id="offer-log-backs" />
+        <input type="checkbox" id="offer-log-backs" [checked]="logbook.applyBacks.length > 0"/>
         <label for="offer-log-backs">Relances</label>
       </div>
     </div>
@@ -88,7 +107,7 @@
     <div class="log-response-backs-list log-child item">
       <div class="log-backs-list ui relaxed divided list">
         <!-- Une recherche -->
-        <div class="item" *ngFor="let back of log.backs">
+        <div class="item" *ngFor="let back of logbook.applyBacks">
           <i class="small plus square calendar icon"></i> {{back.date}} - {{back.state}}
         </div>
 
@@ -111,7 +130,7 @@
   </div>
 </div>
 
-<div *ngIf="!log">
+<div *ngIf="!logbook">
   <div class="pj-info-nothing item">
     <h3 class="ui icon header center aligned">
       <i class="help icon"></i>

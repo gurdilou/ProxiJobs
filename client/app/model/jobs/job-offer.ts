@@ -1,3 +1,10 @@
+
+/**
+ * La longueur max pour le short snippet
+ * @type {Number}
+ */
+const MAX_LENGTH_SNIPPET  = 512;
+
 export class JobOffer {
   /**
    * l'id chez proxi-jobs
@@ -72,7 +79,7 @@ export class JobOffer {
    */
   provider : string = "indeed";
   /**
-   * L'idée de l'annonce chez le fournisseur
+   * L'id de l'annonce chez le fournisseur
    * @type {string}
    */
   jobkey : string = "";
@@ -96,5 +103,22 @@ export class JobOffer {
    * @type {string}
    */
   formattedRelativeTime : string = "";
+  /**
+   * Salaire proposé
+   * @type {string}
+   */
+  salary : string = "";
+
+  /**
+   * Retourne le snippet raccourcis à 400 caractères
+   * @return {string} [description]
+   */
+  getShortSnippet() : string {
+    if(this.snippet.length < MAX_LENGTH_SNIPPET){
+      return this.snippet;
+    }else{
+      return this.snippet.substr(0, MAX_LENGTH_SNIPPET)+'...';
+    }
+  }
 
 }

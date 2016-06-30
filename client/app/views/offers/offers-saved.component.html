@@ -1,11 +1,11 @@
 
 <h2 ><i class="small ticket icon"></i>Offres sauvegardées</h2>
 
-<div *ngIf="offers.count > 0">
-  <div class="items">
-    <div class="item" *ngFor="let offer of offers">
+<div class="pj-offers-saved" *ngIf="offers.length > 0">
+  <div class="ui items">
+    <div [class.selected]="offer === selectedOffer" (click)="onSelect(offer)" class="item" *ngFor="let offer of offers">
 
-      <pj-offer-saved [savedOffer]="offer"></pj-offer-saved>
+      <pj-offer-saved  [savedOffer]="offer" ></pj-offer-saved>
 
     </div>
   </div>
@@ -18,7 +18,7 @@
       <i class="help icon"></i>
       <div class="content">
         Aucune offre sauvegardée &#9785;
-        <div class="sub header">Sauvegardez une offre offres depuis la carte.</div>
+        <div class="sub header">Sauvegardez une offre depuis la carte.</div>
       </div>
     </h3>
   </div>
