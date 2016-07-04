@@ -1,0 +1,13 @@
+<div class="apply-back-widget-{{index}} middle aligned content">
+  <span class="desc">
+    <i class="small calendar icon"></i> {{applyBack.getFormattedStatus()}} - {{applyBack.getFormattedDate()}}
+  </span>
+
+  <button class="butt-delete butt-options circular ui icon button right floated hidden" (click)="onButtDeleteClick($event)">
+    <i class="icon trash outline"></i>
+  </button>
+  <button class="butt-edit butt-options circular ui icon button right floated hidden" (click)="onButtEditClick($event)">
+    <i class="icon write outline"></i>
+  </button>
+
+</div>

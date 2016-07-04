@@ -1,6 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RouteConfig } from '@angular/router-deprecated';
 import { Router } from '@angular/router-deprecated';
+import * as moment from 'moment';
+import 'moment/locale/fr';
 
 import {User} from './model/general/user';
 
@@ -21,10 +23,14 @@ import { OffersPageComponent } from './views/offers/offers-page.component';
   { path: '/search', name: 'SearchPage', component: SearchPageComponent },
   { path: '/offers', name: 'OffersPage', component: OffersPageComponent }
 ])
-export class MainRouter {
+export class MainRouter implements OnInit {
   private user : User = new User();
 
   constructor(
     private router: Router
   ) { }
+
+  ngOnInit() {
+    moment.locale('fr');
+  }
 }

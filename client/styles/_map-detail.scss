@@ -22,6 +22,7 @@
   // bouton afficher la recherche rapide
   &.search {
     right: 12px;
+    top : 20px;
     opacity: 1;
     transition: opacity linear 500ms;
 
@@ -35,7 +36,7 @@
   @include emphasize-shadow();
   position: absolute;
   right: 12px;
-  top: 12px;
+  top : 20px;
   padding: 12px;
   min-height: 200px;
   margin-bottom: 200px;

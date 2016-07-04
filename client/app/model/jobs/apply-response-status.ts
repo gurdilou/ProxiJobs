@@ -9,7 +9,7 @@ export class ApplyResponseStatusUtils {
 
   static getResponseStatusStr(pStatus : ApplyResponseStatus) : string {
     switch(pStatus) {
-      case ApplyResponseStatus.None: return "";
+      case ApplyResponseStatus.None: return "En attente";
       case ApplyResponseStatus.Waiting: return "En attente";
       case ApplyResponseStatus.Interview: return "Entretien placé";
       case ApplyResponseStatus.Rejected: return "Refusé";

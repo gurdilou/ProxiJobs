@@ -2,12 +2,19 @@
 
 
 <div *ngIf="logbook">
-  <div class="ui items">
+  <div class="pj-offer-logbook ui items">
     <!-- Postulation ? -->
-    <div class="log-postulation item">
+    <div class="log-postulation withButton item">
       <div class="ui input checkbox">
-        <input type="checkbox" id="offer-log-postulation" [(ngModel)]="logbook.postulated"  />
+        <input type="checkbox" id="offer-log-postulation" [ngModel]="logbook.getPostulated()" (ngModelChange)="logbook.setPostulated($event)"  />
         <label for="offer-log-postulation">Postulation</label>
+      </div>
+
+      <div *ngIf="logbook.postulationDate != undefined">
+        <button class="datepicker ui button" data-value="{{logbook.postulationDate}}"  (click)="onEditPostulationDate()">
+          <i class="calendar icon"></i>
+          {{logbook.getPostulatedDateStr()}}
+        </button>
       </div>
     </div>
 
@@ -64,10 +71,17 @@
     </div>
 
     <!-- Réponse -->
-    <div class="log-response item">
+    <div class="log-response item withButton">
       <div class="ui input checkbox">
-        <input type="checkbox" id="offer-log-response"  [(ngModel)]="logbook.gotAResponse" />
+        <input type="checkbox" id="offer-log-response"  [ngModel]="logbook.getGotAResponse()" (ngModelChange)="logbook.setGotAResponse($event)" />
         <label for="offer-log-response">Réponse</label>
+      </div>
+
+      <div *ngIf="logbook.responseDate != undefined">
+        <button class="datepicker ui button" data-value="{{logbook.responseDate}}"  (click)="onEditResponseDate()">
+          <i class="calendar icon"></i>
+          {{logbook.getResponseDateStr()}}
+        </button>
       </div>
     </div>
 
@@ -76,19 +90,19 @@
       <div class="grouped fields">
         <div class="field">
           <div class="ui radio checkbox">
-            <input type="radio" name="resp-state" checked="checked">
+            <input type="radio" name="resp-state" checked="checked" (click)="onResponseStatusChange(0)">
             <label>Attente</label>
           </div>
         </div>
         <div class="field">
           <div class="ui radio checkbox">
-            <input type="radio" name="resp-state">
+            <input type="radio" name="resp-state" (click)="onResponseStatusChange(1)">
             <label>Entretien</label>
           </div>
         </div>
         <div class="field">
           <div class="ui radio checkbox">
-            <input type="radio" name="resp-state">
+            <input type="radio" name="resp-state" (click)="onResponseStatusChange(2)">
             <label>Refus</label>
           </div>
         </div>
@@ -96,11 +110,14 @@
     </div>
 
     <!-- Relances -->
-    <div class="log-response-backs item">
+    <div class="log-response-backs withButton item">
       <div class="ui input checkbox">
         <input type="checkbox" id="offer-log-backs" [checked]="logbook.applyBacks.length > 0"/>
         <label for="offer-log-backs">Relances</label>
       </div>
+      <button class="ui circular icon button" (click)="onAddApplyBack()">
+        <i class="add icon"></i>
+      </button>
     </div>
 
     <!-- Liste des relances -->
@@ -108,23 +125,25 @@
       <div class="log-backs-list ui relaxed divided list">
         <!-- Une recherche -->
         <div class="item" *ngFor="let back of logbook.applyBacks">
-          <i class="small plus square calendar icon"></i> {{back.date}} - {{back.state}}
+
+          <pj-apply-back [applyBack]="back" (onEditApplyBack)="onEditApplyBack($event)" (onDeleteApplyBack)="onDeleteApplyBack($event)"></pj-apply-back>
+
         </div>
 
       </div>
     </div>
 
     <!-- Notes -->
-    <div class="log-response-backs item">
+    <div class="log-response-notes item">
       <div class="ui input checkbox">
-        <input type="checkbox" id="offer-log-notes" />
+        <input type="checkbox" id="offer-log-notes" [checked]="logbook.note !== ''" />
         <label for="offer-log-notes">Notes</label>
       </div>
     </div>
 
     <!-- List de notes -->
     <div class="log-response-notes-list log-child item">
-      <textarea class="log-notes-list"></textarea>
+      <textarea  [(ngModel)]="logbook.note" class="log-notes-list"></textarea>
     </div>
 
   </div>

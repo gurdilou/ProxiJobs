@@ -21,6 +21,37 @@ $offer-log-margin : 32px;
     width: 100%;
     margin-right: 64px;
     height: 200px;
+    overflow: auto;
+    overflow-x: hidden;
+    color: darken($secondaryColor, 25%);
+
+    .item {
+      height: 42px;
+      padding-left: 12px;
+      padding-right: 6px;
+
+      .content {
+        position: relative;
+        .desc {
+          position: absolute;
+          top: 4px;
+        }
+      }
+
+
+      .butt-options {
+        display: none;
+      }
+
+      &:hover {
+        background-color: $lightPrimaryColor;
+        cursor: pointer;
+
+        .butt-options {
+          display: inherit;
+        }
+      }
+    }
   }
 
   .log-notes-list{
@@ -28,5 +59,22 @@ $offer-log-margin : 32px;
     width: 100%;
     margin-right: 64px;
     height: 200px;
+    font-family: $pageFont;
+    padding: 6px;
+    color: darken($secondaryColor, 25%);
   }
+
+  .withButton {
+    .ui.input{
+      margin-top: 4px;
+    }
+    .ui.button {
+      padding : 0.3em;
+      margin-left: 16px;
+      box-shadow: none;
+    }
+  }
+
+
+
 }

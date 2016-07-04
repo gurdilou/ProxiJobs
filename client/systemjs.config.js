@@ -12,6 +12,7 @@
     'angular2-in-memory-web-api'  : 'node_modules/angular2-in-memory-web-api',
     'rxjs'                        : 'node_modules/rxjs',
     'angular2-toaster'            : 'node_modules/angular2-toaster',
+    'moment'                      : 'node_modules/moment',
   };
 
   // packages tells the System loader how to load when no filename and/or no extension
@@ -20,6 +21,7 @@
     'rxjs':                       { defaultExtension: 'js' },
     'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
     'angular2-toaster'          : { defaultExtension: 'js' },
+    'moment'                    : { main: 'moment.js', defaultExtension: 'js' },
   };
 
   var ngPackageNames = [
@@ -42,7 +44,7 @@
   // Bundled (~40 requests):
   function packUmd(pkgName) {
     packages['@angular/'+pkgName] = { main: pkgName + '.umd.js', defaultExtension: 'js' };
-  };
+  }
 
   var setPackageConfig = System.packageWithIndex ? packIndex : packUmd;
 
@@ -52,7 +54,7 @@
   var config = {
     map: map,
     packages: packages
-  }
+  };
 
   System.config(config);
 

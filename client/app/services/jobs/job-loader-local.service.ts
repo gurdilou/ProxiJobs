@@ -34,6 +34,7 @@ export class JobLoaderLocal implements IJobLoader{
 
       let tmp = new SavedJobOffer();
       tmp.job = new JobOffer();
+      tmp.id = ""+0;
       tmp.job.id = 0;
       tmp.job.jobtitle = "Développeur H/F SQL serveur";
       tmp.job.company = "puddi corp";
@@ -42,8 +43,6 @@ export class JobLoaderLocal implements IJobLoader{
       tmp.job.formattedLocation = "797 chemin de la breteque, 76230, Bois-Guillaume";
       tmp.job.source = "Indeed";
       tmp.job.date = "20/04/2015";
-      tmp.logbook.documentsSent = true;
-      tmp.logbook.resumeUrl = "http://blog.luce.pro";
       tmp.job.snippet =
         "Invoke, éditeur de logiciels de reporting financier et réglementaire connaît une croissance forte depuis sa création, en France comme à l’international."
         +"<br/>Reconnue comme référence incontournable sur le marché, Invoke compte aujourd’hui parmi ses clients plus de 1 800 groupes et régulateurs. Avec un budget d’environ 1/3 de son chiffre d’affaires consacré à la R&D, Invoke ne cesse d’enrichir fonctionnellement sa gamme pour continuer de satisfaire ses clients et poursuivre son évolution rapide."
@@ -76,18 +75,21 @@ export class JobLoaderLocal implements IJobLoader{
         +"<br/>"
         +"<br/>Candidature"
         +"<br/>CV et lettre de motivation à envoyer par mail à Mme Elodie THIBAULT (ethibault@invoke.fr).";
-
       tmp.job.url = "http://www.indeed.fr/pagead/clk?mo=r&ad=-6NYlbfkN0Asq71gwkBzBySIA2SeM6fGNfQcF2IjDdOJtyxYu4YaUptRbYC2cwl0uHCaN6lERn53iknHoUMDGLbzinWnNaurdaQOdO47NF9mo6XJJcGJKpUJ5vikwwgOiwkrw1A7fBc-b1Qq3JZAenxZJoDgRRuHej_BP7aiq3deX8fZS1o38Vll0tJW8sUZSZ7TglLUPC-H-_TGiBIW9mE8t7GzoXX11HxT6-3Vrj5uqugQfh8amyn8SEAq6CpXWyG2MDmDIn48PRBch-z2oImrCBUzRGeTSESEv_LMbrkv781mRTw_G8vMDWR4OzIC8RKNv2DStP6QNDLT8GXYTmwLtUtPJ82pH79HNZERxi3r4llfRWp4QTWjvvMxAWxl1DN0ETNxzy83MhduoHEDpjO5-wrwxkyC4OPl8NXHjqI_vgVN98_WHcJobeajojWKuJGCwgMNJkd7JbkWxsMgoHtrqmgzxCJIujC2I19q5KojOxCcqx846pgxxDIw2u_bGZrPHCetmbXMBGSXOKbDz067A4YHHevVeYxPr14YaVJHgBn617jsSA==&p=1&sk=&fvj=0&tk=1amg9fvha9v99fnr&jsa=3498&oc=1&sal=0";
       tmp.job.latitude = 49.479787;
       tmp.job.longitude = 1.111285;
       tmp.job.salary = "A négocier";
-      tmp.logbook.postulated = true;
+      tmp.logbook.documentsSent = true;
+      tmp.logbook.resumeUrl = "http://blog.luce.pro";
+      tmp.logbook.setPostulated(true);
+      tmp.logbook.savedDate = new Date();
       tmp.logbook.note = "Voir la cantine";
       tmp.logbook.postulationDate = new Date();
       result.push(tmp);
 
       for(let i = 0; i < 50; i++){
         let tmp2 = new SavedJobOffer();
+        tmp2.id = ""+(i+1);
         tmp2.job = new JobOffer();
         tmp2.job.id = 0;
         tmp2.job.jobtitle = "Développeur H/F SQL serveur";
@@ -102,6 +104,7 @@ export class JobLoaderLocal implements IJobLoader{
         tmp2.job.latitude = 49.479787;
         tmp2.job.longitude = 1.111285;
         tmp2.job.salary = "40k€";
+        tmp2.logbook.savedDate = new Date();
 
         result.push(tmp2);
       }
