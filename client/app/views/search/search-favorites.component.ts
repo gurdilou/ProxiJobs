@@ -57,6 +57,11 @@ export class SearchFavoritesComponent implements OnInit {
     }
   }
 
+  /**
+   * Retourne l'index de la recherche
+   * @param  {AdvancedSearch} search la rechercher donnée
+   * @return {any}                   l'index de la recherche
+   */
   private getSearchIndex(search: AdvancedSearch): any {
     let i = 0;
     let found = false;

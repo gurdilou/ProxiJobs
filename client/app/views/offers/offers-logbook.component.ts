@@ -32,7 +32,10 @@ export class OffersLogbookComponent {
    */
   display(savedOffer : SavedJobOffer) {
     this.savedOffer = savedOffer;
-    this.logbook = savedOffer.logbook;
+    this.logbook = undefined;
+    if(this.savedOffer != undefined){
+      this.logbook = savedOffer.logbook;
+    }
   }
   /**
    * Lors d'un changement du statut de la réponse

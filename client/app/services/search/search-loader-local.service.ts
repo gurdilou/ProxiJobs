@@ -61,8 +61,6 @@ export class SearchLoaderLocal implements ISearchLoader{
       // console.debug("count searchesStr["+key+"] : "+searchesStr);
     }
 
-
-
     return result;
   }
 

@@ -19,7 +19,8 @@ export class OffersSavedComponent implements OnInit {
   private selectedOffer : SavedJobOffer;
   @Output() onOfferSelect = new EventEmitter();
 
-  constructor(private jobService : JobLoaderService) {
+  constructor(private jobService : JobLoaderService,
+    private notifier : NotificationService) {
   }
 
   private getSavedOffers() {
@@ -41,5 +42,28 @@ export class OffersSavedComponent implements OnInit {
     this.selectedOffer = selectedOffer;
     this.onOfferSelect.emit(selectedOffer);
   }
+  /**
+   * Lors de la suppression d'une offre sauvegardée
+   * @param  {SavedJobOffer} deletedOffer l'offre supprimée
+   */
+  onDeleteSavedOffer(deletedOffer : SavedJobOffer) {
+    this.jobService.deleteSavedOffer(this.offers, deletedOffer)
+      .then( deletedoffer => {
+        this.onSelect(undefined);
+        this.informDeleteSucceed(deletedoffer);
+      });
+  }
+  /**
+   * Informe l'utilisateur de la suppression de la recherche sauvegardée
+   * @param  {AdvancedSearch} searchDeleted la recherche supprimée
+   */
+  private informDeleteSucceed(deletedoffer : SavedJobOffer) {
+    this.notifier.askConfirmDownload('Offre supprimée "'+deletedoffer.job.jobtitle+'"', (isCanceled) => {
+      if(isCanceled) {
+        this.jobService.restoreSavedOffer(this.offers, deletedoffer);
+      }
+    });
+  }
+
 
 }

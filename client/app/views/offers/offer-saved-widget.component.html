@@ -1,4 +1,4 @@
-<div class="ui link card item">
+<div class="ui card item">
   <div class="content">
     <h2 class="header">{{savedOffer.job.jobtitle}}</h2>
     <div class="meta">
@@ -32,6 +32,18 @@
     <div [innerHtml]="savedOffer.job.getShortSnippet()" class="offer-desc-content"></div>
   </div>
 
+  <!-- Pied de page de la carte -->
+  <div class="extra content options">
+    <button class="butt-show basic ui button" (click)="seeOnMap()">Voir sur la carte</button>
+
+    <div class="butt-delete ui basic animated button right floated" tabindex="0" (click)="deleteSavedOffer()">
+      <i class="visible content material-icons small">delete</i>
+      <div class="hidden content">
+        <div>Supprimer</div>
+      </div>
+    </div>
+
+  </div>
 </div>
 
 

@@ -34,4 +34,23 @@ export class ApplyBack {
     }
     return "";
   }
+
+  /**
+   * Créé une relance à partir d'un json
+   * @param  {Object}    json le json parsé
+   * @return {ApplyBack}      une nouvelle relance
+   */
+  static parseJSON(json : Object) : ApplyBack {
+    let result = new ApplyBack();
+
+    for (let property in json) {
+      if( result.hasOwnProperty(property) ) {
+        //Affectation des champs spéciaux
+        switch(property) {
+          default: result[property] = json[property];
+        }
+      }
+    }
+    return result;
+  }
 }

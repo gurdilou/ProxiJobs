@@ -61,4 +61,29 @@ export class JobLoaderService implements IJobLoader{
       }
     }
   }
+
+  deleteSavedOffer(savedOffers : SavedJobOffer[], deletedOffer : SavedJobOffer) : Promise<SavedJobOffer> {
+    if(this.app.userIsConnected()){
+      return this.loaderRemote.deleteSavedOffer(savedOffers, deletedOffer);
+    }else{
+      return this.loaderLocal.deleteSavedOffer(savedOffers, deletedOffer);
+    }
+  }
+
+  createSavedOffer(linkedJob : JobOffer) : Promise<SavedJobOffer> {
+    if(this.app.userIsConnected()){
+      return this.loaderRemote.createSavedOffer(linkedJob);
+    }else{
+      return this.loaderLocal.createSavedOffer(linkedJob);
+    }
+  }
+
+  restoreSavedOffer(savedOffers : SavedJobOffer[], restoredOffer : SavedJobOffer) : Promise<SavedJobOffer[]> {
+    if(this.app.userIsConnected()){
+      return this.loaderRemote.restoreSavedOffer(savedOffers, restoredOffer);
+    }else{
+      return this.loaderLocal.restoreSavedOffer(savedOffers, restoredOffer);
+    }
+  }
+
 }

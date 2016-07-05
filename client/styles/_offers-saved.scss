@@ -18,6 +18,10 @@
         max-height: 64px;
         overflow: hidden;
 
+        &:hover {
+          cursor: pointer;
+        }
+
         .content {
           padding-bottom: 0px;
           margin-bottom: 0px;
@@ -63,7 +67,28 @@
             background: none;
             &:hover {
               border: none;
-              background: none;              
+              background: none;
+            }
+          }
+        }
+
+        // footer
+        .extra.content.options {
+          .ui.basic.button {
+            margin-left: 9px;
+            margin-right: 9px;
+
+            &.butt-delete {
+              width: 90px;
+              .material-icons{
+                color: $secondaryColor;
+              }
+
+              &:hover {
+                border-color: $errorColor;
+                color: $errorColor !important;
+                box-shadow: 0 0 0 1px $errorColor inset,0 2px 3px 0 rgba(0,0,0,.2) !important;
+              }
             }
           }
         }

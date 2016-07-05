@@ -121,4 +121,24 @@ export class JobOffer {
     }
   }
 
+  /**
+   * Parse une offre contenu dans du JSON
+   * @param  {Object}   json le json parsé
+   * @return {JobOffer}      une nouvelle offre
+   */
+  static parseJSON(json : Object) : JobOffer {
+    let result = new JobOffer();
+
+    for (let property in json) {
+      if( result.hasOwnProperty(property) ) {
+        //Affectation des champs spéciaux
+        switch(property) {
+          default: result[property] = json[property];
+        }
+      }
+    }
+
+    return result;
+  }
+
 }

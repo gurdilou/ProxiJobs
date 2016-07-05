@@ -1,4 +1,6 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Router } from '@angular/router-deprecated';
+
 
 import {SavedJobOffer} from '../../model/jobs/saved-job-offer';
 import {JobLoaderService} from '../../services/job-loader.service';
@@ -12,10 +14,13 @@ import {NotificationService} from '../../services/notification.service';
 
 export class OfferSavedWidgetComponent implements OnInit {
   @Input() savedOffer : SavedJobOffer;
+  @Output() onDeleteSavedOffer = new EventEmitter();
   private id : number;
   static global_counter : number = 0;
 
-  constructor(private jobService : JobLoaderService) {
+  constructor(
+      private jobService : JobLoaderService,
+      private router : Router) {
     this.id = OfferSavedWidgetComponent.global_counter;
     OfferSavedWidgetComponent.global_counter++;
   }
@@ -47,6 +52,20 @@ export class OfferSavedWidgetComponent implements OnInit {
       })
       .modal('setting', 'transition', 'vertical flip')
       .modal('show');
+  }
+
+  /**
+   * Lors de la suppression de l'offre
+   */
+  protected deleteSavedOffer() {
+    this.onDeleteSavedOffer.emit(this.savedOffer);
+  }
+
+  /**
+   * Lorsque l'utilisateur veut voir l'offre sur la carte
+   */
+  protected seeOnMap() {
+    this.router.navigate(['MapPage', { savedOfferId: this.savedOffer.id }]);
   }
 
 

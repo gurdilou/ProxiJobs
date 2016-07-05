@@ -20,7 +20,7 @@ export class LogBook {
    * La date de la sauvegarde de l'offre
    * @type {Date}
    */
-  savedDate : Date;
+  savedDate : Date = undefined;
   /**
    * Vrai si l'utilisateur a postulé
    * @type {boolean}
@@ -115,14 +115,19 @@ export class LogBook {
    * @return {string}         la différence en jour
    */
   getDiffDate(oldDate : Date) : string{
-    let today = new Date();
-    let timeDiff = Math.abs(today.getTime() - oldDate.getTime());
-    let diff = timeDiff / (1000 * 3600 * 24);
-    let diffDays = Math.floor(diff);
-    if(diffDays === 0){
-      return "ajourd'hui"
+    if(oldDate != undefined) {
+      let today = new Date();
+      let timeDiff = Math.abs(today.getTime() - oldDate.getTime());
+      let diff = timeDiff / (1000 * 3600 * 24);
+      let diffDays = Math.floor(diff);
+      if(diffDays === 0){
+        return "ajourd'hui"
+      }
+      return "il y  a "+diffDays+" jours";
+    }else{
+      return "";
     }
-    return "il y  a "+diffDays+" jours"
+
   }
 
   /**
@@ -253,5 +258,30 @@ export class LogBook {
     }
 
     this.applyBacks.sort(compare);
+  }
+
+  static parseJSON(json : Object) : LogBook {
+    let result = new LogBook();
+
+    for (let property in json) {
+      if( result.hasOwnProperty(property) ) {
+        //Affectation des champs spéciaux
+        switch(property) {
+          case 'savedDate' : result.savedDate = new Date(json[property]); break;
+          case 'postulationDate' : result.postulationDate = new Date(json[property]); break;
+          case 'responseDate' : result.responseDate = new Date(json[property]); break;
+          case 'applyBacks' :
+            let backs : Object[] = json[property];
+            for(let i = 0; i < backs.length; i++){
+              let newBack = ApplyBack.parseJSON(backs[i]);
+              result.applyBacks.push(newBack);
+            }
+            break;
+          default: result[property] = json[property];
+        }
+      }
+    }
+
+    return result;
   }
 }
