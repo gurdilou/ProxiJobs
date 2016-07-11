@@ -38,7 +38,6 @@ export class OfferApplyBackWidgetComponent {
     let result = this.applyBack.date;
 
     let widget = $('.log-response-backs');
-    console.log("widget : "+widget.html());
     let inputPostulation = widget.pickadate({
       formatSubmit: 'yyyy/mm/dd',
       hiddenName : true

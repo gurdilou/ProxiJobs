@@ -3,13 +3,13 @@ import { Router } from '@angular/router-deprecated';
 
 
 import {SavedJobOffer} from '../../model/jobs/saved-job-offer';
-import {JobLoaderService} from '../../services/job-loader.service';
+import {LogbookEditorService} from '../../services/logbook-editor.service';
 import {NotificationService} from '../../services/notification.service';
 
 @Component({
   selector: 'pj-offer-saved',
   templateUrl : 'app/views/offers/offer-saved-widget.component.html',
-  providers: [NotificationService, JobLoaderService]
+  providers: [NotificationService, LogbookEditorService]
 })
 
 export class OfferSavedWidgetComponent implements OnInit {
@@ -19,14 +19,14 @@ export class OfferSavedWidgetComponent implements OnInit {
   static global_counter : number = 0;
 
   constructor(
-      private jobService : JobLoaderService,
+      private logbookService : LogbookEditorService,
       private router : Router) {
     this.id = OfferSavedWidgetComponent.global_counter;
     OfferSavedWidgetComponent.global_counter++;
   }
 
   private getSavedOfferLogBook() {
-    this.jobService.getSavedOfferLogBook(this.savedOffer)
+    this.logbookService.getSavedOfferLogBook(this.savedOffer)
       .then(savedOffer => {
       });
   }
@@ -57,7 +57,9 @@ export class OfferSavedWidgetComponent implements OnInit {
   /**
    * Lors de la suppression de l'offre
    */
-  protected deleteSavedOffer() {
+  protected deleteSavedOffer(event : any) {
+    event.stopPropagation();
+    event.preventDefault();
     this.onDeleteSavedOffer.emit(this.savedOffer);
   }
 

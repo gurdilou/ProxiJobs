@@ -28,4 +28,11 @@ export class OffersPageComponent implements OnInit {
   onOfferSelect(offerSelected : SavedJobOffer) {
     this.logbookPanel.display(offerSelected);
   }
+  /**
+   * Lors de la suppression de l'offre sélectionnée
+   * @return {[type]} [description]
+   */
+  onOfferDelete() {
+    this.logbookPanel.offerDeleted();
+  }
 }

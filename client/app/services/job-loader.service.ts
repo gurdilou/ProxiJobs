@@ -22,8 +22,9 @@ export class JobLoaderService implements IJobLoader{
 
   constructor(
     private http: Http,
-    private app: AppProperties) {
-      this.loaderLocal = new JobLoaderLocal();
+    private app: AppProperties,
+    private notifier : NotificationService) {
+      this.loaderLocal = new JobLoaderLocal(notifier);
       this.loaderRemote = new JobLoaderRemote(http);
   }
 
@@ -43,47 +44,4 @@ export class JobLoaderService implements IJobLoader{
       return this.loaderLocal.getJobsAdvanced(search);
     }
   }
-
-  getSavedOffers() : Promise<SavedJobOffer[]> {
-    if(this.app.userIsConnected()){
-      return this.loaderRemote.getSavedOffers();
-    }else{
-      return this.loaderLocal.getSavedOffers();
-    }
-  }
-
-  getSavedOfferLogBook(offer : SavedJobOffer) : Promise<SavedJobOffer> {
-    if(!offer.logbook.isLoaded){
-      if(this.app.userIsConnected()){
-        return this.loaderRemote.getSavedOfferLogBook(offer);
-      }else{
-        return this.loaderLocal.getSavedOfferLogBook(offer);
-      }
-    }
-  }
-
-  deleteSavedOffer(savedOffers : SavedJobOffer[], deletedOffer : SavedJobOffer) : Promise<SavedJobOffer> {
-    if(this.app.userIsConnected()){
-      return this.loaderRemote.deleteSavedOffer(savedOffers, deletedOffer);
-    }else{
-      return this.loaderLocal.deleteSavedOffer(savedOffers, deletedOffer);
-    }
-  }
-
-  createSavedOffer(linkedJob : JobOffer) : Promise<SavedJobOffer> {
-    if(this.app.userIsConnected()){
-      return this.loaderRemote.createSavedOffer(linkedJob);
-    }else{
-      return this.loaderLocal.createSavedOffer(linkedJob);
-    }
-  }
-
-  restoreSavedOffer(savedOffers : SavedJobOffer[], restoredOffer : SavedJobOffer) : Promise<SavedJobOffer[]> {
-    if(this.app.userIsConnected()){
-      return this.loaderRemote.restoreSavedOffer(savedOffers, restoredOffer);
-    }else{
-      return this.loaderLocal.restoreSavedOffer(savedOffers, restoredOffer);
-    }
-  }
-
 }

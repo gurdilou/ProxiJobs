@@ -20,40 +20,4 @@ export interface IJobLoader {
    * @return {Promise<JobOffer[]>}             la liste des offres qui répondent aux critères
    */
   getJobsAdvanced(search : AdvancedSearch) : Promise<JobOffer[]>;
-
-  /**
-   * Charge la lise des offres sauvegardées
-   * @return {Promise<SavedJobOffer[]>} la liste des offres sauvegardées
-   */
-  getSavedOffers() : Promise<SavedJobOffer[]>;
-
-  /**
-   * Charge le journal d'une offre sauvegardée
-   * @param  {SavedJobOffer}          offer l'offre sauvegardée
-   * @return {Promise<SavedJobOffer>}       le journal de bord de l'offre sauvegardée
-   */
-  getSavedOfferLogBook(offer : SavedJobOffer) : Promise<SavedJobOffer>;
-
-  /**
-   * Supprime une offre sauvegardée
-   * @param  {SavedJobOffer[]}        savedOffers la liste des offres
-   * @param  {SavedJobOffer}          deletedOffer l'offre supprimée
-   * @return {Promise<SavedJobOffer>}             l'offre qui vient d'être supprimée
-   */
-  deleteSavedOffer(savedOffers : SavedJobOffer[], deletedOffer : SavedJobOffer) : Promise<SavedJobOffer>;
-
-  /**
-   * Créé une offre sauvegardée
-   * @param  {JobOffer}               linkedJob le job sélectionnée
-   * @return {Promise<SavedJobOffer>}           l'offre qui vient d'être créée
-   */
-  createSavedOffer(linkedJob : JobOffer) : Promise<SavedJobOffer>;
-
-  /**
-   * Restaure une offre sauvegardée (lui donne un nouvel id)
-   * @param  {SavedJobOffer[]}          savedOffers   les offres actuelles
-   * @param  {SavedJobOffer}            restoredOffer l'offre restaurée
-   * @return {Promise<SavedJobOffer[]>}               les offres mises à jours
-   */
-  restoreSavedOffer(savedOffers : SavedJobOffer[], restoredOffer : SavedJobOffer) : Promise<SavedJobOffer[]>;
 }

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import * as moment from 'moment';
 
 import {SavedJobOffer} from '../../model/jobs/saved-job-offer';
@@ -7,6 +7,8 @@ import {ApplyResponseStatus} from '../../model/jobs/apply-response-status';
 import {ApplyBack} from '../../model/jobs/apply-back';
 
 import {LogbookEditorService} from '../../services/logbook-editor.service';
+import {NotificationService} from '../../services/notification.service';
+
 
 import {OfferApplyBackWidgetComponent} from './offer-back-widget.component';
 
@@ -14,10 +16,10 @@ import {OfferApplyBackWidgetComponent} from './offer-back-widget.component';
   selector: 'pj-offers-logbook',
   templateUrl : 'app/views/offers/offers-logbook.component.html',
   directives: [OfferApplyBackWidgetComponent],
-  providers: [LogbookEditorService]
+  providers: [NotificationService, LogbookEditorService]
 })
 
-export class OffersLogbookComponent {
+export class OffersLogbookComponent implements OnDestroy{
   private logbook : LogBook;
   private savedOffer : SavedJobOffer;
 
@@ -31,11 +33,25 @@ export class OffersLogbookComponent {
    * @return {[type]}              [description]
    */
   display(savedOffer : SavedJobOffer) {
+    if(this.savedOffer != null){
+      this.logbookService.saveLogbook(this.savedOffer);
+    }
+
     this.savedOffer = savedOffer;
     this.logbook = undefined;
     if(this.savedOffer != undefined){
       this.logbook = savedOffer.logbook;
     }
+  }
+  /**
+   * Que l'offre liée a été supprimée
+   * @return {[type]} [description]
+   */
+  offerDeleted() {
+    this.savedOffer = undefined;
+    this.logbook = undefined;
+
+    this.display(undefined);
   }
   /**
    * Lors d'un changement du statut de la réponse
@@ -137,6 +153,10 @@ export class OffersLogbookComponent {
    */
   protected onEditApplyBack(applyBack : ApplyBack) {
     this.logbook.sortApplyBacks();
+    this.logbookService.saveLogbook(this.savedOffer);
+  }
+
+  ngOnDestroy() {
     this.logbookService.saveLogbook(this.savedOffer);
   }
 

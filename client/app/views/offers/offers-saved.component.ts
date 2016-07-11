@@ -2,7 +2,7 @@ import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 
 import {SavedJobOffer} from '../../model/jobs/saved-job-offer';
 
-import {JobLoaderService} from '../../services/job-loader.service';
+import {LogbookEditorService} from '../../services/logbook-editor.service';
 import {NotificationService} from '../../services/notification.service';
 
 import {OfferSavedWidgetComponent} from './offer-saved-widget.component';
@@ -11,20 +11,21 @@ import {OfferSavedWidgetComponent} from './offer-saved-widget.component';
   selector: 'pj-offers-saved',
   templateUrl : 'app/views/offers/offers-saved.component.html',
   directives: [OfferSavedWidgetComponent],
-  providers: [NotificationService, JobLoaderService]
+  providers: [NotificationService, LogbookEditorService]
 })
 
 export class OffersSavedComponent implements OnInit {
   private offers : SavedJobOffer[] = [];
   private selectedOffer : SavedJobOffer;
   @Output() onOfferSelect = new EventEmitter();
+  @Output() onOfferDelete = new EventEmitter();
 
-  constructor(private jobService : JobLoaderService,
+  constructor(private logbookService : LogbookEditorService,
     private notifier : NotificationService) {
   }
 
   private getSavedOffers() {
-    this.jobService.getSavedOffers()
+    this.logbookService.getSavedOffers()
       .then(offers => {
         this.offers = offers;
       });
@@ -39,6 +40,7 @@ export class OffersSavedComponent implements OnInit {
    * @return {[type]} [description]
    */
   onSelect(selectedOffer : SavedJobOffer) {
+    console.log("onSelect");
     this.selectedOffer = selectedOffer;
     this.onOfferSelect.emit(selectedOffer);
   }
@@ -47,9 +49,9 @@ export class OffersSavedComponent implements OnInit {
    * @param  {SavedJobOffer} deletedOffer l'offre supprimée
    */
   onDeleteSavedOffer(deletedOffer : SavedJobOffer) {
-    this.jobService.deleteSavedOffer(this.offers, deletedOffer)
+    this.logbookService.deleteSavedOffer(this.offers, deletedOffer)
       .then( deletedoffer => {
-        this.onSelect(undefined);
+        this.onOfferDelete.emit(undefined);
         this.informDeleteSucceed(deletedoffer);
       });
   }
@@ -60,7 +62,7 @@ export class OffersSavedComponent implements OnInit {
   private informDeleteSucceed(deletedoffer : SavedJobOffer) {
     this.notifier.askConfirmDownload('Offre supprimée "'+deletedoffer.job.jobtitle+'"', (isCanceled) => {
       if(isCanceled) {
-        this.jobService.restoreSavedOffer(this.offers, deletedoffer);
+        this.logbookService.restoreSavedOffer(this.offers, deletedoffer);
       }
     });
   }
