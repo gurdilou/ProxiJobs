@@ -20,8 +20,8 @@ import {OfferApplyBackWidgetComponent} from './offer-back-widget.component';
 })
 
 export class OffersLogbookComponent implements OnDestroy{
-  private logbook : LogBook;
-  private savedOffer : SavedJobOffer;
+  private logbook : LogBook = undefined;
+  private savedOffer : SavedJobOffer = undefined;
 
 
   constructor(private logbookService : LogbookEditorService) {
@@ -157,7 +157,9 @@ export class OffersLogbookComponent implements OnDestroy{
   }
 
   ngOnDestroy() {
-    this.logbookService.saveLogbook(this.savedOffer);
+    if(this.savedOffer != undefined) {
+      this.logbookService.saveLogbook(this.savedOffer);
+    }
   }
 
 }

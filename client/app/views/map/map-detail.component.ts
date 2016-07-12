@@ -5,6 +5,9 @@ import { Router, RouteParams } from '@angular/router-deprecated';
 import {JobOffer} from '../../model/jobs/job-offer';
 import {QuickSearch} from '../../model/search/quick-search';
 
+import {JobLoaderService} from '../../services/job-loader.service';
+import {NotificationService} from '../../services/notification.service';
+
 
 import {MapQuickSearchComponent} from './map-quick-search.component';
 import {MapJobDetailComponent} from './map-job-detail.component';
@@ -13,7 +16,8 @@ import {MapJobDetailComponent} from './map-job-detail.component';
 @Component({
   selector: 'pj-map-detail',
   templateUrl: 'app/views/map/map-detail.component.html',
-  directives: [MapQuickSearchComponent]
+  directives: [MapQuickSearchComponent],
+  providers: [NotificationService, JobLoaderService]
 })
 /**
  * Classe gérant le détail d'une carte
@@ -29,7 +33,8 @@ export class MapDetailComponent implements OnInit {
   constructor(
     private router: Router,
     private routeParams: RouteParams,
-    private location: Location) {
+    private location: Location,
+    private jobLoader : JobLoaderService) {
     this.search = new QuickSearch();
   }
 
@@ -69,7 +74,10 @@ export class MapDetailComponent implements OnInit {
   onQuickSearch() {
     this.refreshQuickSearchUrl();
     this.hideQuickSearch();
-    //add loading
+    this.jobLoader.getJobsQuick(this.search)
+      .then(offers => {
+
+      });
   }
 
   /**
