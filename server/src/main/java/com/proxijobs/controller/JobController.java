@@ -3,16 +3,20 @@ package com.proxijobs.controller;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import com.Application;
 import com.proxijobs.AppProperties;
+import com.proxijobs.model.ClientProperties;
 import com.proxijobs.model.JobOffer;
 import com.proxijobs.model.QuickSearch;
-import com.proxijobs.utils.ApiRequestBuilder;
+import com.proxijobs.parser.IndeedError;
+import com.proxijobs.parser.IndeedParser;
 
 /**
  * En charge de la recherche des emplois
@@ -21,8 +25,6 @@ import com.proxijobs.utils.ApiRequestBuilder;
  */
 public class JobController {
 	
-	private static final Logger log = LoggerFactory.getLogger(Application.class);
-
 	
 	/**
 	 * 
@@ -33,16 +35,19 @@ public class JobController {
 	
 	
 	/**
-	 * Retourne la liste des offres
-	 * @param search
-	 * @return
-	 * @throws UnsupportedEncodingException 
+	 * Retourne la liste des offres.
+	 *
+	 * @param props the props
+	 * @param search the search
+	 * @return the array list
+	 * @throws UnsupportedEncodingException the unsupported encoding exception
+	 * @throws IndeedError the indeed error
 	 */
-	public ArrayList<JobOffer> loadQuickJobs(QuickSearch search) throws UnsupportedEncodingException {
+	public ArrayList<JobOffer> loadQuickJobs(ClientProperties props, QuickSearch search) throws UnsupportedEncodingException, IndeedError {
 		ArrayList<JobOffer> offers = new ArrayList<JobOffer>();
 		
 		//Pour chaque providers...
-		loadIndeedJobs(offers, search);
+		loadIndeedJobs(offers, props, search);
 		
 		
 		return offers;
@@ -52,31 +57,39 @@ public class JobController {
 	 * Charge les offres répertoriées sur Indeed.
 	 *
 	 * @param offers les offres à remplir
+	 * @param props the props
 	 * @param search la recherche demandée
 	 * @throws UnsupportedEncodingException the unsupported encoding exception
+	 * @throws IndeedError the indeed error
 	 */
-	private void loadIndeedJobs(ArrayList<JobOffer> offers, QuickSearch search) throws UnsupportedEncodingException {
+	private void loadIndeedJobs(ArrayList<JobOffer> offers, ClientProperties props, QuickSearch search) throws UnsupportedEncodingException, IndeedError {
 		RestTemplate restTemplate = new RestTemplate();
 		
-		ApiRequestBuilder request = new ApiRequestBuilder("http://api.indeed.com/ads/apisearch");
-		request.addParam("publisher", AppProperties.INDEED_API_KEY);
-		request.addParam("q", search.getJob());
-		request.addParam("v", "2");
-		request.addParam("format", "json");
-		request.addParam("l", search.getCity());
-		request.addParam("radius", search.getPerimeterDistance());
-		request.addParam("latlong", "1");
-		request.addParam("co", "fr");
-		request.addParam("limit", "15");
 		
 		
-		ResponseEntity<String> resp = restTemplate.getForEntity(request.toString(), String.class);
-		log.info("requête : "+request.toString());
-		log.info("réponse code : "+resp.getStatusCode());
-//		log.info("réponse : "+resp.getBody());
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
 
-//		&l=austin%2C+tx&sort=&radius=&st=&jt=&start=&limit=&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29
+		UriComponentsBuilder request = UriComponentsBuilder.fromHttpUrl("http://api.indeed.com/ads/apisearch");
+		request.queryParam("publisher", AppProperties.INDEED_API_KEY);
+		request.queryParam("q", search.getJob());
+		request.queryParam("v", "2");
+		request.queryParam("format", "json");
+		request.queryParam("l", search.getCity());
+		request.queryParam("radius", search.getPerimeterDistance());
+		request.queryParam("latlong", "1");
+		request.queryParam("co", props.getCountryCode().toLowerCase());
+		request.queryParam("limit", "15");
+		request.queryParam("userip", props.getIpAddress());
+		request.queryParam("useragent", props.getUserAgent());
+		request.queryParam("highlight", "1");
+
+	
 		
+		ResponseEntity<String> resp = restTemplate.getForEntity(request.build().encode().toUri(), String.class);
+		IndeedParser parser = new IndeedParser();
+//		System.out.println("response.getBody() : "+response.getBody());
+		parser.parseJobs(offers, resp.getBody() );
 	}
 
 }

@@ -10,11 +10,11 @@ import {ApiRequestBuilder} from '../model/general/api-request-builder';
 import {IJobLoader} from './jobs/job-loader.interface';
 
 import {NotificationService} from './notification.service';
-
+import {GenericService} from './generic.service';
 
 
 @Injectable()
-export class JobLoaderService implements IJobLoader{
+export class JobLoaderService extends GenericService implements IJobLoader{
 
 
   private quickJobsUrl = AppProperties.BASE_URL+'quickJobs';  // URL to web api
@@ -24,6 +24,7 @@ export class JobLoaderService implements IJobLoader{
     private http: Http,
     private app: AppProperties,
     private notifier : NotificationService) {
+      super(notifier);
   }
 
 
@@ -31,26 +32,32 @@ export class JobLoaderService implements IJobLoader{
     return new Promise<JobOffer[]>((resolve, reject) => {
       let result: JobOffer[] = [];
 
-      let request = new ApiRequestBuilder(this.app, this.quickJobsUrl)
-
-      // TODO finir la requete
-
-      // let url = this.quickJobsUrl + "?";
-      // url += "ip="
-      // url += "&job=" + encodeURI(search.job);
-      // url += "&city=" + encodeURI(search.city);
-      // url += "&perimeter=" + encodeURI(search.perimeter);
+      let request = new ApiRequestBuilder(this.app, this.quickJobsUrl);
+      request.addParam("job", search.job);
+      request.addParam("city", search.city);
+      request.addParam("perimeter", search.perimeter);
 
       this.http.get(request.toString())
         .toPromise()
         .then(response => {
-          console.log("data : " + response.json().data);
+          if(!this.handleServerError(response.json())) {
+            this.parseOffers(result, response.json());
+          }
+
           resolve(result);
         })
         .catch(err => {
           this.notifier.errror(err);
         });
     });
+  }
+
+
+  private parseOffers(result : JobOffer[], json : any) {
+    for(let i = 0; i < json.length; i++){
+      let newOffer = JobOffer.parseJSON(json[i]);
+      result.push(newOffer);
+    }
   }
 
   getJobsAdvanced(search : AdvancedSearch) : Promise<JobOffer[]> {

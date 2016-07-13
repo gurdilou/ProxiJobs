@@ -48,7 +48,8 @@ export class MapQuickSearchComponent implements OnInit {
     event.stopPropagation();
 
     this.locationService.getCurrentPosition().then(position => {
-      this.search.city = position.address;
+      this.search.city = position.cityLong;
+      this.search.position = position;
 
       var center = new google.maps.LatLng(position.latitude, position.longitude);
       this.onCenterMap.emit(center);

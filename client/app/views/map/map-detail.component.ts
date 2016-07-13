@@ -24,6 +24,7 @@ import {MapJobDetailComponent} from './map-job-detail.component';
  */
 export class MapDetailComponent implements OnInit {
   @Output() onCenterMap = new EventEmitter();
+  @Output() onSearchJobs = new EventEmitter();
 
 
   search: QuickSearch;
@@ -74,9 +75,11 @@ export class MapDetailComponent implements OnInit {
   onQuickSearch() {
     this.refreshQuickSearchUrl();
     this.hideQuickSearch();
+    this.setQuickSearchLoading(true);
     this.jobLoader.getJobsQuick(this.search)
       .then(offers => {
-
+        this.setQuickSearchLoading(false);
+        this.onSearchJobs.emit(offers);
       });
   }
 
@@ -112,7 +115,7 @@ export class MapDetailComponent implements OnInit {
   /**
    * Affiche la fenêtre de recherche rapide
    */
-  showQuickSearch() {
+  private showQuickSearch() {
     $('.pj-detail-button.ui.button.job').addClass("search-opened");
     $('.pj-detail-button.ui.button.search').addClass("search-opened");
     // $('.pj-map-detail.quicksearch').addClass('visible');
@@ -126,7 +129,7 @@ export class MapDetailComponent implements OnInit {
    * Masque la fenêtre de recherche rapide
    * @return {[type]} [description]
    */
-  hideQuickSearch() {
+  private hideQuickSearch() {
     let popup = $('.pj-map-detail.quicksearch');
 
     if (popup.hasClass("visible")) {
@@ -138,7 +141,15 @@ export class MapDetailComponent implements OnInit {
         duration: 450
       });
     }
+  }
 
+  private setQuickSearchLoading(display : boolean) {
+    let butt = $('.pj-detail-button.ui.button.search');
+    if(display){
+      butt.addClass('loading');
+    }else{
+      butt.removeClass('loading');
+    }
   }
 
 

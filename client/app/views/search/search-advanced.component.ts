@@ -41,7 +41,8 @@ export class SearchAdvancedComponent implements OnInit {
     event.stopPropagation();
 
     this.locationService.getCurrentPosition().then(position => {
-      this.advSearch.city = position.address;
+      this.advSearch.city = position.cityLong;
+      this.advSearch.position = position;
     });
   }
 

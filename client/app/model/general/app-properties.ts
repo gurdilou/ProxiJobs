@@ -7,8 +7,21 @@ export class AppProperties {
   public static BASE_URL: string = 'http://localhost:8080/';
 
   private user : User = new User();
-  private ipAddress : string = "";
-  private userAgent : string = "";
+  /**
+   * L'adresse IP du client
+   * @type {string}
+   */
+  ipAddress : string = "";
+  /**
+   * Le user agent du navigateur web du client
+   * @type {string}
+   */
+  userAgent : string = "";
+  /**
+   * La pays de l'utilisateur
+   * @type {string}
+   */
+  countryCode : string = "";
 
 
   constructor() {
@@ -25,6 +38,7 @@ export class AppProperties {
         dataType: 'jsonp',
         success: function(location) {
           self.ipAddress = location.ip;
+          self.countryCode = location.country_code;
         }
       });
     });

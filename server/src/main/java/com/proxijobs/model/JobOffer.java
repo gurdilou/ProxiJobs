@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JobOffer { 
-	
+
 	private double id = 0;
 	private String jobtitle = "";
 	private String company = "";
@@ -31,11 +31,12 @@ public class JobOffer {
 	private String formattedRelativeTime = "";
 	private String salary = "";
 	
+
 	/**
 	 * Constructor
 	 */
 	public JobOffer() {
-		
+
 	}
 
 
@@ -357,8 +358,8 @@ public class JobOffer {
 	public void setSalary(String salary) {
 		this.salary = salary;
 	}
-	
-	
-	
-	
+
+
+
+
 }

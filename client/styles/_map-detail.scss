@@ -6,7 +6,7 @@
   font-weight: bold;
 
   &.loading {
-    position: absolute;
+    position: absolute !important;
     top: 12px;
   }
   // bouton afficher l'offre

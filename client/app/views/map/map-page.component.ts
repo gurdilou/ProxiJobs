@@ -1,6 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router-deprecated';
 
+import {JobOffer} from '../../model/jobs/job-offer';
+
 import {MapComponent} from './map.component';
 import {MapDetailComponent} from './map-detail.component';
 
@@ -25,5 +27,13 @@ export class MapPageComponent implements OnInit {
    */
   centerMap(center : google.maps.LatLng) {
     this.map.setHomeOn(center);
+  }
+  /**
+   * Lors du résultat d'une recherche d'offre
+   * @param  {JobOffer[]} offers [description]
+   * @return {[type]}            [description]
+   */
+  searchJobs(offers : JobOffer[]){
+    this.map.displayOffers(offers);
   }
 }

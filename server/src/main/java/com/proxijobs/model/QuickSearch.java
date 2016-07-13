@@ -80,8 +80,11 @@ public class QuickSearch {
 	 * @return the perimeter distance
 	 */
 	public String getPerimeterDistance() {
-		//TODO
-		return this.perimeter;
+		String result = this.perimeter;
+		if(result.isEmpty()){
+			result = "90";
+		}
+		return result;
 	}
 	
 	

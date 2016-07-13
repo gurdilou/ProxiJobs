@@ -28,12 +28,21 @@ export class LocationResolverService {
       //Position
       this.getLongLatitude().then( position => {
         let url = this.mapApi + position.latitude + ',' + position.longitude;
-        console.debug('position : '+url);
+
 
         // Addresse
         this.http.get(url).toPromise().then(response => {
           let responseJSON = response.json();
+          console.log(JSON.stringify(responseJSON));
+
           position.address = responseJSON.results[0].formatted_address;
+          position.city = responseJSON.results[0].address_components[1].long_name;
+          position.country = responseJSON.results[0].address_components[4].long_name;
+          position.cityLong = responseJSON.results[2].formatted_address;
+          position.countryCode = responseJSON.results[0].address_components[4].short_name;
+
+          console.debug('position : '+url);
+
           resolve(position);
         }).catch(err => {
           this.notifier.errror(err);

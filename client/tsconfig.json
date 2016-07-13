@@ -32,6 +32,7 @@
     "app/model/search/contract-kind.ts",
     "app/model/search/quick-search.ts",
     "app/model/search/user-position.ts",
+    "app/services/generic.service.ts",
     "app/services/job-loader.service.ts",
     "app/services/jobs/job-loader.interface.ts",
     "app/services/location-resolver.service.ts",

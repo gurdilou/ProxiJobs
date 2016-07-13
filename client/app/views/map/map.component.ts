@@ -1,11 +1,13 @@
 import {Component, OnInit, AfterContentInit, Input, EventEmitter} from '@angular/core';
-
 import { RouteParams } from '@angular/router-deprecated';
+
+import {JobOffer} from '../../model/jobs/job-offer';
 
 import {MapJobDetailComponent} from './map-job-detail.component';
 
 const MARKER_PATH   = 'images/markers/';
 const ICON_HOME     = MARKER_PATH+'marker_home.png'
+const ICON_JOB      = MARKER_PATH+'marker_job.png'
 
 @Component({
   selector: 'pj-map',
@@ -50,6 +52,24 @@ export class MapComponent implements OnInit, AfterContentInit {
       map: this.map,
       icon: ICON_HOME
     });
+  }
+  /**
+   * Affiche et gère une liste d'offre
+   * @param  {JobOffer[]} offers la liste des offres à afficher
+   */
+  displayOffers(offers : JobOffer[]) {
+    for(let i = 0; i < offers.length; i++) {
+      let offer = offers[i];
+
+      let position = new google.maps.LatLng(offer.latitude, offer.longitude);
+
+
+      let jobMarker = new google.maps.Marker({
+        position: position,
+        map: this.map,
+        icon: ICON_JOB
+      });
+    }
   }
 
 

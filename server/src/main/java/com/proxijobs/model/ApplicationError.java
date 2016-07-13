@@ -1,10 +1,11 @@
-package com.proxijobs.utils;
+package com.proxijobs.model;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
-public class ApiRequestBuilder {
-
+/**
+ * Conteneur pour une erreur retournée au client
+ * @author tluce
+ *
+ */
+public class ApplicationError {
 
 	//----------------------------------------------------------------------------------------------------------------------------
 	//																	CONSTANTS
@@ -13,24 +14,15 @@ public class ApiRequestBuilder {
 	//----------------------------------------------------------------------------------------------------------------------------
 	//																	VARIABLES
 	//----------------------------------------------------------------------------------------------------------------------------
-	private StringBuilder builder;
-	private boolean initialized;
-
+	private Throwable error;
+	private String message;
 	//----------------------------------------------------------------------------------------------------------------------------
 	//																	CONSTRUCTOR
 	//----------------------------------------------------------------------------------------------------------------------------
-	/**
-	 * Constructor
-	 * @param url
-	 */
-	public ApiRequestBuilder(String url) {
-		this.builder = new StringBuilder(url);
-		this.initialized = false;
+	public ApplicationError() {
+		
 	}
 
-
-
-	
 	//----------------------------------------------------------------------------------------------------------------------------
 	//																	PRIVATE
 	//----------------------------------------------------------------------------------------------------------------------------
@@ -38,36 +30,33 @@ public class ApiRequestBuilder {
 	//----------------------------------------------------------------------------------------------------------------------------
 	//																	GETTER/SETTER
 	//----------------------------------------------------------------------------------------------------------------------------
-
+	/**
+	 * @return the error
+	 */
+	public Throwable getError() {
+		return error;
+	}
+	/**
+	 * @param error the error to set
+	 */
+	public void setError(Throwable error) {
+		this.error = error;
+	}
+	/**
+	 * @return the message
+	 */
+	public String getMessage() {
+		return message;
+	}
+	/**
+	 * @param message the message to set
+	 */
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
 	//----------------------------------------------------------------------------------------------------------------------------
 	//																	PUBLIC
 	//----------------------------------------------------------------------------------------------------------------------------
-	/**
-	 * Ajoute une paramètre, l'encode au besoin.
-	 *
-	 * @param name the parameter name
-	 * @param value the param value
-	 * @throws UnsupportedEncodingException 
-	 */
-	public void addParam(String name, String value) throws UnsupportedEncodingException {
-		String prefix = "&";
-		if(!this.initialized) {
-			prefix = "?";
-			this.initialized = true;
-		}
-		
-		this.builder.append(prefix+name+"="+URLEncoder.encode(value , "UTF-8"));	
-	}
-	
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return this.builder.toString();
-	}
-
-
 
 }
