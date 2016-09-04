@@ -14,7 +14,7 @@ import {MapDetailComponent} from './map-detail.component';
 
 export class MapPageComponent implements OnInit {
   @ViewChild(MapComponent) map:MapComponent;
-
+  @ViewChild(MapDetailComponent) details:MapDetailComponent;
 
   constructor(private router: Router) {
   }
@@ -30,10 +30,17 @@ export class MapPageComponent implements OnInit {
   }
   /**
    * Lors du résultat d'une recherche d'offre
-   * @param  {JobOffer[]} offers [description]
-   * @return {[type]}            [description]
+   * @param  {JobOffer[]} offers les offres trouvées
    */
   searchJobs(offers : JobOffer[]){
     this.map.displayOffers(offers);
+  }
+
+  /**
+   * Lors de la sélection d'une ou plusieurs offres sur la carte
+   * @param  {JobOffer[]} offers les offres à afficher
+   */
+  displayOffers(offers : JobOffer[]){
+    this.details.displayOffers(offers);
   }
 }

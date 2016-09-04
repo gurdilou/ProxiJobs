@@ -12,7 +12,7 @@
     'angular2-in-memory-web-api'  : 'node_modules/angular2-in-memory-web-api',
     'rxjs'                        : 'node_modules/rxjs',
     'angular2-toaster'            : 'node_modules/angular2-toaster',
-    'moment'                      : 'node_modules/moment',
+    'moment'                      : 'node_modules/moment'
   };
 
   // packages tells the System loader how to load when no filename and/or no extension
@@ -21,7 +21,11 @@
     'rxjs':                       { defaultExtension: 'js' },
     'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
     'angular2-toaster'          : { defaultExtension: 'js' },
-    'moment'                    : { main: 'moment.js', defaultExtension: 'js' },
+    'moment'                    : { main: 'moment.js', defaultExtension: 'js' }
+  };
+
+  var paths = {
+    'typescript-collections': 'node_modules/typescript-collections/dist/lib/umd.min.js'
   };
 
   var ngPackageNames = [
@@ -53,7 +57,8 @@
 
   var config = {
     map: map,
-    packages: packages
+    packages: packages,
+    paths : paths,
   };
 
   System.config(config);

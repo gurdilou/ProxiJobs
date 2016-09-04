@@ -14,13 +14,13 @@
   "compileOnSave": false,
   "filesGlob": [
     "app/**/*.ts",
-    "typings/**/*.d.ts"
+    "typings/**/*.d.ts",
+    "node_modules/typescript-collections/dist/lib/*.ts"
   ],
   "files": [
     "app/main-router.component.spec.ts",
     "app/main-router.component.ts",
     "app/main.ts",
-    "app/model/general/api-request-builder.ts",
     "app/model/general/app-properties.ts",
     "app/model/general/user.ts",
     "app/model/jobs/apply-back.ts",
@@ -45,6 +45,8 @@
     "app/services/search/search-loader-local.service.ts",
     "app/services/search/search-loader-remote.service.ts",
     "app/services/search/search-loader.interface.ts",
+    "app/views/map/couple-marker-offers.ts",
+    "app/views/map/map-bound.ts",
     "app/views/map/map-detail.component.ts",
     "app/views/map/map-job-detail.component.ts",
     "app/views/map/map-page.component.ts",
@@ -61,13 +63,27 @@
     "app/views/search/search-favorites.component.ts",
     "app/views/search/search-page.component.ts",
     "app/views/search/search-recents.component.ts",
+    "typings/globals/core-js/index.d.ts",
+    "typings/globals/jasmine/index.d.ts",
+    "typings/globals/node/index.d.ts",
     "typings/index.d.ts",
-    "typings/modules/globals/core-js/index.d.ts",
-    "typings/modules/globals/jasmine/index.d.ts",
-    "typings/modules/globals/node/index.d.ts",
     "typings/modules/google-maps/index.d.ts",
-    "typings/modules/jquery/index.d.ts",
-    "typings/modules/pickadate/pickadate.d.ts"
+    "typings/modules/jquery/jquery.d.ts",
+    "typings/modules/pickadate/pickadate.d.ts",
+    "node_modules/typescript-collections/dist/lib/arrays.d.ts",
+    "node_modules/typescript-collections/dist/lib/Bag.d.ts",
+    "node_modules/typescript-collections/dist/lib/BSTree.d.ts",
+    "node_modules/typescript-collections/dist/lib/Dictionary.d.ts",
+    "node_modules/typescript-collections/dist/lib/Heap.d.ts",
+    "node_modules/typescript-collections/dist/lib/index.d.ts",
+    "node_modules/typescript-collections/dist/lib/LinkedDictionary.d.ts",
+    "node_modules/typescript-collections/dist/lib/LinkedList.d.ts",
+    "node_modules/typescript-collections/dist/lib/MultiDictionary.d.ts",
+    "node_modules/typescript-collections/dist/lib/PriorityQueue.d.ts",
+    "node_modules/typescript-collections/dist/lib/Queue.d.ts",
+    "node_modules/typescript-collections/dist/lib/Set.d.ts",
+    "node_modules/typescript-collections/dist/lib/Stack.d.ts",
+    "node_modules/typescript-collections/dist/lib/util.d.ts"
   ],
   "atom": {
     "rewriteTsconfig": true

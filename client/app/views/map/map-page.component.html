@@ -1,6 +1,6 @@
 <div class="page-map ui grid">
 
-  <pj-map [centerMap]="centerMap">Loading...</pj-map>
+  <pj-map [centerMap]="centerMap" (onSelectOffers)="displayOffers($event)">Loading...</pj-map>
 
   <pj-map-detail (onCenterMap)="centerMap($event)" (onSearchJobs)="searchJobs($event)"></pj-map-detail>
 </div>

@@ -152,5 +152,13 @@ export class MapDetailComponent implements OnInit {
     }
   }
 
+  /**
+   * Affiche le détail de une ou plusieurs offres
+   * @param  {JobOffer[]} offers les offres
+   */
+  displayOffers(offers : JobOffer[]) {
+    TODO créer la popup de détail
+  }
+
 
 }

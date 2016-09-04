@@ -80,11 +80,17 @@ public class QuickSearch {
 	 * @return the perimeter distance
 	 */
 	public String getPerimeterDistance() {
-		String result = this.perimeter;
-		if(result.isEmpty()){
-			result = "90";
-		}
-		return result;
+		//TODO convert to distance
+		return this.perimeter;
+	}
+
+	/**
+	 * Checks perimeter is set
+	 *
+	 * @return true, if perimeter not empty
+	 */
+	public boolean hasPerimeter() {
+		return !this.perimeter.isEmpty();
 	}
 	
 	

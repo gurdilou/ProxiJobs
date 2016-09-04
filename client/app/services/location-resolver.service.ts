@@ -33,7 +33,7 @@ export class LocationResolverService {
         // Addresse
         this.http.get(url).toPromise().then(response => {
           let responseJSON = response.json();
-          console.log(JSON.stringify(responseJSON));
+          // console.log(JSON.stringify(responseJSON));
 
           position.address = responseJSON.results[0].formatted_address;
           position.city = responseJSON.results[0].address_components[1].long_name;

@@ -1,4 +1,5 @@
-import { Injectable }    from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Http, Headers} from '@angular/http';
 
 import {NotificationService} from './notification.service';
 
@@ -6,6 +7,7 @@ import {NotificationService} from './notification.service';
 export class GenericService {
 
   constructor(
+    private httpService: Http,
     private notifierService : NotificationService) {
   }
 
@@ -14,8 +16,9 @@ export class GenericService {
    * @param  {any}     json la réponse du serveur
    * @return {boolean}      retourne vrai s'il y a une erreur dans la réponse
    */
-  public handleServerError(json : any) : boolean{
-    if( (json instanceof Object) && (json.hasOwnProperty("error")) ){
+  public handleServerError(response : any) : boolean{
+    if( (response instanceof Object) && (response.json().hasOwnProperty("error")) ){
+      let json = response.json();
       if(json.hasOwnProperty("message")) {
         this.notifierService.errror(json["message"]);
       }else{
@@ -26,6 +29,25 @@ export class GenericService {
     }
 
     return false;
+  }
+
+  public postJson(url : string, data : any) : Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      let body = JSON.stringify(data);
+      let head = new Headers({
+          'Content-Type': 'application/json'
+      });
+      this.httpService.post(url, body, { headers : head})
+        .toPromise()
+        .then(response => {
+          if(!this.handleServerError(response)){
+            resolve(response);
+          }
+        })
+        .catch(err => {
+          this.notifierService.errror(err);
+        });
+    });
   }
 
 }

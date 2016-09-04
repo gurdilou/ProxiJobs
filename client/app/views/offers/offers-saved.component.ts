@@ -40,7 +40,6 @@ export class OffersSavedComponent implements OnInit {
    * @return {[type]} [description]
    */
   onSelect(selectedOffer : SavedJobOffer) {
-    console.log("onSelect");
     this.selectedOffer = selectedOffer;
     this.onOfferSelect.emit(selectedOffer);
   }

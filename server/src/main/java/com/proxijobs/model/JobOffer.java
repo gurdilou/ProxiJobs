@@ -2,38 +2,78 @@ package com.proxijobs.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+// TODO: Auto-generated Javadoc
 /**
- * Une offre d'emploi
- * @author tluce
+ * Une offre d'emploi.
  *
+ * @author tluce
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class JobOffer { 
+public class JobOffer implements HasLocation { 
 
+	/** The id. */
 	private double id = 0;
+	
+	/** The jobtitle. */
 	private String jobtitle = "";
+	
+	/** The company. */
 	private String company = "";
+	
+	/** The city. */
 	private String city = "";
+	
+	/** The state. */
 	private String state = "";
+	
+	/** The country. */
 	private String country = "";
+	
+	/** The formatted location. */
 	private String formattedLocation = "";
+	
+	/** The source. */
 	private String source = "";
+	
+	/** The date. */
 	private String date = "";
+	
+	/** The snippet. */
 	private String snippet = "";
+	
+	/** The url. */
 	private String url = "";
+	
+	/** The latitude. */
 	private double latitude = 0;
+	
+	/** The longitude. */
 	private double longitude = 0;
+	
+	/** The provider. */
 	private String provider = "";
+	
+	/** The jobkey. */
 	private String jobkey = "";
+	
+	/** The sponsored. */
 	private boolean sponsored = false;
+	
+	/** The expired. */
 	private boolean expired = false;
+	
+	/** The formatted location full. */
 	private String formattedLocationFull = "";
+	
+	/** The formatted relative time. */
 	private String formattedRelativeTime = "";
+	
+	/** The salary. */
 	private String salary = "";
 	
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 */
 	public JobOffer() {
 
@@ -41,6 +81,8 @@ public class JobOffer {
 
 
 	/**
+	 * Gets the id.
+	 *
 	 * @return the id
 	 */
 	public double getId() {
@@ -49,6 +91,8 @@ public class JobOffer {
 
 
 	/**
+	 * Sets the id.
+	 *
 	 * @param id the id to set
 	 */
 	public void setId(double id) {
@@ -57,6 +101,8 @@ public class JobOffer {
 
 
 	/**
+	 * Gets the jobtitle.
+	 *
 	 * @return the jobtitle
 	 */
 	public String getJobtitle() {
@@ -65,6 +111,8 @@ public class JobOffer {
 
 
 	/**
+	 * Sets the jobtitle.
+	 *
 	 * @param jobtitle the jobtitle to set
 	 */
 	public void setJobtitle(String jobtitle) {
@@ -73,6 +121,8 @@ public class JobOffer {
 
 
 	/**
+	 * Gets the company.
+	 *
 	 * @return the company
 	 */
 	public String getCompany() {
@@ -81,6 +131,8 @@ public class JobOffer {
 
 
 	/**
+	 * Sets the company.
+	 *
 	 * @param company the company to set
 	 */
 	public void setCompany(String company) {
@@ -88,8 +140,9 @@ public class JobOffer {
 	}
 
 
-	/**
-	 * @return the city
+
+	/* (non-Javadoc)
+	 * @see com.proxijobs.model.HasLocation#getCity()
 	 */
 	public String getCity() {
 		return city;
@@ -97,6 +150,8 @@ public class JobOffer {
 
 
 	/**
+	 * Sets the city.
+	 *
 	 * @param city the city to set
 	 */
 	public void setCity(String city) {
@@ -105,6 +160,8 @@ public class JobOffer {
 
 
 	/**
+	 * Gets the state.
+	 *
 	 * @return the state
 	 */
 	public String getState() {
@@ -113,6 +170,8 @@ public class JobOffer {
 
 
 	/**
+	 * Sets the state.
+	 *
 	 * @param state the state to set
 	 */
 	public void setState(String state) {
@@ -120,8 +179,9 @@ public class JobOffer {
 	}
 
 
-	/**
-	 * @return the country
+
+	/* (non-Javadoc)
+	 * @see com.proxijobs.model.HasLocation#getCountry()
 	 */
 	public String getCountry() {
 		return country;
@@ -129,7 +189,9 @@ public class JobOffer {
 
 
 	/**
-	 * @param country the country to set
+	 * Sets the country.
+	 *
+	 * @param country the new country
 	 */
 	public void setCountry(String country) {
 		this.country = country;
@@ -137,6 +199,8 @@ public class JobOffer {
 
 
 	/**
+	 * Gets the formatted location.
+	 *
 	 * @return the formattedLocation
 	 */
 	public String getFormattedLocation() {
@@ -145,6 +209,8 @@ public class JobOffer {
 
 
 	/**
+	 * Sets the formatted location.
+	 *
 	 * @param formattedLocation the formattedLocation to set
 	 */
 	public void setFormattedLocation(String formattedLocation) {
@@ -153,6 +219,8 @@ public class JobOffer {
 
 
 	/**
+	 * Gets the source.
+	 *
 	 * @return the source
 	 */
 	public String getSource() {
@@ -161,6 +229,8 @@ public class JobOffer {
 
 
 	/**
+	 * Sets the source.
+	 *
 	 * @param source the source to set
 	 */
 	public void setSource(String source) {
@@ -169,6 +239,8 @@ public class JobOffer {
 
 
 	/**
+	 * Gets the date.
+	 *
 	 * @return the date
 	 */
 	public String getDate() {
@@ -177,6 +249,8 @@ public class JobOffer {
 
 
 	/**
+	 * Sets the date.
+	 *
 	 * @param date the date to set
 	 */
 	public void setDate(String date) {
@@ -185,6 +259,8 @@ public class JobOffer {
 
 
 	/**
+	 * Gets the snippet.
+	 *
 	 * @return the snippet
 	 */
 	public String getSnippet() {
@@ -193,6 +269,8 @@ public class JobOffer {
 
 
 	/**
+	 * Sets the snippet.
+	 *
 	 * @param snippet the snippet to set
 	 */
 	public void setSnippet(String snippet) {
@@ -201,6 +279,8 @@ public class JobOffer {
 
 
 	/**
+	 * Gets the url.
+	 *
 	 * @return the url
 	 */
 	public String getUrl() {
@@ -209,6 +289,8 @@ public class JobOffer {
 
 
 	/**
+	 * Sets the url.
+	 *
 	 * @param url the url to set
 	 */
 	public void setUrl(String url) {
@@ -216,32 +298,36 @@ public class JobOffer {
 	}
 
 
-	/**
-	 * @return the latitude
+
+	/* (non-Javadoc)
+	 * @see com.proxijobs.model.HasLocation#getLatitude()
 	 */
 	public double getLatitude() {
 		return latitude;
 	}
 
 
-	/**
-	 * @param latitude the latitude to set
+
+	/* (non-Javadoc)
+	 * @see com.proxijobs.model.HasLocation#setLatitude(double)
 	 */
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 
 
-	/**
-	 * @return the longitude
+
+	/* (non-Javadoc)
+	 * @see com.proxijobs.model.HasLocation#getLongitude()
 	 */
 	public double getLongitude() {
 		return longitude;
 	}
 
 
-	/**
-	 * @param longitude the longitude to set
+	
+	/* (non-Javadoc)
+	 * @see com.proxijobs.model.HasLocation#setLongitude(double)
 	 */
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
@@ -249,6 +335,8 @@ public class JobOffer {
 
 
 	/**
+	 * Gets the provider.
+	 *
 	 * @return the provider
 	 */
 	public String getProvider() {
@@ -257,6 +345,8 @@ public class JobOffer {
 
 
 	/**
+	 * Sets the provider.
+	 *
 	 * @param provider the provider to set
 	 */
 	public void setProvider(String provider) {
@@ -265,6 +355,8 @@ public class JobOffer {
 
 
 	/**
+	 * Gets the jobkey.
+	 *
 	 * @return the jobkey
 	 */
 	public String getJobkey() {
@@ -273,6 +365,8 @@ public class JobOffer {
 
 
 	/**
+	 * Sets the jobkey.
+	 *
 	 * @param jobkey the jobkey to set
 	 */
 	public void setJobkey(String jobkey) {
@@ -281,6 +375,8 @@ public class JobOffer {
 
 
 	/**
+	 * Checks if is sponsored.
+	 *
 	 * @return the sponsored
 	 */
 	public boolean isSponsored() {
@@ -289,6 +385,8 @@ public class JobOffer {
 
 
 	/**
+	 * Sets the sponsored.
+	 *
 	 * @param sponsored the sponsored to set
 	 */
 	public void setSponsored(boolean sponsored) {
@@ -297,6 +395,8 @@ public class JobOffer {
 
 
 	/**
+	 * Checks if is expired.
+	 *
 	 * @return the expired
 	 */
 	public boolean isExpired() {
@@ -305,6 +405,8 @@ public class JobOffer {
 
 
 	/**
+	 * Sets the expired.
+	 *
 	 * @param expired the expired to set
 	 */
 	public void setExpired(boolean expired) {
@@ -313,6 +415,8 @@ public class JobOffer {
 
 
 	/**
+	 * Gets the formatted location full.
+	 *
 	 * @return the formattedLocationFull
 	 */
 	public String getFormattedLocationFull() {
@@ -321,6 +425,8 @@ public class JobOffer {
 
 
 	/**
+	 * Sets the formatted location full.
+	 *
 	 * @param formattedLocationFull the formattedLocationFull to set
 	 */
 	public void setFormattedLocationFull(String formattedLocationFull) {
@@ -329,6 +435,8 @@ public class JobOffer {
 
 
 	/**
+	 * Gets the formatted relative time.
+	 *
 	 * @return the formattedRelativeTime
 	 */
 	public String getFormattedRelativeTime() {
@@ -337,6 +445,8 @@ public class JobOffer {
 
 
 	/**
+	 * Sets the formatted relative time.
+	 *
 	 * @param formattedRelativeTime the formattedRelativeTime to set
 	 */
 	public void setFormattedRelativeTime(String formattedRelativeTime) {
@@ -345,6 +455,8 @@ public class JobOffer {
 
 
 	/**
+	 * Gets the salary.
+	 *
 	 * @return the salary
 	 */
 	public String getSalary() {
@@ -353,10 +465,21 @@ public class JobOffer {
 
 
 	/**
+	 * Sets the salary.
+	 *
 	 * @param salary the salary to set
 	 */
 	public void setSalary(String salary) {
 		this.salary = salary;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see com.proxijobs.model.HasLocation#getPlace()
+	 */
+	@Override
+	public String getPlace() {
+		return this.getCompany();
 	}
 
 
