@@ -1,14 +1,37 @@
-<div *ngIf="offer == true">
+<div class="pj-map-detail jobs-selected ui teal card transition visible">
+  <div class="content">
 
-  <h3>Offre sélectionnée</h3>
-  <!-- TODO -->
-</div>
+    <div class="ui top big attached label" *ngIf="_offers.size() > 1">
+        <i class="material-icons">work</i>
+        Offres sélectionnées
+        <button class="circular ui icon button exit" (click)="onReduce()">
+          <i class="icon expand"></i>
+        </button>
+    </div>
+    <div class="ui top big attached label" *ngIf="_offers.size() <= 1">
+        <i class="material-icons">work</i>
+        Offre sélectionnée
+        <button class="circular ui icon button exit" (click)="onReduce()">
+          <i class="icon expand"></i>
+        </button>
+    </div>
 
 
-<div *ngIf="offer == false">
+    <h3 class="disabled">Nb offres : {{_offers.size()}}</h3>
 
-  <h3>Aucune offre sélectionnée</h3>
 
-  <p>Sélectionnez une offre sur la carte</p>
+    <!-- <div class="content">
+      Nb offres : {{offers.size()}}
+      <div *ngIf="offers.length > 0">
+        <h3 class="disabled">{{offers.length}} offres</h3>
+        <div *ngFor="let offer of offers">
+          {{offer.jobtitle}}
+        </div>
+      </div>
+      <div *ngIf="offers.length == 0">
+        <h3 class="disabled">Aucune offre sélectionnée</h3>
+      </div>
+    </div> -->
 
+  </div>
 </div>

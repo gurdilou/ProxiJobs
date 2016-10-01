@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Output, EventEmitter, ViewChild} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { RouteParams } from '@angular/router-deprecated';
 
 import {QuickSearch} from '../../model/search/quick-search';

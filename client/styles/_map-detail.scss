@@ -44,6 +44,10 @@
   display: none;
   border-width: 2px;
 
+  &.jobs-selected {
+    right : 72px;
+  }
+
   &.visible {
     display: inherit;
   }

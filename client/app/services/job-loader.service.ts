@@ -1,5 +1,6 @@
 import { Injectable }    from '@angular/core';
 import { Http, Headers} from '@angular/http';
+import * as Collections from 'typescript-collections';
 
 import {QuickSearch} from '../model/search/quick-search';
 import {AdvancedSearch} from '../model/search/advanced-search';
@@ -27,32 +28,34 @@ export class JobLoaderService extends GenericService implements IJobLoader {
   }
 
 
-  getJobsQuick(search: QuickSearch): Promise<JobOffer[]> {
-    return new Promise<JobOffer[]>((resolve, reject) => {
-      let result: JobOffer[] = [];
+  getJobsQuick(search: QuickSearch): Promise<Collections.LinkedList<JobOffer>> {
+    return new Promise<Collections.LinkedList<JobOffer>>((resolve, reject) => {
+      let result = new Collections.LinkedList<JobOffer>();
 
-      let data = {
-        "search": search,
-        "props": this.app,
-      };
-      super.postJson(this.quickJobsUrl, data).then(response => {
-          this.parseOffers(result, response.json());
-          resolve(result);
-        });
+      this.app.ready().then( ready => {
+        let data = {
+          "search": search,
+          "props": this.app,
+        };
+        super.postJson(this.quickJobsUrl, data).then(response => {
+            this.parseOffers(result, response.json());
+            resolve(result);
+          });
+      });
     });
   }
 
 
-  private parseOffers(result: JobOffer[], json: any) {
+  private parseOffers(result: Collections.LinkedList<JobOffer>, json: any) {
     for (let i = 0; i < json.length; i++) {
       let newOffer = JobOffer.parseJSON(json[i]);
-      result.push(newOffer);
+      result.add(newOffer);
     }
   }
 
-  getJobsAdvanced(search: AdvancedSearch): Promise<JobOffer[]> {
-    return new Promise<JobOffer[]>((resolve, reject) => {
-      let result: JobOffer[] = [];
+  getJobsAdvanced(search: AdvancedSearch): Promise<Collections.LinkedList<JobOffer>> {
+    return new Promise<Collections.LinkedList<JobOffer>>((resolve, reject) => {
+      let result = new Collections.LinkedList<JobOffer>();
 
       let url = this.advJobsUrl + "?";
       url += "job=" + search.job;

@@ -7,7 +7,12 @@
   <i class="material-icons">search</i>
 </button>
 
-<pj-map-job-selected></pj-map-job-selected>
+<pj-map-job-selected
+  [offers]="offers"
+  (onJobPopupClose)="onJobPopupClose()">
+</pj-map-job-selected>
+
+
 <pj-map-quick-search [search]="search"
       (onQuickSearchClose)="onQuickSearchClose()"
       (onQuickSearch)="onQuickSearch()"

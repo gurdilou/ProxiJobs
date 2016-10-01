@@ -11,10 +11,10 @@
     "suppressImplicitAnyIndexErrors": true,
     "outDir": "js"
   },
-  "compileOnSave": false,
+  "compileOnSave": true,
   "filesGlob": [
     "app/**/*.ts",
-    "typings/**/*.d.ts",
+    "typings/modules/**/*.d.ts",
     "node_modules/typescript-collections/dist/lib/*.ts"
   ],
   "files": [
@@ -46,7 +46,6 @@
     "app/services/search/search-loader-remote.service.ts",
     "app/services/search/search-loader.interface.ts",
     "app/views/map/couple-marker-offers.ts",
-    "app/views/map/map-bound.ts",
     "app/views/map/map-detail.component.ts",
     "app/views/map/map-job-detail.component.ts",
     "app/views/map/map-page.component.ts",
@@ -63,10 +62,6 @@
     "app/views/search/search-favorites.component.ts",
     "app/views/search/search-page.component.ts",
     "app/views/search/search-recents.component.ts",
-    "typings/globals/core-js/index.d.ts",
-    "typings/globals/jasmine/index.d.ts",
-    "typings/globals/node/index.d.ts",
-    "typings/index.d.ts",
     "typings/modules/google-maps/index.d.ts",
     "typings/modules/jquery/jquery.d.ts",
     "typings/modules/pickadate/pickadate.d.ts",

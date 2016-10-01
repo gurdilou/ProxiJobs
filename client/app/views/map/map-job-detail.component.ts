@@ -1,5 +1,6 @@
-import {Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 import { RouteParams } from '@angular/router-deprecated';
+import * as Collections from 'typescript-collections';
 
 import {JobOffer} from '../../model/jobs/job-offer';
 import {MapDetailComponent} from './map-detail.component';
@@ -11,23 +12,32 @@ import {MapDetailComponent} from './map-detail.component';
   templateUrl : 'app/views/map/map-job-detail.component.html'
 })
 export class MapJobDetailComponent  implements OnInit {
-  offer: JobOffer;
-  navigated = false; // true if navigated here
+  @Output() onJobPopupClose = new EventEmitter();
+  @Output() onRefresh = new EventEmitter();
+  _offers: Collections.LinkedList<JobOffer>;
+
+
 
   constructor(
-    private detailParent: MapDetailComponent,
     private routeParams: RouteParams) {
   }
 
   ngOnInit() {
-    this.offer = this.detailParent.offer;
 
-    if (this.routeParams.get('jobid') !== null) {
-      let id = +this.routeParams.get('jobid');
-      this.navigated = true;
-    } else {
-      this.navigated = false;
-    }
+  }
+
+  @Input()
+  set offers(offers: Collections.LinkedList<JobOffer>) {
+    console.log("onChange");
+    this._offers = offers;
+    console.log("offers : "+this._offers.size());
+  }
+
+  /**
+   * Lorsque l'on réduit la fenêtre de recherche
+   */
+  onReduce() {
+    this.onJobPopupClose.emit(undefined);
   }
 
 }

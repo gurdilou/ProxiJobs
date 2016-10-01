@@ -17,7 +17,7 @@ var typedoc = require("gulp-typedoc");
 gulp.task('default', ['serve']);
 
 // II - Local html server during desktop developement
-gulp.task('serve', ['build'], function() {
+gulp.task('serve', function() {
   browserSync({
     server: {
       baseDir: '.',
@@ -33,7 +33,7 @@ gulp.task('serve', ['build'], function() {
   gulp.watch(['*.html', 'app/**/*.component.html', 'js/**/*.js'], reload);
   gulp.watch(['lib/semantic/dist/*.css', 'lib/semantic/dist/*.js'],['semantic-ui']);
   gulp.watch('styles/**/*.scss',['sass']);
-  gulp.watch(['app/**/*.ts'], ['compile-ts']);
+  // gulp.watch(['app/**/*.ts'], ['compile-ts']);
 });
 
 
@@ -54,8 +54,8 @@ gulp.task('sass', function() {
 var tsProject = ts.createProject('tsconfig.json');
 gulp.task('compile-ts', function() {
 
-  var tsResult = gulp.src( ['app/**/*.ts', 'typings/modules/**/*.d.ts'])
-    .pipe(cache('tscompile'))
+  var tsResult = gulp.src( ['typings/modules/**/*.d.ts', 'app/**/*.ts'])
+    // .pipe(cache('tscompile'))
     .pipe(ts(tsProject));
 
     return tsResult.js

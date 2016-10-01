@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router-deprecated';
+import * as Collections from 'typescript-collections';
 
 import {JobOffer} from '../../model/jobs/job-offer';
 
@@ -30,17 +31,17 @@ export class MapPageComponent implements OnInit {
   }
   /**
    * Lors du résultat d'une recherche d'offre
-   * @param  {JobOffer[]} offers les offres trouvées
+   * @param  {Collections.LinkedList<JobOffer>} offers les offres trouvées
    */
-  searchJobs(offers : JobOffer[]){
+  searchJobs(offers : Collections.LinkedList<JobOffer>){
     this.map.displayOffers(offers);
   }
 
   /**
    * Lors de la sélection d'une ou plusieurs offres sur la carte
-   * @param  {JobOffer[]} offers les offres à afficher
+   * @param  {Collections.LinkedList<JobOffer>} offers les offres à afficher
    */
-  displayOffers(offers : JobOffer[]){
+  displayOffers(offers : Collections.LinkedList<JobOffer>){
     this.details.displayOffers(offers);
   }
 }

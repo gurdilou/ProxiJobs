@@ -1,6 +1,7 @@
-import {Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import {Location} from '@angular/common';
 import { Router, RouteParams } from '@angular/router-deprecated';
+import * as Collections from 'typescript-collections';
 
 import {JobOffer} from '../../model/jobs/job-offer';
 import {QuickSearch} from '../../model/search/quick-search';
@@ -16,7 +17,7 @@ import {MapJobDetailComponent} from './map-job-detail.component';
 @Component({
   selector: 'pj-map-detail',
   templateUrl: 'app/views/map/map-detail.component.html',
-  directives: [MapQuickSearchComponent],
+  directives: [MapQuickSearchComponent, MapJobDetailComponent],
   providers: [NotificationService, JobLoaderService]
 })
 /**
@@ -25,10 +26,10 @@ import {MapJobDetailComponent} from './map-job-detail.component';
 export class MapDetailComponent implements OnInit {
   @Output() onCenterMap = new EventEmitter();
   @Output() onSearchJobs = new EventEmitter();
+  @ViewChild(MapJobDetailComponent) jobDetailsPopup:MapJobDetailComponent;
 
-
+  offers: Collections.LinkedList<JobOffer> = new Collections.LinkedList<JobOffer>();
   search: QuickSearch;
-  offer: JobOffer;
 
 
   constructor(
@@ -52,7 +53,7 @@ export class MapDetailComponent implements OnInit {
       this.search.city = decodeURI(this.routeParams.get('qCity'));
       this.search.perimeter = decodeURI(this.routeParams.get('qPerim'));
 
-      this.showQuickSearch();
+      this.onQuickSearch();
     }
   }
 
@@ -60,8 +61,8 @@ export class MapDetailComponent implements OnInit {
    * Lorsqu'on clique sur le bouton afficher l'offre sélectionnée
    */
   onShowSelectedJob() {
-    //TODO popup show selected job
     this.hideQuickSearch();
+    this.showSelectedJobPopup();
   }
 
   /**
@@ -69,6 +70,10 @@ export class MapDetailComponent implements OnInit {
    */
   onQuickSearchClose() {
     this.hideQuickSearch();
+  }
+
+  onJobPopupClose() {
+    this.hideSelectedJobPopup();
   }
 
   //call back lors d'une recherche rapide
@@ -88,6 +93,7 @@ export class MapDetailComponent implements OnInit {
    */
   onShowQuickSearch() {
     this.refreshQuickSearchUrl();
+    this.hideSelectedJobPopup();
     this.showQuickSearch();
   }
 
@@ -143,6 +149,29 @@ export class MapDetailComponent implements OnInit {
     }
   }
 
+  private showSelectedJobPopup() {
+    $('.pj-detail-button.ui.button.job').addClass("job-opened");
+    $('.pj-detail-button.ui.button.search').addClass("job-opened");
+    $('.pj-map-detail.jobs-selected').transition({
+      animation: 'fade left',
+      duration: 450
+    })
+  }
+
+  private hideSelectedJobPopup() {
+    let popup = $('.pj-map-detail.jobs-selected');
+
+    if (popup.hasClass("visible")) {
+      $('.pj-detail-button.ui.button.job').removeClass("job-opened");
+      $('.pj-detail-button.ui.button.search').removeClass("job-opened");
+      // $('.pj-map-detail.quicksearch').addClass('visible');
+      popup.transition({
+        animation: 'fade left',
+        duration: 450
+      });
+    }
+  }
+
   private setQuickSearchLoading(display : boolean) {
     let butt = $('.pj-detail-button.ui.button.search');
     if(display){
@@ -154,11 +183,17 @@ export class MapDetailComponent implements OnInit {
 
   /**
    * Affiche le détail de une ou plusieurs offres
-   * @param  {JobOffer[]} offers les offres
+   * @param  {Collections.LinkedList<JobOffer>} offers les offres
    */
-  displayOffers(offers : JobOffer[]) {
-    TODO créer la popup de détail
-  }
+  displayOffers(offers : Collections.LinkedList<JobOffer>) {
+    this.offers = offers;
 
+    let popup = $('.pj-map-detail.jobs-selected');
+    if (popup.hasClass("visible")) {
+      this.hideSelectedJobPopup();
+    }
+    this.onShowSelectedJob();
+
+  }
 
 }

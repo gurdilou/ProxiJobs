@@ -63,15 +63,15 @@ export class MapComponent implements OnInit, AfterContentInit {
   }
   /**
    * Affiche et gère une liste d'offre
-   * @param  {JobOffer[]} offers la liste des offres à afficher
+   * @param  {Collections.LinkedList<JobOffer>} offers la liste des offres à afficher
    */
-  displayOffers(offers : JobOffer[]) {
+  displayOffers(offers : Collections.LinkedList<JobOffer>) {
     this.cleanOffers();
     let bounds = this.map.getBounds();
 
 
-    for(let i = 0; i < offers.length; i++) {
-      let offer = offers[i];
+    for(let i = 0; i < offers.size(); i++) {
+      let offer = offers.elementAtIndex(i);
 
       let position = new google.maps.LatLng(offer.latitude, offer.longitude);
 
@@ -105,13 +105,12 @@ export class MapComponent implements OnInit, AfterContentInit {
     });
     let newCouple = new CoupleMarkerOffers();
     newCouple.marker = jobMarker;
-    newCouple.offers.push(offer);
+    newCouple.offers.add(offer);
     var self = this;
     jobMarker.addListener('click', function() {
         let couple = self.markers.getValue(jobMarker.getPosition());
         if(couple) {
-          let offers = couple.offers;
-          self.onSelectOffers.emit(offers);
+          self.onSelectOffers.emit(couple.offers);
         }
       });
 
@@ -119,8 +118,8 @@ export class MapComponent implements OnInit, AfterContentInit {
   }
   private editMarker(offer : JobOffer, position : google.maps.LatLng) {
     let couple = this.markers.getValue(position);
-    couple.offers.push(offer);
+    couple.offers.add(offer);
 
-    couple.marker.setTitle(couple.offers.length+" offres");
+    couple.marker.setTitle(couple.offers.size()+" offres");
   }
 }
