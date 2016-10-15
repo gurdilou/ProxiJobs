@@ -1,6 +1,6 @@
 import {Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import {Location} from '@angular/common';
-import { Router, RouteParams } from '@angular/router-deprecated';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import * as Collections from 'typescript-collections';
 
 import {JobOffer} from '../../model/jobs/job-offer';
@@ -17,7 +17,6 @@ import {MapJobDetailComponent} from './map-job-detail.component';
 @Component({
   selector: 'pj-map-detail',
   templateUrl: 'app/views/map/map-detail.component.html',
-  directives: [MapQuickSearchComponent, MapJobDetailComponent],
   providers: [NotificationService, JobLoaderService]
 })
 /**
@@ -34,7 +33,7 @@ export class MapDetailComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private routeParams: RouteParams,
+    private route: ActivatedRoute,
     private location: Location,
     private jobLoader : JobLoaderService) {
     this.search = new QuickSearch();
@@ -42,19 +41,20 @@ export class MapDetailComponent implements OnInit {
 
   ngOnInit() {
     //Si on veut afficher un boulot,
-    if (this.routeParams.get('jobid') !== null) {
-      let id = +this.routeParams.get('jobid');
-      // this.jobService.getJob(id.then(offer => this.offer = offer);
+    this.route.params.forEach((params: Params) => {
+      if (params.hasOwnProperty('jobid')) {
+        let id = +params['jobid'];
+        // this.jobService.getJob(id.then(offer => this.offer = offer);
+      }
+      //Si on veut afficher la recherche rapide
+      if ( params.hasOwnProperty('qJob') || params.hasOwnProperty('qCity')|| params.hasOwnProperty('qPerim') ) {
+        this.search.job = decodeURI(params['qJob']);
+        this.search.city = decodeURI(params['qCity']);
+        this.search.perimeter = decodeURI(params['qPerim']);
 
-    }
-    //Si on veut afficher la recherche rapide
-    if ((this.routeParams.get('qJob') !== null) || (this.routeParams.get('qCity') !== null) || (this.routeParams.get('qPerim') !== null)) {
-      this.search.job = decodeURI(this.routeParams.get('qJob'));
-      this.search.city = decodeURI(this.routeParams.get('qCity'));
-      this.search.perimeter = decodeURI(this.routeParams.get('qPerim'));
-
-      this.onQuickSearch();
-    }
+        this.onQuickSearch();
+      }
+    });
   }
 
   /**
@@ -113,9 +113,9 @@ export class MapDetailComponent implements OnInit {
     let city = this.search.city ? this.search.city : '';
     let perimeter = this.search.perimeter ? this.search.perimeter : '';
 
-    let queryRaw = 'qJob=' + job + '&qCity=' + city + '&qPerim=' + perimeter;
-    let query = Location.normalizeQueryParams(queryRaw);
-    this.location.go('/map/' + query);
+    let queryRaw = 'qJob=' + job + ';qCity=' + city + ';qPerim=' + perimeter;
+    let query = queryRaw;
+    this.location.go('/map;' + query);
   }
 
   /**
@@ -187,13 +187,11 @@ export class MapDetailComponent implements OnInit {
    */
   displayOffers(offers : Collections.LinkedList<JobOffer>) {
     this.offers = offers;
-
     let popup = $('.pj-map-detail.jobs-selected');
     if (popup.hasClass("visible")) {
       this.hideSelectedJobPopup();
     }
     this.onShowSelectedJob();
-
   }
 
 }

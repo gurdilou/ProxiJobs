@@ -1,5 +1,5 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
-import { Router, RouteParams } from '@angular/router-deprecated';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import {SearchAdvancedWidget} from './search-adv-widget.component';
 
@@ -27,7 +27,7 @@ export class SearchAdvancedComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private routeParams : RouteParams,
+    private route: ActivatedRoute,
     private locationService : LocationResolverService,
     private searchService : SearchLoaderService) {
       this.advSearch = new AdvancedSearch();

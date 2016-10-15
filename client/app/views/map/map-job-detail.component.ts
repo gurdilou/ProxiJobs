@@ -1,5 +1,4 @@
 import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
-import { RouteParams } from '@angular/router-deprecated';
 import * as Collections from 'typescript-collections';
 
 import {JobOffer} from '../../model/jobs/job-offer';
@@ -18,8 +17,7 @@ export class MapJobDetailComponent  implements OnInit {
 
 
 
-  constructor(
-    private routeParams: RouteParams) {
+  constructor() {
   }
 
   ngOnInit() {

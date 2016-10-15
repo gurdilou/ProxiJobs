@@ -1,10 +1,9 @@
 import {Component} from '@angular/core';
-import {ToasterContainerComponent, ToasterService, ToasterConfig} from 'angular2-toaster/angular2-toaster';
+import {ToasterService, ToasterConfig, ToasterContainerComponent} from 'angular2-toaster/angular2-toaster';
 
 @Component({
   selector: 'pj-toaster',
-  directives: [ToasterContainerComponent],
-  templateUrl: 'app/views/notification.component.html',
+  templateUrl: '/app/views/notification.component.html',
 })
 
 export class NotificationComponent {

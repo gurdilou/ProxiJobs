@@ -1,5 +1,4 @@
 import {Component, OnInit, AfterContentInit, Input, Output, EventEmitter} from '@angular/core';
-import { RouteParams } from '@angular/router-deprecated';
 import * as Collections from 'typescript-collections';
 
 import {JobOffer} from '../../model/jobs/job-offer';
@@ -25,12 +24,7 @@ export class MapComponent implements OnInit, AfterContentInit {
   private markers = new Collections.Dictionary<google.maps.LatLng, CoupleMarkerOffers>();
 
   // TODO gérer les offres sauvegardées
-
-
-
-  constructor(
-    private routeParams : RouteParams
-  ){ }
+  constructor(){ }
 
   ngOnInit() {
 

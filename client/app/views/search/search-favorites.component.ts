@@ -1,5 +1,4 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
-import { Router, RouteParams } from '@angular/router-deprecated';
 import {Toast} from 'angular2-toaster/angular2-toaster';
 
 import {AdvancedSearch} from '../../model/search/advanced-search';
@@ -7,12 +6,11 @@ import {AdvancedSearch} from '../../model/search/advanced-search';
 import {SearchLoaderService} from '../../services/search-loader.service';
 import {NotificationService} from '../../services/notification.service';
 
-import {SearchAdvancedWidget} from './search-adv-widget.component';
+
 
 @Component({
   selector: 'pj-search-favorites',
   templateUrl : 'app/views/search/search-favorites.component.html',
-  directives: [SearchAdvancedWidget],
   providers: [NotificationService, SearchLoaderService]
 })
 

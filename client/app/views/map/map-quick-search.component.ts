@@ -1,5 +1,4 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import { RouteParams } from '@angular/router-deprecated';
 
 import {QuickSearch} from '../../model/search/quick-search';
 
@@ -19,7 +18,6 @@ export class MapQuickSearchComponent implements OnInit {
   @Output() onCenterMap = new EventEmitter();
 
   constructor(
-    private routeParams: RouteParams,
     private locationService: LocationResolverService) {
   }
 

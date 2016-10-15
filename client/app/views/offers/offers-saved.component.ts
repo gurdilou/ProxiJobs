@@ -5,12 +5,11 @@ import {SavedJobOffer} from '../../model/jobs/saved-job-offer';
 import {LogbookEditorService} from '../../services/logbook-editor.service';
 import {NotificationService} from '../../services/notification.service';
 
-import {OfferSavedWidgetComponent} from './offer-saved-widget.component';
+
 
 @Component({
   selector: 'pj-offers-saved',
   templateUrl : 'app/views/offers/offers-saved.component.html',
-  directives: [OfferSavedWidgetComponent],
   providers: [NotificationService, LogbookEditorService]
 })
 

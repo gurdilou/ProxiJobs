@@ -27,7 +27,8 @@ gulp.task('serve', function() {
         "/map": ".",
         "/search": ".",
         "/offers": ".",
-      }
+      },
+      entryFile:  "index.html"
     }
   });
   gulp.watch(['*.html', 'app/**/*.component.html', 'js/**/*.js'], reload);
@@ -56,7 +57,7 @@ gulp.task('compile-ts', function() {
 
   var tsResult = gulp.src( ['typings/modules/**/*.d.ts', 'app/**/*.ts'])
     // .pipe(cache('tscompile'))
-    .pipe(ts(tsProject));
+    .pipe(tsProject());
 
     return tsResult.js
       .pipe(gulp.dest('js'));

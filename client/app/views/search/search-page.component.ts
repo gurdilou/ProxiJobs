@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import { Router } from '@angular/router-deprecated';
+import { Router } from '@angular/router';
 
 import {AdvancedSearch} from '../../model/search/advanced-search';
 
@@ -10,7 +10,6 @@ import {SearchRecentsComponent} from './search-recents.component';
 @Component({
   selector: 'pj-search-page',
   templateUrl : 'app/views/search/search-page.component.html',
-  directives: [SearchAdvancedComponent, SearchFavoritesComponent, SearchRecentsComponent]
 })
 
 export class SearchPageComponent {

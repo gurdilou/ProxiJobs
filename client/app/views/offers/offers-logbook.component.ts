@@ -10,12 +10,11 @@ import {LogbookEditorService} from '../../services/logbook-editor.service';
 import {NotificationService} from '../../services/notification.service';
 
 
-import {OfferApplyBackWidgetComponent} from './offer-back-widget.component';
+
 
 @Component({
   selector: 'pj-offers-logbook',
   templateUrl : 'app/views/offers/offers-logbook.component.html',
-  directives: [OfferApplyBackWidgetComponent],
   providers: [NotificationService, LogbookEditorService]
 })
 

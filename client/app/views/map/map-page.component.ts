@@ -1,5 +1,4 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { Router } from '@angular/router-deprecated';
 import * as Collections from 'typescript-collections';
 
 import {JobOffer} from '../../model/jobs/job-offer';
@@ -10,14 +9,13 @@ import {MapDetailComponent} from './map-detail.component';
 @Component({
   selector: 'pj-map-page',
   templateUrl: 'app/views/map/map-page.component.html',
-  directives: [MapComponent, MapDetailComponent]
 })
 
 export class MapPageComponent implements OnInit {
   @ViewChild(MapComponent) map:MapComponent;
   @ViewChild(MapDetailComponent) details:MapDetailComponent;
 
-  constructor(private router: Router) {
+  constructor() {
   }
 
   ngOnInit() {

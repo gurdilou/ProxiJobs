@@ -1,16 +1,14 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { Router } from '@angular/router-deprecated';
+import { Router } from '@angular/router';
 
 import {SavedJobOffer} from '../../model/jobs/saved-job-offer';
 
-import {OffersSavedComponent} from './offers-saved.component';
 import {OffersLogbookComponent} from './offers-logbook.component';
 
 
 @Component({
   selector: 'pj-offers-page',
   templateUrl: 'app/views/offers/offers-page.component.html',
-  directives: [OffersSavedComponent, OffersLogbookComponent]
 })
 
 export class OffersPageComponent implements OnInit {

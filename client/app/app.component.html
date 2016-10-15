@@ -4,13 +4,13 @@
     <img class="logo" src="/images/logo.png" />
     <h2>ProxiJobs</h2>
   </div>
-  <a class="item"  [routerLink]="['MapPage']" [class.active]="router.isRouteActive(router.generate(['/MapPage']))">
+  <a class="item"  routerLink="/map" [class.active]="router.isActive('/map', true) || router.isActive('', true)">
     <i class="map icon"></i> Ma carte
   </a>
-  <a class="item" [routerLink]="['SearchPage']" [class.active]="router.isRouteActive(router.generate(['/SearchPage']))">
+  <a class="item" routerLink="/search" routerLinkActive='active'>
     <i class="search icon"></i> Mes recherches
   </a>
-  <a class="item" [routerLink]="['OffersPage']" [class.active]="router.isRouteActive(router.generate(['/OffersPage']))">
+  <a class="item" routerLink="/offers" routerLinkActive='active'>
     <i class="ticket icon"></i> Mes offres
   </a>
 </div>
