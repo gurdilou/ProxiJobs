@@ -39,7 +39,7 @@ export class MapPageComponent implements OnInit {
    * Lors de la sélection d'une ou plusieurs offres sur la carte
    * @param  {Collections.LinkedList<JobOffer>} offers les offres à afficher
    */
-  displayOffers(offers : Collections.LinkedList<JobOffer>){
+  displayOffers(offers : JobOffer[]){
     this.details.displayOffers(offers);
   }
 }

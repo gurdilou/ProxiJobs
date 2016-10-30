@@ -11,7 +11,8 @@
 
     <div class="content">
 
-      <form class="ui form pj-quick-search-form" (submit)="onLoadJobs()">
+      <form class="ui form pj-quick-search-form">
+        <button type="submit" class="hidden" (click)="onLoadJobs()" style="display:none; visibility : hidden">Submit</button>
         <div class="field">
           <label>Emploi</label>
           <input [(ngModel)]="search.job"  type="text" name="kind" placeholder="métier, mots-clés ou entreprise">
@@ -19,7 +20,6 @@
 
         <div class="field">
           <label>Ville</label>
-
           <div class="action ui input">
             <input [(ngModel)]="search.city"  type="text" name="city" placeholder="ville, département ou code postal">
             <button class="ui icon button" title="Ma position actuelle" (click)="getCurrentLocation($event)">
@@ -32,14 +32,11 @@
           <label>Rayon</label>
           <input [(ngModel)]="search.perimeter"  type="text" name="distance" placeholder="temps de trajet, ou kilomètres">
         </div>
-
-        <div class="extra content">
-            <div class="ui error message"></div>
-          <div class="ui divider"></div>
-          <button type="submit" class="ui button">Rechercher</button>
-        </div>
+        <div class="ui error message"></div>
       </form>
-
     </div>
+  </div>
+  <div class="extra content">
+    <button type="submit" class="ui button" (click)="onLoadJobs()">Rechercher</button>
   </div>
 </div>

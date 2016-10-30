@@ -6,6 +6,10 @@ import * as Collections from 'typescript-collections';
  */
 export class CoupleMarkerOffers {
   marker : google.maps.Marker;
-  offers : Collections.LinkedList<JobOffer> = new Collections.LinkedList<JobOffer>();
+  offers : JobOffer[] = [];
 
+
+  public addOffer(offer : JobOffer) {
+    this.offers.push(offer);
+  }
 }

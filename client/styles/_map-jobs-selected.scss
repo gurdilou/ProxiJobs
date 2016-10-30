@@ -1,4 +1,6 @@
 .pj-map-detail.ui.card.jobs-selected {
+  display: flex;
+  flex-direction: column;
 
   .ui.top {
     .material-icons {
@@ -10,5 +12,16 @@
       opacity: 1;
       margin-top: 1px;
     }
+  }
+
+  &>.content {
+    flex: 1;
+    display: flex;
+    flex-grow: 1;
+    height: 100%;
+  }
+
+  &>.extra.content {
+    display: inherit;
   }
 }

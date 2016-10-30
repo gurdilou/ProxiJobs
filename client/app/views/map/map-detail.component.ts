@@ -27,7 +27,7 @@ export class MapDetailComponent implements OnInit {
   @Output() onSearchJobs = new EventEmitter();
   @ViewChild(MapJobDetailComponent) jobDetailsPopup:MapJobDetailComponent;
 
-  offers: Collections.LinkedList<JobOffer> = new Collections.LinkedList<JobOffer>();
+  offers: JobOffer[] = [];
   search: QuickSearch;
 
 
@@ -152,10 +152,19 @@ export class MapDetailComponent implements OnInit {
   private showSelectedJobPopup() {
     $('.pj-detail-button.ui.button.job').addClass("job-opened");
     $('.pj-detail-button.ui.button.search').addClass("job-opened");
-    $('.pj-map-detail.jobs-selected').transition({
-      animation: 'fade left',
-      duration: 450
-    })
+    let popup = $('.pj-map-detail.jobs-selected');
+    if (!popup.hasClass("visible")) {
+      $('.pj-map-detail.jobs-selected').transition({
+        animation: 'fade left',
+        duration: 350
+      });
+    } else {
+      popup.removeClass("hidden");
+      $('.pj-map-detail.jobs-selected').transition({
+        animation: 'pulse',
+        duration: 150
+      });
+    }
   }
 
   private hideSelectedJobPopup() {
@@ -185,12 +194,9 @@ export class MapDetailComponent implements OnInit {
    * Affiche le détail de une ou plusieurs offres
    * @param  {Collections.LinkedList<JobOffer>} offers les offres
    */
-  displayOffers(offers : Collections.LinkedList<JobOffer>) {
+  displayOffers(offers : JobOffer[]) {
     this.offers = offers;
     let popup = $('.pj-map-detail.jobs-selected');
-    if (popup.hasClass("visible")) {
-      this.hideSelectedJobPopup();
-    }
     this.onShowSelectedJob();
   }
 

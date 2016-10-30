@@ -37,12 +37,15 @@
   position: absolute;
   right: 12px;
   top : 20px;
-  padding: 12px;
   min-height: 200px;
   margin-bottom: 200px;
   width: 372px;
   display: none;
   border-width: 2px;
+
+  .ui.top.attached.label:first-child+:not(.attached) {
+    margin-top: 40px !important;
+  }
 
   &.jobs-selected {
     right : 72px;

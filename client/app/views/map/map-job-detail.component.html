@@ -1,37 +1,44 @@
 <div class="pj-map-detail jobs-selected ui teal card transition hidden">
+  <div class="ui top big attached label" *ngIf="offers.length > 1">
+    <i class="material-icons">work</i> {{offers.length}} offres sélectionnées
+    <button class="circular ui icon button exit" (click)="onReduce()">
+          <i class="icon expand"></i>
+        </button>
+  </div>
+  <div class="ui top big attached label" *ngIf="offers.length == 1">
+    <i class="material-icons">work</i> Offre sélectionnée
+    <button class="circular ui icon button exit" (click)="onReduce()">
+          <i class="icon expand"></i>
+        </button>
+  </div>
+
+  <div class="ui top big attached label" *ngIf="offers.length < 1">
+    <i class="material-icons">work</i> Aucune offre sélectionnée
+    <button class="circular ui icon button exit" (click)="onReduce()">
+          <i class="icon expand"></i>
+        </button>
+  </div>
+
+
   <div class="content">
-
-    <div class="ui top big attached label" *ngIf="_offers.size() > 1">
-        <i class="material-icons">work</i>
-        Offres sélectionnées
-        <button class="circular ui icon button exit" (click)="onReduce()">
-          <i class="icon expand"></i>
-        </button>
+    <div *ngIf="selectedOffer">
+      <h3>{{selectedOffer.jobtitle}}</h3>
     </div>
-    <div class="ui top big attached label" *ngIf="_offers.size() <= 1">
-        <i class="material-icons">work</i>
-        Offre sélectionnée
-        <button class="circular ui icon button exit" (click)="onReduce()">
-          <i class="icon expand"></i>
-        </button>
+    <div *ngIf="!selectedOffer">
+      Faites une recherche ou sélectionnez une offre sur la carte.
     </div>
+  </div>
 
-
-    <h3 class="disabled">Nb offres : {{_offers.size()}}</h3>
-
-
-    <!-- <div class="content">
-      Nb offres : {{offers.size()}}
-      <div *ngIf="offers.length > 0">
-        <h3 class="disabled">{{offers.length}} offres</h3>
-        <div *ngFor="let offer of offers">
-          {{offer.jobtitle}}
-        </div>
+  <div class="extra content" *ngIf="offers.length > 1">
+    <div class="ui three column grid">
+      <div class="column">
+        <button class="ui left floated button">Previous</button>
       </div>
-      <div *ngIf="offers.length == 0">
-        <h3 class="disabled">Aucune offre sélectionnée</h3>
+      <div class="column">
+        <div class="content">{{selectedIndex + 1}} sur {{offers.length}}</div>
       </div>
-    </div> -->
-
+      <div class="column">
+        <button class="ui right floated button">Next</button></div>
+    </div>
   </div>
 </div>

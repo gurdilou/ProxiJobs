@@ -12,8 +12,11 @@ import {MapDetailComponent} from './map-detail.component';
 })
 export class MapJobDetailComponent  implements OnInit {
   @Output() onJobPopupClose = new EventEmitter();
-  @Output() onRefresh = new EventEmitter();
-  _offers: Collections.LinkedList<JobOffer>;
+
+  _offers: JobOffer[];
+
+  private selectedOffer : JobOffer = null;
+  private selectedIndex : number = 0;
 
 
 
@@ -25,10 +28,16 @@ export class MapJobDetailComponent  implements OnInit {
   }
 
   @Input()
-  set offers(offers: Collections.LinkedList<JobOffer>) {
-    console.log("onChange");
+  set offers(offers : JobOffer[]) {
     this._offers = offers;
-    console.log("offers : "+this._offers.size());
+    this.selectedOffer = null;
+    this.selectedIndex = 0;
+    if(offers.length > 0) {
+      this.selectedOffer = offers[0];
+    }
+  }
+  get offers() : JobOffer[] {
+    return this._offers;
   }
 
   /**

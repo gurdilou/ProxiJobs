@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterContentInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, AfterContentInit, Input, Output, EventEmitter, NgZone} from '@angular/core';
 import * as Collections from 'typescript-collections';
 
 import {JobOffer} from '../../model/jobs/job-offer';
@@ -24,7 +24,7 @@ export class MapComponent implements OnInit, AfterContentInit {
   private markers = new Collections.Dictionary<google.maps.LatLng, CoupleMarkerOffers>();
 
   // TODO gérer les offres sauvegardées
-  constructor(){ }
+  constructor(private zone:NgZone){ }
 
   ngOnInit() {
 
@@ -99,21 +99,24 @@ export class MapComponent implements OnInit, AfterContentInit {
     });
     let newCouple = new CoupleMarkerOffers();
     newCouple.marker = jobMarker;
-    newCouple.offers.add(offer);
+    newCouple.addOffer(offer);
     var self = this;
     jobMarker.addListener('click', function() {
         let couple = self.markers.getValue(jobMarker.getPosition());
         if(couple) {
-          self.onSelectOffers.emit(couple.offers);
+          self.zone.run(() => {
+            self.onSelectOffers.emit(couple.offers);
+          });
         }
       });
 
     this.markers.setValue(position, newCouple);
   }
+
   private editMarker(offer : JobOffer, position : google.maps.LatLng) {
     let couple = this.markers.getValue(position);
-    couple.offers.add(offer);
+    couple.addOffer(offer);
 
-    couple.marker.setTitle(couple.offers.size()+" offres");
+    couple.marker.setTitle(couple.offers.length+" offres");
   }
 }
