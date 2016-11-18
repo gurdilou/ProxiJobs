@@ -20,25 +20,65 @@
   </div>
 
 
-  <div class="content">
+  <div class="content offer-body">
     <div *ngIf="selectedOffer">
-      <h3>{{selectedOffer.jobtitle}}</h3>
+      <h4>{{selectedOffer.jobtitle}}</h4>
+      <div class="meta">
+        <span><i class="small user icon"></i> {{selectedOffer.company}}</span>
+        <div *ngIf="selectedOffer.salary">
+          <span><i class="small user icon"></i> {{selectedOffer.salary}}</span>
+        </div>
+        <span><i class="small university icon"></i> {{selectedOffer.city}}</span>
+      </div>
+      <div [innerHtml]="selectedOffer.getShortSnippet()" class="offer-desc-content"></div>
     </div>
+
+
     <div *ngIf="!selectedOffer">
-      Faites une recherche ou sélectionnez une offre sur la carte.
+      <h3 class="ui icon header center aligned">
+        <i class="help icon"></i>
+        <div class="content">
+          <div class="sub header">Faites une recherche ou sélectionner une offre sur la carte.</div>
+        </div>
+      </h3>
+    </div>
+  </div>
+
+  <div class="extra content" *ngIf="offers.length > 1">
+    <div class="ui two buttons">
+      <div class="ui basic green button">Approve</div>
+      <div class="ui basic red button">Decline</div>
     </div>
   </div>
 
   <div class="extra content" *ngIf="offers.length > 1">
     <div class="ui three column grid">
       <div class="column">
-        <button class="ui left floated button">Previous</button>
+        <button class="ui left floated button" [class.disabled]="selectedIndex <= 0" (click)="onPreviousOffer()">Précédent</button>
+      </div>
+      <div class="column offers-page">
+        <div class="content pagination">{{selectedIndex + 1}} sur {{offers.length}}</div>
       </div>
       <div class="column">
-        <div class="content">{{selectedIndex + 1}} sur {{offers.length}}</div>
-      </div>
-      <div class="column">
-        <button class="ui right floated button">Next</button></div>
+        <button class="ui right floated button" [class.disabled]="selectedIndex >= (offers.length - 1)" (click)="onNextOffer()">Suivant</button></div>
     </div>
+  </div>
+</div>
+
+
+<div class="ui transition long modal offer-desc-long">
+  <i class="close icon"></i>
+  <div *ngIf="selectedOffer" class="header">
+    {{selectedOffer.jobtitle}}
+  </div>
+
+  <div *ngIf="selectedOffer" class="content">
+    <div [innerHtml]="selectedOffer.snippet" class="description">
+
+    </div>
+  </div>
+
+  <div class="actions">
+    <div class="ui right approve labeled button">OK</div>
   </div>
 </div>
